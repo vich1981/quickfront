@@ -20,6 +20,19 @@ export const loginHandler = (credentials) => {
         });
     };
 };
+// export const loginHandler = (credentials) => {
+//     return function (dispatch){
+//         return apiCalls.login(credentials).then((response) => {
+//             dispatch(
+//                 loginSuccess({
+//                     ...response.data,
+//                     password: credentials.password
+//                 })
+//             );
+//             return response;
+//         });
+//     };
+// };
 
 export const signupHandler = (user) => {
     return function(dispatch) {

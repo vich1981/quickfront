@@ -5,8 +5,11 @@ export const signup = (user) => {
     return axios.post('/api/1.0/users', user);
 };
 
-export const login = (user) => {
-    return axios.post('/api/1.0/login', {}, { auth: user });
+export const login = (email,password) => {
+    return axios.post('http://localhost:8080/api/v1/auth/login', {
+        email,
+        password,
+    }, { withCredentials: true });
 };
 
 export const setAuthorizationHeader = ({username, password, isLoggedIn }) => {
@@ -25,8 +28,8 @@ export const listUsers = (param = { page: 0, size: 3 }) => {
     return axios.get(path);
 };
 
-export const getUser = (username) => {
-    return axios.get(`/api/1.0/users/${username}`);
+export const getUser = (id) => {
+    return axios.get(`http://localhost:8080/api/v1/users/${id}`);
 };
 
 export const updateUser = (userId, body) => {

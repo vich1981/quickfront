@@ -82,14 +82,14 @@ class TopBar extends React.Component {
                                 height="32"
                                 image={this.props.user.image} 
                             />
-                            <span className="nav-link dropdown-toggle">{this.props.user.displayName}</span>
+                            <span className="nav-link dropdown-toggle">{this.props.user.username}</span>
                         </div>
                         <div 
                             className={dropDownClass} 
                             data-testid="drop-down-menu"
                         >
                             <Link 
-                                to={`/${this.props.user.username}`} 
+                                to={`/users/${this.props.user.id}`} 
                                 className="dropdown-item"
                                 onClick={this.onClickMyProfile}
                             >

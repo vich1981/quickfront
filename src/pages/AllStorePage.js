@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import StoreView from '../components/StoreView';
 
-const StoreList = () => {
+const AllStorePage = () => {
     const [stores, setStores] = useState([]);
     const [error, setError] = useState('');
 
@@ -40,18 +41,9 @@ const StoreList = () => {
         <div>
             <h2>Store List</h2>
             <div class="list-group">
-            {stores.map((store) => (
-               
-                <a href="/store/{store.storeId}" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{store.storeName}</h5>
-                    <p><img src={store.logoUrl} width="80" height="60" alt="" /></p>
-                    <small>{store.storeWorkingHours}</small>
-                    </div>
-                    <p class="mb-1">{store.storeDesctiption}</p>
-                    <small>{store.storeLocation}</small>
-                </a>
-            ))}
+                {stores.map((store) => {
+                    return <StoreView key={store.id} store = {store} />;
+                })}
             </div>
             {error && <p>{error}</p>}
             {/* <ul>
@@ -63,4 +55,4 @@ const StoreList = () => {
     );
 };
 
-export default StoreList;
+export default AllStorePage;

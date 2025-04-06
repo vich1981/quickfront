@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Импортируем библиотеку для работы с куками
+import loginSuccess from '../redux/authActions';
+import configStore from '../redux/configureStore';
+import { useDispatch } from 'react-redux';
 
-const Login = () => {
+
+const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -17,6 +22,22 @@ const Login = () => {
                 password,
             }, { withCredentials: true });
 
+            const user = await axios.get(`http://localhost:8080/api/v1/users/email/${email}`, {
+                withCredentials: true });
+
+            const loggedIn = {
+                id: user.data.id,
+                username: user.data.username,
+                displayName: user.data.email,
+                image: '',
+                password: '',
+                isLoggedIn: true
+            };
+            const action = {
+                type: 'login-success',
+                payload:loggedIn
+            };
+            dispatch(action);
 
             Cookies.set('sessionId', response.data.sessionId, { path: '/' });
 
@@ -59,4 +80,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginPage;
