@@ -3,7 +3,7 @@ import * as apiCalls from '../api/apiCalls';
 import { withRouterParam }  from '../components/withRouterParam';
 import ProfileCard from '../components/ProfileCard';
 import { connect } from 'react-redux';
-import StoreView from '../components/StoreView';
+import SellerStore from '../components/SellerStore';
 import Spinner from '../components/Spinner';
 
 class UserPage extends React.Component{
@@ -172,7 +172,7 @@ class UserPage extends React.Component{
             <div data-testid="userpage">
                 <div className="row">
                     <div className="col">
-                        Тут будут магазины{/* <StoreView user={this.props.match.params.username} /> */}
+                        <SellerStore user={this.props.match.params.username} />
                     </div>
                     <div className="col">
                         {pageContent}

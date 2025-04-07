@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import * as apiCalls from '../api/apiCalls';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Импортируем библиотеку для работы с куками
-import loginSuccess from '../redux/authActions';
-import configStore from '../redux/configureStore';
 import { useDispatch } from 'react-redux';
 
 
@@ -17,7 +16,9 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/auth/login', {
+            const response = 
+            // apiCalls.login(email,password);
+            await axios.post('http://localhost:8080/api/v1/auth/login', {
                 email,
                 password,
             }, { withCredentials: true });

@@ -5,8 +5,8 @@ export const signup = (user) => {
     return axios.post('/api/1.0/users', user);
 };
 
-export const login = (email,password) => {
-    return axios.post('http://localhost:8080/api/v1/auth/login', {
+export const login = async (email,password) => {
+    return await axios.post('http://localhost:8080/api/v1/auth/login', {
         email,
         password,
     }, { withCredentials: true });
@@ -21,6 +21,10 @@ export const setAuthorizationHeader = ({username, password, isLoggedIn }) => {
         delete axios.defaults.headers.common['Authorization'];
     }
     
+};
+
+export const loadMyStores = () => {
+    return axios.get('http://localhost:8080/api/v1/my/store',{ withCredentials: true});
 };
 
 export const listUsers = (param = { page: 0, size: 3 }) => {
