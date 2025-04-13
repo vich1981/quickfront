@@ -1,7 +1,8 @@
 const initialState = {
         id: 0,
         username: '',
-        displayName: '',
+        email: '',
+        location: '',
         image: '',
         password: '',
         isLoggedIn: false
@@ -18,7 +19,8 @@ export default function authReducer(state = initialState, action) {
     } else if(action.type === 'update-success'){
         return {
             ...state,
-            displayName: action.payload.displayName,
+            username: action.payload.username,
+            location: action.payload.location,
             image: action.payload.image
         };
     }

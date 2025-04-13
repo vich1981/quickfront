@@ -82,7 +82,7 @@ class TopBar extends React.Component {
                                 height="32"
                                 image={this.props.user.image} 
                             />
-                            <span className="nav-link dropdown-toggle">{this.props.user.username}</span>
+                            <span className="nav-link dropdown-toggle">{this.props.user.username}(id:{this.props.user.id})</span>
                         </div>
                         <div 
                             className={dropDownClass} 
@@ -116,6 +116,19 @@ class TopBar extends React.Component {
                         <Link to="/" className="navbar-brand">
                             <img src={logo} width="60" alt="quickCart" /> Quick Cart
                         </Link>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <Link to="/store/all/store" className="nav-link">Stores</Link>
+                                </li>
+                                {/* <li class="nav-item">
+                                <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                                </li> */}
+                            </ul>
+                        </div>
                         {links}
                     </nav>
                 </div>  

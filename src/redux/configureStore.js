@@ -19,7 +19,8 @@ const configStore = (addLogger = true) => {
     let persistedState = {
         id: 0,
         username: '',
-        displayName: '',
+        email: '',
+        location: '',
         image: '',
         password: '',
         isLoggedIn: false

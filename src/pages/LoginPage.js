@@ -20,7 +20,7 @@ const LoginPage = () => {
             // apiCalls.login(email,password);
             await axios.post('http://localhost:8080/api/v1/auth/login', {
                 email,
-                password,
+                password
             }, { withCredentials: true });
 
             const user = await axios.get(`http://localhost:8080/api/v1/users/email/${email}`, {
@@ -29,7 +29,8 @@ const LoginPage = () => {
             const loggedIn = {
                 id: user.data.id,
                 username: user.data.username,
-                displayName: user.data.email,
+                email: user.data.email,
+                location: user.data.location,
                 image: '',
                 password: '',
                 isLoggedIn: true
@@ -55,25 +56,35 @@ const LoginPage = () => {
             <div className="container">
                 <h1 className="text-center">Login</h1>
                 <form className="text-center" onSubmit={handleLogin}>
-                    <div className="col-12 mb-3">
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email"
-                            required
-                        />
+                    <div className="row justify-content-center">
+                        <div className="col-lg-4 mb-3">
+                            <input
+                                className="input-group"
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
-                    <div className="col-12 mb-3">
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password"
-                            required
-                        />
+                    <div className="row justify-content-center">
+                        <div className="col-lg-4 mb-3">
+                            <input
+                                className="input-group"
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
-                    <button type="submit">Login</button>
+                    <div className="row justify-content-center">
+                        <div className="col-lg-4 mb-3">
+                            <button className="btn btn-primary mb-3" type="submit">Login</button>
+                        </div>
+                    </div> 
                 </form>
                 {error && <p className="alert alert-danger">{error}</p>}  
             </div>

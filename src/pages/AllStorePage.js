@@ -12,20 +12,20 @@ const AllStorePage = () => {
                 const response = await axios.get('http://localhost:8080/api/v1/store/all/store');
                 setStores(response.data);
                 setStores([{
-                    storeId:"1", 
-                    storeName:"Diksi",
-                    storeLocation:"Lenina d.5",
-                    storeDesctiption:"food store",
-                    storeWorkingHours:"08:00 - 22:00",
-                    storeRating:"4",
+                    id:"1", 
+                    name:"Diksi",
+                    location:"Lenina d.5",
+                    desctiption:"food store",
+                    workingHours:"08:00 - 22:00",
+                    rating:"4",
                     logoUrl:"https://static.tildacdn.com/tild3263-3162-4432-b763-373034643236/logo_green_02.svg"},
                 {
-                    storeId:"2", 
-                    storeName:"Yarche",
-                    storeLocation:"Pushkina d.37",
-                    storeDesctiption:"food store",
-                    storeWorkingHours:"09:00 - 22:00",
-                    storeRating:"5",
+                    id:"2", 
+                    name:"Yarche",
+                    location:"Pushkina d.37",
+                    desctiption:"food store",
+                    workingHours:"09:00 - 22:00",
+                    rating:"5",
                     logoUrl:"https://upload.wikimedia.org/wikipedia/commons/a/ae/Dixy_logo.svg"
                 }]);
             } catch (err) {
@@ -40,7 +40,7 @@ const AllStorePage = () => {
     return (
         <div>
             <h2>Store List</h2>
-            <div class="list-group">
+            <div className="list-group">
                 {stores.map((store) => {
                     return <StoreView key={store.id} store = {store} />;
                 })}

@@ -4,7 +4,7 @@ import Input from './Input';
 import ButtonWithProgress from './ButtonWithProgress';
 
 const ProfileCard = (props) => {
-    const { displayName, username, image } = props.user;
+    const { role, email, location, username, image } = props.user;
 
     const showEditButton = props.isEditable && !props.inEditMode;
 
@@ -21,16 +21,31 @@ const ProfileCard = (props) => {
                 />
             </div>
             <div className="card-body text-center">
-                {!props.inEditMode && <h4>{`${displayName}@${username}`}</h4>}
+                {!props.inEditMode && (
+                    <div>
+                        <h4>{`${username}(${role})`}</h4>
+                        <h4>{`${email}`}</h4>
+                        <h4>{`${location}`}</h4>
+                    </div>
+                )}
                 {props.inEditMode && (
                     <div className="mb-2">
                         <div className = "text-start mt-2">
                             <Input 
-                                value={displayName} 
-                                label={`Change Display Name for ${username}`}
-                                onChange={props.onChangeDisplayName}
-                                hasError={props.errors.displayName && true}
-                                error={props.errors.displayName}
+                                value={username} 
+                                label={`Изменить имя для ${email}`}
+                                onChange={props.onChangeUsername}
+                                hasError={props.errors.username && true}
+                                error={props.errors.username}
+                            />
+                        </div>
+                        <div className = "text-start mt-2">
+                            <Input 
+                                value={location} 
+                                label={`Изменить расположение для ${email}`}
+                                onChange={props.onChangeLocation}
+                                hasError={props.errors.location && true}
+                                error={props.errors.location}
                             />
                         </div>
                         <div className = "text-start mt-2">

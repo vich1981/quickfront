@@ -9,15 +9,22 @@ class StoreView extends Component {
     render(){
         const { store } = this.props;
         return (
-            <a href="/store/{store.storeId}" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{store.storeName}</h5>
-                    <p><img src={store.logoUrl} width="80" height="60" alt="" /></p>
-                    <small>{store.storeWorkingHours}</small>
-                </div>
-                <p class="mb-1">{store.storeDesctiption}</p>
-                <small>{store.storeLocation}</small>
-            </a>
+            <div>
+                <Link to ={`/store/${store.storeId}`} class="list-group-item list-group-item-action">
+                    <div className="d-flex w-100 justify-content-between">
+                        <div> 
+                            <h5 className="mb-1">{store.name}</h5>
+                            status: {store.status}
+                        </div>
+                        
+                        <p><img src={store.logoUrl} width="80" height="60" alt="" /></p>
+                        <small>{store.workingHours}</small>
+                    </div>
+                    <p className="mb-1">{store.description}</p>
+                    <small>{store.location}</small>
+                </Link>
+                
+            </div>
          );
     }
 }

@@ -12,7 +12,8 @@ class UserPage extends React.Component{
         userNotFound: false,
         isLoadingUser: false,
         inEditMode: false,
-        originalDisplayName: undefined,
+        originalUsername: undefined,
+        originalLocation: undefined,
         pendingUpdateCall: false,
         image: undefined,
         errors: {}
@@ -55,13 +56,13 @@ class UserPage extends React.Component{
 
     onClickCancel = () => {
         const user = { ...this.state.user}
-        if(this.state.originalDisplayName !== undefined){
-            user.displayName = this.state.originalDisplayName;
+        if(this.state.originalUsername !== undefined){
+            user.username = this.state.originalUsername;
         }
         this.setState({
             user,
             errors: {},
-            originalDisplayName: undefined,
+            originalUsername: undefined,
             inEditMode: false,
             image: undefined
         });
@@ -70,7 +71,8 @@ class UserPage extends React.Component{
     onClickSave = () => {
         const userId = this.props.loggedInUser.id;
         const userUpdate = {
-            displayName: this.state.user.displayName,
+            username: this.state.user.username,
+            location: this.state.user.location,
             image: this.state.image && this.state.image.split(',')[1]
         };
         this.setState({pendingUpdateCall: true})
@@ -80,7 +82,8 @@ class UserPage extends React.Component{
                 user.image = response.data.image;
                 this.setState({
                     inEditMode: false,
-                    originalDisplayName: undefined,
+                    originalUsername: undefined,
+                    originalLocation: undefined,
                     pendingUpdateCall: false,
                     user,
                     image: undefined
@@ -104,17 +107,29 @@ class UserPage extends React.Component{
             });
     };
 
-    onChangeDisplayName = (event) => {
+    onChangeUsername = (event) => {
         const user = { ...this.state.user };
-        let originalDisplayName = this.state.originalDisplayName;
-        if(originalDisplayName === undefined){
-            originalDisplayName = user.displayName;
+        let originalUsername = this.state.originalUsername;
+        if(originalUsername === undefined){
+            originalUsername = user.username;
         }
-        user.displayName = event.target.value;
+        user.username = event.target.value;
         const errors = { ...this.state.errors};
-        errors.displayName = undefined;
-        this.setState({user, originalDisplayName, errors });
+        errors.username = undefined;
+        this.setState({user, originalUsername, errors });
     }
+    onChangeLocation = (event) => {
+        const user = { ...this.state.user };
+        let originalLocation = this.state.originalLocation;
+        if(originalLocation === undefined){
+            originalLocation = user.location;
+        }
+        user.location = event.target.value;
+        const errors = { ...this.state.errors};
+        errors.location = undefined;
+        this.setState({user, originalLocation, errors });
+    }
+
 
     onFileSelect = (event) => {
         if(event.target.files.length === 0){
@@ -160,7 +175,8 @@ class UserPage extends React.Component{
                     onClickEdit={this.onClickEdit}
                     onClickCancel={this.onClickCancel}
                     onClickSave={this.onClickSave}
-                    onChangeDisplayName={this.onChangeDisplayName}
+                    onChangeUsername={this.onChangeUsername}
+                    onChangeLocation={this.onChangeLocation}
                     pendingUpdateCall={this.state.pendingUpdateCall}
                     loadedImage={this.state.image}
                     onFileSelect={this.onFileSelect}
