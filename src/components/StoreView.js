@@ -1,6 +1,6 @@
 
  import React, { Component } from 'react';
-//  import ProfileImageWithDefault from './ProfileImageWithDefault';
+ import StoreImageWithDefault from './StoreImageWithDefault';
 //  import { format } from 'timeago.js';
  import { Link } from 'react-router-dom';
  
@@ -17,7 +17,14 @@ class StoreView extends Component {
                             status: {store.status}
                         </div>
                         
-                        <p><img src={store.logoUrl} width="80" height="60" alt="" /></p>
+                        <p>
+                            <StoreImageWithDefault 
+                                src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
+                                width="60" 
+                                height="60" 
+                                alt="" 
+                            />
+                        </p>
                         <small>{store.workingHours}</small>
                     </div>
                     <p className="mb-1">{store.description}</p>

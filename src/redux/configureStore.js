@@ -21,6 +21,7 @@ const configStore = (addLogger = true) => {
         username: '',
         email: '',
         location: '',
+        role: '',
         image: '',
         password: '',
         isLoggedIn: false

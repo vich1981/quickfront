@@ -4,6 +4,7 @@ import { withRouterParam }  from '../components/withRouterParam';
 import ProfileCard from '../components/ProfileCard';
 import { connect } from 'react-redux';
 import SellerStore from '../components/SellerStore';
+import BuyerStore from '../components/BuyerStore';
 import Spinner from '../components/Spinner';
 
 class UserPage extends React.Component{
@@ -149,14 +150,15 @@ class UserPage extends React.Component{
     }
 
     render() {
-        let pageContent;
+        let userContent;
+        let storeContent;
         if(this.state.isLoadingUser) {
-            pageContent = (
+            userContent = (
                 <Spinner />
             );
         }
         else if(this.state.userNotFound){
-            pageContent = (
+            userContent = (
                 <div className="alert alert-danger text-center">
                     <div className="alert-heading">
                         <i className="fas fa-exclamation-triangle fa-3x" />
@@ -167,7 +169,7 @@ class UserPage extends React.Component{
         }
         else {
             const isEditable = true;//this.props.loggedInUser.username === this.props.match.params.username;
-            pageContent = this.state.user && (
+            userContent = this.state.user && (
                 <ProfileCard 
                     user={this.state.user} 
                     isEditable={isEditable}
@@ -184,14 +186,42 @@ class UserPage extends React.Component{
                 />
             );
         }
+        
+        if(this.state.isLoadingUser) {
+            storeContent = (
+                <Spinner />
+            );
+        }
+        else{
+            let role;
+            if(this.state.user) {role = this.state.user.role;}
+            if(role){
+                if(role == 'SELLER'){
+                    storeContent = (
+                        <SellerStore user={this.state.user.username} />
+                    );
+                }
+                if(role == 'BUYER'){
+                    storeContent = (
+                        <BuyerStore user={this.state.user.id} />
+                    );
+                }
+            }
+            else {
+                storeContent = (
+                    <h5>Права пользователя не определены</h5>
+                )
+            }
+        }
+        
         return (
             <div data-testid="userpage">
                 <div className="row">
                     <div className="col">
-                        <SellerStore user={this.props.match.params.username} />
+                        {storeContent}
                     </div>
-                    <div className="col">
-                        {pageContent}
+                    <div className="col-lg-4">
+                        {userContent}
                     </div>
                     
                 </div>

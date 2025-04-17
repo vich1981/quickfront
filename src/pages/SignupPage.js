@@ -36,7 +36,7 @@ const SignupPage = () => {
                 <h1 className="text-center">Sign up</h1>
                 <form className="text-center" onSubmit={handleSignup}>
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
+                    <div className="col-lg-3 mb-3">
                         <input
                             className="input-group"
                             type="text"
@@ -48,7 +48,7 @@ const SignupPage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
+                    <div className="col-lg-3 mb-3">
                         <input
                             className="input-group"
                             type="email"
@@ -60,9 +60,10 @@ const SignupPage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
+                    <div className="col-lg-3 mb-3">
                         <input
                             className="input-group"
+                            autoComplete="current-password"
                             type="password"
                             placeholder="Password"
                             value={password}
@@ -72,7 +73,7 @@ const SignupPage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
+                    <div className="col-lg-3 mb-3">
                         <input
                             className="input-group"
                             type="text"
@@ -84,17 +85,18 @@ const SignupPage = () => {
                     </div>
                 </div>  
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
+                    <div className="col-lg-3 mb-3">
                         <select
                             className="form-select"
                             aria-label="Выберите права пользователя"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
                             required
+
                         >
                             <option value="ADMIN">Administrator</option>
                             <option value="MODER">Moderator</option>
-                            <option defaultValue value="BUYER">Buyer</option>
+                            <option value="BUYER">Buyer</option>
                             <option value="SELLER">Seller</option>
                         </select>
                     </div>

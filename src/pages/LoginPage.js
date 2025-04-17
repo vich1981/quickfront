@@ -46,7 +46,7 @@ const LoginPage = () => {
             console.log(response.data);
             navigate('/store/all/store');
         } catch (error) {
-            setError('Failed to log in. Please check your credentials.');
+            setError('Не удается войти, неверный email или пароль');
             console.error(error);
         }
     };
@@ -57,7 +57,7 @@ const LoginPage = () => {
                 <h1 className="text-center">Login</h1>
                 <form className="text-center" onSubmit={handleLogin}>
                     <div className="row justify-content-center">
-                        <div className="col-lg-4 mb-3">
+                        <div className="col-lg-3 mb-3">
                             <input
                                 className="input-group"
                                 type="email"
@@ -69,10 +69,11 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-lg-4 mb-3">
+                        <div className="col-lg-3 mb-3">
                             <input
                                 className="input-group"
                                 type="password"
+                                autoComplete="current-password"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +82,7 @@ const LoginPage = () => {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-lg-4 mb-3">
+                        <div className="col-lg-3 mb-3">
                             <button className="btn btn-primary mb-3" type="submit">Login</button>
                         </div>
                     </div> 

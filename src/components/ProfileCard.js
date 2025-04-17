@@ -23,9 +23,9 @@ const ProfileCard = (props) => {
             <div className="card-body text-center">
                 {!props.inEditMode && (
                     <div>
-                        <h4>{`${username}(${role})`}</h4>
-                        <h4>{`${email}`}</h4>
-                        <h4>{`${location}`}</h4>
+                        <h5>{`${username}(${role})`}</h5>
+                        <h5>{`${email}`}</h5>
+                        <h5>{`${location}`}</h5>
                     </div>
                 )}
                 {props.inEditMode && (

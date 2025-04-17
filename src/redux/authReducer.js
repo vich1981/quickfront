@@ -3,6 +3,7 @@ const initialState = {
         username: '',
         email: '',
         location: '',
+        role: '',
         image: '',
         password: '',
         isLoggedIn: false
