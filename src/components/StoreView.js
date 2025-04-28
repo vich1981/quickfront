@@ -12,23 +12,27 @@ class StoreView extends Component {
             <div>
                 <Link to ={`/store/${store.storeId}`} class="list-group-item list-group-item-action">
                     <div className="d-flex w-100 justify-content-between">
-                        <div> 
-                            <h5 className="mb-1">{store.name}</h5>
-                            status: {store.status}
+                        <div className="col-4"> 
+                            <h5 className="mb-1">{store.storeName}</h5>
+                            <p className="mb-1">{store.storeDescription}</p>
+                    <small>{store.storeLocation}</small>
+                            {/* status: {store.status} */}
+                        </div>
+                        <div className="col-4">
+                            <p>
+                                <StoreImageWithDefault 
+                                    src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
+                                    width="60" 
+                                    height="60" 
+                                    alt="" 
+                                />
+                            </p>
                         </div>
                         
-                        <p>
-                            <StoreImageWithDefault 
-                                src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
-                                width="60" 
-                                height="60" 
-                                alt="" 
-                            />
-                        </p>
-                        <small>{store.workingHours}</small>
+                        
+                        <small>{store.storeWorkingHours}</small>
                     </div>
-                    <p className="mb-1">{store.description}</p>
-                    <small>{store.location}</small>
+                    
                 </Link>
                 
             </div>

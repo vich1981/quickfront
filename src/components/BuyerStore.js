@@ -9,7 +9,7 @@ class BuyerStore extends Component {
 
     state = {
         orders: [],
-        userId: this.props.userId,
+        userId: this.props.id,
         isLoadingOrders: false,
         error: ''
     }
@@ -24,7 +24,7 @@ class BuyerStore extends Component {
     handleStoreRegister = async (e) => {
         //e.preventDefault();
         try {
-            const response = await axios.get(`http://localhost:8080/api/v1/orders/${this.state.userId}`, { withCredentials: true });
+            const response = await axios.get(`http://localhost:8080/api/v1/orders/user/${this.state.userId}`, { withCredentials: true });
             this.setState({
                 orders: response.data, 
                 isLoadingOrders: false
@@ -34,7 +34,7 @@ class BuyerStore extends Component {
             console.log(response.data);
 
         } catch (error) {
-            this.setState({error: 'Failed to recieve store. Please check your credentials.'});
+            this.setState({error: 'Не можем отобразить заказы. Проверьте права доступа.'});
             console.error(error);
         }
     };
@@ -61,7 +61,7 @@ class BuyerStore extends Component {
         if(this.state.orders) {
             myOrders = (
                 <div>
-                    <h2>My orders</h2>
+                    <h2>Мои заказы</h2>
                     <div className="list-group">
                         {this.state.orders.map((order) => {
                             // store.logoUrl = this.getUrl(store);
@@ -74,14 +74,19 @@ class BuyerStore extends Component {
             // }));
             )
         }
+        else {
+            <div>
+                <h4>У вас пока нет заказов</h4>
+            </div>
+        }
         return (
             <div>
                 {myOrders}
                 {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
                 
-                <Link to="/store/all/store" className="nav-link">
+                {/* <Link to="/store/all/store" className="nav-link">
                         У вас нет ни одного заказа
-                </Link>
+                </Link> */}
                 
             </div>
         );

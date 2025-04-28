@@ -6,10 +6,11 @@ import Logout from '../components/Logout';
 import Signup from '../pages/SignupPage';
 import HomePage from '../pages/HomePage';
 import StoreRegisterPage from '../pages/StoreRegisterPage';
-import StoreID from '../components/StoreID';
+import StoreIDPage from '../pages/StoreIDPage';
 import PrivateRoute from '../components/PrivateRoute';
 import AllStorePage from '../pages/AllStorePage';
 import TopBar from '../components/TopBar';
+import ProductAddPage from '../pages/ProductAddPage';
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/store/register" element={<StoreRegisterPage />} />
-            <Route path='/store/:id' element={<StoreID />} />
+            <Route path='/store/:id' element={<StoreIDPage />} />
             <Route path="/store/all/store" element={<AllStorePage />} />
+            <Route path="/product/add" element={<ProductAddPage />} />
           </Routes>
       </div>
     </div>

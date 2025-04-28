@@ -40,6 +40,14 @@ export const updateUser = (userId, body) => {
     return axios.put('http://localhost:8080/api/v1/users/update/' + userId, body,{withCredentials: true});
 };
 
+export const getStore = (storeId) => {
+    return axios.get(`http://localhost:8080/api/v1/store/${storeId}`,{withCredentials: true});
+};
+
+export const getProducts = (storeId) => {
+    return axios.get(`http://localhost:8080/api/v1/store/${storeId}/products`,{withCredentials: true});
+}
+
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);
 // };

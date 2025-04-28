@@ -11,25 +11,25 @@ const AllStorePage = () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/v1/store/all/store');
                 setStores(response.data);
-                setStores([{
-                    id:"1", 
-                    name:"Diksi",
-                    location:"Lenina d.5",
-                    desctiption:"food store",
-                    workingHours:"08:00 - 22:00",
-                    rating:"4",
-                    logoUrl:"https://static.tildacdn.com/tild3263-3162-4432-b763-373034643236/logo_green_02.svg"},
-                {
-                    id:"2", 
-                    name:"Yarche",
-                    location:"Pushkina d.37",
-                    desctiption:"food store",
-                    workingHours:"09:00 - 22:00",
-                    rating:"5",
-                    logoUrl:"https://upload.wikimedia.org/wikipedia/commons/a/ae/Dixy_logo.svg"
-                }]);
+                // setStores([{
+                //     id:"1", 
+                //     name:"Diksi",
+                //     location:"Lenina d.5",
+                //     desctiption:"food store",
+                //     workingHours:"08:00 - 22:00",
+                //     rating:"4",
+                //     logoUrl:"https://static.tildacdn.com/tild3263-3162-4432-b763-373034643236/logo_green_02.svg"},
+                // {
+                //     id:"2", 
+                //     name:"Yarche",
+                //     location:"Pushkina d.37",
+                //     desctiption:"food store",
+                //     workingHours:"09:00 - 22:00",
+                //     rating:"5",
+                //     logoUrl:"https://upload.wikimedia.org/wikipedia/commons/a/ae/Dixy_logo.svg"
+                // }]);
             } catch (err) {
-                setError('Failed to fetch stores. Please try again later.');
+                setError('Невозможно получить список магазинов. Попробуйте попозже.');
                 console.error(err);
             }
         };
@@ -39,10 +39,10 @@ const AllStorePage = () => {
 
     return (
         <div>
-            <h2>Store List</h2>
+            <h2>Список магазинов</h2>
             <div className="list-group">
                 {stores.map((store) => {
-                    return <StoreView key={store.id} store = {store} />;
+                    return <StoreView key={store.storeId} store = {store} />;
                 })}
             </div>
             {error && <p>{error}</p>}

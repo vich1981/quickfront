@@ -24,7 +24,8 @@ const configStore = (addLogger = true) => {
         role: '',
         image: '',
         password: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        backet: []
     };
 
     if (localStorageData) {

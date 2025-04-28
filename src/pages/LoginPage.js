@@ -31,6 +31,7 @@ const LoginPage = () => {
                 username: user.data.username,
                 email: user.data.email,
                 location: user.data.location,
+                role: user.data.role,
                 image: '',
                 password: '',
                 isLoggedIn: true

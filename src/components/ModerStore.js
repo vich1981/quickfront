@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as apiCalls from '../api/apiCalls';
 import axios from 'axios';
 import Spinner from './Spinner';
-import SellerStoreView from './SellerStoreView';
+import ModerStoreView from './ModerStoreView';
 import { Link } from 'react-router-dom';
 
-class SellerStore extends Component {
+class ModerStore extends Component {
 
     state = {
         stores: [],
@@ -23,7 +23,7 @@ class SellerStore extends Component {
     handleStoreRegister = async (e) => {
         //e.preventDefault();
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/store/my/store', { withCredentials: true });
+            const response = await axios.get('http://localhost:8080/api/v1/moderation/manage/store', { withCredentials: true });
             this.setState({
                 stores: response.data, 
                 isLoadingStores: false
@@ -33,7 +33,7 @@ class SellerStore extends Component {
             console.log(response.data);
 
         } catch (error) {
-            this.setState({error: 'Failed to recieve store. Please check your credentials.'});
+            this.setState({error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'});
             console.error(error);
         }
     };
@@ -60,14 +60,11 @@ class SellerStore extends Component {
         if(this.state.stores) {
             myStores = (
                 <div>
-                    <h2>Мои магазины</h2>
+                    <h2>Список магазинов</h2>
                     <div className="list-group">
                         {this.state.stores.map((store) => {
                             // store.logoUrl = this.getUrl(store);
-                            return (
-                            <div>
-                                <SellerStoreView key={store.storeId} store={store} />
-                            </div>);
+                            return <ModerStoreView key={store.storeId} store={store} />;
                         })}
                     </div>
                 </div>
@@ -80,15 +77,10 @@ class SellerStore extends Component {
             <div>
                 {myStores}
                 {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
-                
-                <Link to="/store/register" className="nav-link">
-                        Register new store
-                </Link>
-                
             </div>
         );
         
     };
 }
 
-export default SellerStore;
+export default ModerStore;

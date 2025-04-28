@@ -5,6 +5,8 @@ import ProfileCard from '../components/ProfileCard';
 import { connect } from 'react-redux';
 import SellerStore from '../components/SellerStore';
 import BuyerStore from '../components/BuyerStore';
+import ModerStore from '../components/ModerStore';
+import AdminPanel from '../components/AdminPanel';
 import Spinner from '../components/Spinner';
 
 class UserPage extends React.Component{
@@ -47,13 +49,13 @@ class UserPage extends React.Component{
                 isLoadingUser: false
             });
         });
-    };
+    }
 
     onClickEdit = () => {
         this.setState({
             inEditMode: true
         });
-    };
+    }
 
     onClickCancel = () => {
         const user = { ...this.state.user}
@@ -67,7 +69,7 @@ class UserPage extends React.Component{
             inEditMode: false,
             image: undefined
         });
-    };
+    }
 
     onClickSave = () => {
         const userId = this.props.loggedInUser.id;
@@ -106,7 +108,7 @@ class UserPage extends React.Component{
                     errors
                 })
             });
-    };
+    }
 
     onChangeUsername = (event) => {
         const user = { ...this.state.user };
@@ -196,15 +198,25 @@ class UserPage extends React.Component{
             let role;
             if(this.state.user) {role = this.state.user.role;}
             if(role){
-                if(role == 'SELLER'){
+                if(role === 'SELLER'){
                     storeContent = (
                         <SellerStore user={this.state.user.username} />
                     );
                 }
-                if(role == 'BUYER'){
+                if(role === 'BUYER'){
                     storeContent = (
-                        <BuyerStore user={this.state.user.id} />
+                        <BuyerStore id={this.state.user.id} />
                     );
+                }
+                if(role === 'MODER'){
+                    storeContent = (
+                        <ModerStore />
+                    );
+                }
+                if(role === 'ADMIN'){
+                    storeContent = (
+                        <AdminPanel />
+                    )
                 }
             }
             else {
