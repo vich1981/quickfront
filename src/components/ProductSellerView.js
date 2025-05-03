@@ -21,7 +21,7 @@ class ProductSellerView extends Component {
                     </Link>
                 </div> 
                 <div className="card-body text-self-left">
-                    <h5 className="card-title">{product.name}</h5>
+                    <h5 className="card-title">{product.name}({product.id})</h5>
                     <p className="card-text">{product.description}</p>
                     <div className="row">
                         <div className="col-6 align-self-end">
@@ -31,7 +31,13 @@ class ProductSellerView extends Component {
                             <small class="text-body-secondary">Осталось:{product.stock}</small> 
                         </div>
                         <div className="col-6 align-self-center">
-                            <a href="#" className="btn btn-primary">Изменить</a>
+                            <Link 
+                                to="/product/update"
+                                state={{product: product}}
+                                className="btn btn-primary"
+                            >
+                                Изменить
+                            </Link>
                         </div>
                     </div>
                 </div>

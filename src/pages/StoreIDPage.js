@@ -58,7 +58,7 @@ class StoreIdPage extends React.Component{
         this.setState({isLoadingProducts: true});
         apiCalls.getProducts(storeId)
         .then(response => {
-            this.setState({ products: response.data, isLoadingProducts: false })
+            this.setState({ products: response.data, isLoadingProducts: false });
         })
         .catch(error => {
             console.error(error);
@@ -77,7 +77,7 @@ class StoreIdPage extends React.Component{
             );
         }
         else {
-            if(this.state.store)storeContent = (
+            if(this.state.store) storeContent = (
                 <div class="list-group-item list-group-item-action mb-3">
                     <h2>Магазин</h2>
                     <div className="d-flex w-100 justify-content-between">

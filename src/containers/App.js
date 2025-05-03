@@ -11,6 +11,8 @@ import PrivateRoute from '../components/PrivateRoute';
 import AllStorePage from '../pages/AllStorePage';
 import TopBar from '../components/TopBar';
 import ProductAddPage from '../pages/ProductAddPage';
+import ProductPage from '../pages/ProductPage';
+import ProductUpdatePage from '../pages/ProductUpdatePage';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path='/store/:id' element={<StoreIDPage />} />
             <Route path="/store/all/store" element={<AllStorePage />} />
             <Route path="/product/add" element={<ProductAddPage />} />
+            <Route path="/product/update" element ={<ProductUpdatePage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
           </Routes>
       </div>
     </div>

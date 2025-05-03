@@ -4,15 +4,15 @@ import Input from '../components/Input';
 import { useNavigate, useLocation } from 'react-router-dom';
 //import Cookies from 'js-cookie';
 
-const ProductAddPage = (props) => {
+const ProductUpdatePage = (props) => {
     //const [storeDTO, setStore] = useState([]);
     const location = useLocation();
-    const {storeId} = location.state;
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState('');
-    const [stock, setStock] = useState('');
+    const {product} = location.state;
+    const [name, setName] = useState(product.name);
+    const [description, setDescription] = useState(product.description);
+    const [category, setCategory] = useState(product.category);
+    const [price, setPrice] = useState(product.price);
+    const [stock, setStock] = useState(product.stock);
 
     //const [imageUrl, setLogoUrl] = useState('');
     const [image, setImage] = useState('');
@@ -29,15 +29,15 @@ const ProductAddPage = (props) => {
         formData.append('description', description);
         formData.append('price', price);
         formData.append('stock', parseInt(stock));
-        formData.append('image', image);// && logo.split(',')[1]);
+        if(image)formData.append('image', image);// && logo.split(',')[1]);
         try {
-            const response = await axios.post(`http://localhost:8080/api/v1/store/${storeId}/product`, formData,
+            const response = await axios.patch(`http://localhost:8080/api/v1/product/${product.id}`, formData,
                 { 
                     headers: {'Content-Type': 'multipart/form-data'},
                     withCredentials: true 
                 });
 
-            navigate(`/store/${storeId}`);
+            navigate(-1);
 
         } catch (err) {
             if (err.response) {
@@ -66,7 +66,7 @@ const ProductAddPage = (props) => {
     return (
         <div>
             <div className="container">
-                <h1 className="text-center">Добавление продукта({storeId})</h1>
+                <h1 className="text-center">Изменение продукта({product.id})</h1>
                 <form className="text-center" onSubmit={handleProductAdd}>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
@@ -138,7 +138,7 @@ const ProductAddPage = (props) => {
                     
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <button className="btn btn-primary mb-3" type="submit">Добавить</button>
+                            <button className="btn btn-primary mb-3" type="submit">Обновить</button>
                         </div>
                     </div> 
                 </form>
@@ -149,4 +149,4 @@ const ProductAddPage = (props) => {
     );
 };
 
-export default ProductAddPage;
+export default ProductUpdatePage;
