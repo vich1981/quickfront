@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authReducer';
+import cartNewReducer from './cartNewReducer';
+import { cartReducer } from './cartReducer';
 import logger from 'redux-logger';
 import * as apiCalls from '../api/apiCalls';
 
@@ -25,7 +27,28 @@ const configStore = (addLogger = true) => {
         image: '',
         password: '',
         isLoggedIn: false,
-        backet: []
+        cart: []
+        //[
+        //     {
+        //         category: "Хлебобулочные изделия",
+        //         description: "Ватрушка с творогом, 80 г.",
+        //         id: 9,
+        //         imageUrl: "________.webp_d004cac7-ce3e-4ba3-bc9d-276ec0907993.webp",
+        //         name: "Ватрушка",
+        //         price: "65.00",
+        //         stock: 150
+        //     },
+        //     {
+        //         category: "Хлебобулочные изделия",
+        //         description: "Ватрушка с творогом, 80 г.",
+        //         id: 9,
+        //         imageUrl: "________.webp_d004cac7-ce3e-4ba3-bc9d-276ec0907993.webp",
+        //         name: "Ватрушка",
+        //         price: "65.00",
+        //         stock: 150
+        //     }
+
+        // ]
     };
 
     if (localStorageData) {
@@ -36,12 +59,12 @@ const configStore = (addLogger = true) => {
     }
     const store = addLogger
     ? configureStore({
-        reducer: authReducer,
+        reducer: authReducer, cartReducer, cartNewReducer,
         preloadedState: persistedState,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
     })
     : configureStore({
-        reducer: authReducer,
+        reducer: authReducer, cartReducer, cartNewReducer,
         preloadedState: persistedState,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     });

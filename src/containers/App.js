@@ -13,6 +13,7 @@ import TopBar from '../components/TopBar';
 import ProductAddPage from '../pages/ProductAddPage';
 import ProductPage from '../pages/ProductPage';
 import ProductUpdatePage from '../pages/ProductUpdatePage';
+import CartPage from '../pages/CartPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/product/add" element={<ProductAddPage />} />
             <Route path="/product/update" element ={<ProductUpdatePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<CartPage />} />
           </Routes>
       </div>
     </div>

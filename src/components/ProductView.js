@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import ProductImageWithDefault from './ProductImageWithDefault';
 //  import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class ProductView extends Component {
+    state = {
+        product: this.props.product,
+        products: this.props.products
+    }
+
+    addProduct = () => {
+        const action = {
+            type:'addNewProduct',
+            payload: this.state.product
+        };
+        this.props.dispatch(action);
+    };
    
    render(){
        const { product } = this.props;
@@ -31,7 +44,7 @@ class ProductView extends Component {
                             <small class="text-body-secondary">Осталось:{product.stock}</small> 
                         </div>
                         <div className="col-6 align-self-center">
-                            <a href="#" className="btn btn-primary">В корзину</a>
+                            <button className="btn btn-primary" onClick={this.addProduct}>В корзину</button>
                         </div>
                     </div>
                 </div>
@@ -40,5 +53,11 @@ class ProductView extends Component {
    }
 }
 
-export default ProductView;       
+const mapStateToProps = (state) => {
+    return {
+        products: state.cart
+    }
+};
+//
+export default connect(mapStateToProps)(ProductView);       
    

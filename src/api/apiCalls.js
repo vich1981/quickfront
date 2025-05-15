@@ -52,6 +52,10 @@ export const getProduct = (productId) => {
     return axios.get(`http://localhost:8080/api/v1/product/${productId}`,{withCredentials: true});
 };
 
+export const createOrder = (body) => {
+    return axios.post('http://localhost:8080/api/v1/orders/',body,{withCredentials: true});
+}
+
 
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);

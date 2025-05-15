@@ -1,15 +1,17 @@
 import React from "react";
 import logo from '../assets/logoquickcart.png';
+import cartImage from '../assets/cart.webp';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ProfileImageWithDefault from './ProfileImageWithDefault';
+import "../css/TopBar.css";
 
 class TopBar extends React.Component {
 
     state = {
-        dropDownVisible: false
+        dropDownVisible: false,
+        count: 0
     };
-
     componentDidMount() {
         document.addEventListener('click', this.onClickTracker);
     }
@@ -50,9 +52,19 @@ class TopBar extends React.Component {
 
     assignActionArea = (area) => {
         this.actionArea = area;
+    };
+
+    calculateCount = () => {
+        let cartCount = 0;
+        if(this.props.user.cart)this.props.user.cart.forEach(element => {
+            cartCount += parseInt(element.quantity);
+        });
+        this.state.count = cartCount;
     }
 
+
     render() {
+        this.calculateCount();   
         let links = (
             <ul className="nav navbar-nav ms-auto">
                 <li className="nav-item">
@@ -121,14 +133,19 @@ class TopBar extends React.Component {
                                 <li class="nav-item">
                                     <Link to="/store/all/store" className="nav-link">Stores</Link>
                                 </li>
-                                {/* <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
-                                </li>
-                                <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                                </li> */}
                             </ul>
                         </div>
+                        <Link to ="/cart" className="link">
+                            <button 
+                                className="cart" 
+                                id="cart"
+                            >
+                                <img className="cart__image" src={cartImage} width="50"
+                                    height="50" alt="Cart" />
+                                <div className="cart__num" id="cart_num">{this.state.count}</div>
+                            </button>        
+                        </Link>
+                        
                         {links}
                     </nav>
                 </div>  

@@ -33,7 +33,7 @@ class SellerStore extends Component {
             console.log(response.data);
 
         } catch (error) {
-            this.setState({error: 'Failed to recieve store. Please check your credentials.'});
+            this.setState({error: 'Невозможно получить магазин, проверьте права доступа.'});
             console.error(error);
         }
     };
@@ -82,7 +82,7 @@ class SellerStore extends Component {
                 {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
                 
                 <Link to="/store/register" className="nav-link">
-                        Register new store
+                        Добавить новый магазин
                 </Link>
                 
             </div>
