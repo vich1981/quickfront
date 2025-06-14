@@ -10,7 +10,7 @@ class CartPage extends React.Component{
         //cart: this.props.loggedInUser.cart,
         role: this.props.loggedInUser.role,
         userId: this.props.loggedInUser.id,
-        deliveryAddress: undefined,
+        deliveryAddress: 'укажите адрес доставки',
         paymentMethod: 'наличные',
         orderStatus: undefined,
 
@@ -23,20 +23,21 @@ class CartPage extends React.Component{
 
     onClickOrder = () => {
         const order = {
+            userId: this.props.loggedInUser.id,
             deliveryAddress: this.state.deliveryAddress,
             paymentMethod: this.state.paymentMethod,
-            products: JSON.stringify(this.props.loggedInUser.cart)
+            products: this.props.loggedInUser.cart
+            
         }
         const body = {
-            order: order,
-            userId: this.state.userId
+            order: order
         }
         const formData = new FormData();
-        formData.append('order', order);
-        formData.append('userId', this.state.userId);//this.props.loggedInUser.cart);
-        // order.append('deliveryAddress', this.state.deliveryAddress);
-        // order.append('paymentMethod', this.state.paymentMethod);
-        apiCalls.createOrder(body)
+        formData.append('products', JSON.stringify(this.props.loggedInUser.cart));
+        formData.append('userId', this.state.userId);
+        formData.append('deliveryAddress', this.state.deliveryAddress);
+        formData.append('paymentMethod', this.state.paymentMethod);
+        apiCalls.createOrder(formData)
         .then(response => {
             this.setState({
                 orders: response.data,
@@ -78,7 +79,15 @@ class CartPage extends React.Component{
         else{
             if(this.state.orderStatus){
                 productContent = (
-                    <div><h4>{this.state.orderStatus}</h4></div>
+                    <div>
+                        <div><h4>{this.state.orderStatus}</h4></div>
+                        <div>
+                            {this.state.orders.map((order) => {
+                                return (<div>Сформирован заказ {order.id}</div>);
+                            })}
+                        </div>
+                    </div>
+                    
                 )
             }
             else if(!cart || (cart.length === 0)){

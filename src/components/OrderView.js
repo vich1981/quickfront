@@ -7,13 +7,36 @@ class OrderView extends Component {
    
    render(){
        const { order } = this.props;
+       const od = order.orderDate;
+       let date = od.slice(8,10) + '.' + od.slice(5,7) + '.' + od.slice(0,4) + ' ' + od.slice(11,16);
+       let status;
+       switch(order.status){
+        case 'PENDING':
+            status = 'Обрабатывается';
+            break;
+        case 'ASSEMBLED':
+            status = 'Собран';
+            break;
+        case 'PAID':
+            status = 'Оплачен';
+            break;
+        case 'DELIVERED':
+            status = 'Доставляется';
+            break;
+        case 'COMPLETED':
+            status = 'Завершен';
+            break;
+        default:
+            status = 'Статус заказа не определен';
+
+       }
        return (
            <div>
-               <Link to ={`/order/${order.orderId}`} class="list-group-item list-group-item-action">
+               <Link to ={`/orders/${order.id}`} class="list-group-item list-group-item-action">
                    <div className="d-flex w-100 justify-content-between">
                        <div> 
-                           <h5 className="mb-1">{order.name}</h5>
-                           status: {order.status}
+                           <h5 className="mb-1">Заказ номер №{order.id} от {date}</h5>
+                           статус: {status}
                        </div>
                        
                        {/* <p>

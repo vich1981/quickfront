@@ -14,6 +14,8 @@ import ProductAddPage from '../pages/ProductAddPage';
 import ProductPage from '../pages/ProductPage';
 import ProductUpdatePage from '../pages/ProductUpdatePage';
 import CartPage from '../pages/CartPage';
+import OrdersPage from '../pages/OrdersPage';
+import OrderPage from '../pages/OrderPage';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/product/update" element ={<ProductUpdatePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/orders/user" element={<OrdersPage />} />
+            <Route path="/orders/:id" element={<OrderPage />} />
           </Routes>
       </div>
     </div>

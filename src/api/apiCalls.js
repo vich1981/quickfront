@@ -56,7 +56,13 @@ export const createOrder = (body) => {
     return axios.post('http://localhost:8080/api/v1/orders/',body,{withCredentials: true});
 }
 
+export const getOrders = (userId) => {
+    return axios.get(`http://localhost:8080/api/v1/orders/user/${userId}`,{withCredentials: true});
+}
 
+export const getOrder = (id) => {
+    return axios.get(`http://localhost:8080/api/v1/orders/${id}`, {withCredentials: true});
+}
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);
 // };

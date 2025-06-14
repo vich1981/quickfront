@@ -79,6 +79,12 @@ class TopBar extends React.Component {
                 </li>
             </ul> 
         );
+
+        let orders = (this.props.user.role =="BUYER")&&(
+            <li class="nav-item">
+                <Link to="/orders/user" className="nav-link">Заказы</Link>
+            </li>
+        );
         if(this.props.user.isLoggedIn){
             let dropDownClass = 'p-0 shadow dropdown-menu';
             if(this.state.dropDownVisible){
@@ -105,7 +111,7 @@ class TopBar extends React.Component {
                                 className="dropdown-item"
                                 onClick={this.onClickMyProfile}
                             >
-                                <i className="fas fa-user text-info"></i> My Profile
+                                <i className="fas fa-user text-info"></i> Мой профиль
                             </Link>
                             <span className="dropdown-item" 
                                 onClick={this.onClickLogout} 
@@ -129,10 +135,11 @@ class TopBar extends React.Component {
                             <img src={logo} width="60" alt="quickCart" /> Quick Cart
                         </Link>
                         <div class="collapse navbar-collapse" id="navbarText">
-                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <Link to="/store/all/store" className="nav-link">Stores</Link>
+                                    <Link to="/store/all/store" className="nav-link">Магазины</Link>
                                 </li>
+                                {orders}
                             </ul>
                         </div>
                         <Link to ="/cart" className="link">

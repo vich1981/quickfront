@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class ProductView extends Component {
     state = {
         product: this.props.product,
-        products: this.props.products
+        //products: this.props.products
     }
 
     addProduct = () => {
