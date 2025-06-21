@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import StoreImageWithDefault from './StoreImageWithDefault';
 //  import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 

@@ -80,11 +80,21 @@ class TopBar extends React.Component {
             </ul> 
         );
 
-        let orders = (this.props.user.role =="BUYER")&&(
-            <li class="nav-item">
-                <Link to="/orders/user" className="nav-link">Заказы</Link>
-            </li>
-        );
+        let orders;
+        if(this.props.user.role =="BUYER"){
+            orders = (
+                <li className="nav-item">
+                    <Link to="/orders/user" className="nav-link">Заказы</Link>
+                </li>
+            );
+        }
+        else if(this.props.user.role =="SELLER"){
+            orders = (
+                <li className="nav-item">
+                    <Link to="/orders/store" className="nav-link">Заказы</Link>
+                </li>
+            );
+        }
         if(this.props.user.isLoggedIn){
             let dropDownClass = 'p-0 shadow dropdown-menu';
             if(this.state.dropDownVisible){

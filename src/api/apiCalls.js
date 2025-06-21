@@ -60,6 +60,10 @@ export const getOrders = (userId) => {
     return axios.get(`http://localhost:8080/api/v1/orders/user/${userId}`,{withCredentials: true});
 }
 
+export const getStoreOrders = (storeId) => {
+    return axios.get(`http://localhost:8080/api/v1/orders/store/${storeId}`,{withCredentials: true});
+}
+
 export const getOrder = (id) => {
     return axios.get(`http://localhost:8080/api/v1/orders/${id}`, {withCredentials: true});
 }
