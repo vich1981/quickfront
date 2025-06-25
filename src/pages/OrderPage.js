@@ -71,20 +71,21 @@ class OrderPage extends React.Component{
     }
 
     handleOrderStatus = () => {
-        // apiCalls.getStore(storeId)
-        // .then(response => {
-        //     this.setState({ 
-        //         store: response.data, 
-        //         isLoadingStore: false, 
-        //     })
-        // })
-        // .catch(error => {
-        //     console.error(error);
-        //     this.setState({ 
-        //         isLoadingStore: false,
-        //         error: 'Невоможно получить магазин.'
-        //     });
-        // });
+        // Добавить спиннер на кнопку статуса
+        const formData = new FormData();
+        formData.append('status', this.state.status);
+        apiCalls.updateOrderStatus(this.state.order.id, formData)
+        .then(response => {
+            this.setState({ 
+                status: response.data 
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            this.setState({ 
+                error: 'Статус не изменен'
+            });
+        });
     }
 
 
@@ -100,7 +101,7 @@ class OrderPage extends React.Component{
         else{
             if(!this.state.store){
                 storeContent = (
-                    <div>
+                    <div className="mb-2">
                         <button
                             className="btn btn-primary mb-2"
                             onClick={this.loadStore}
@@ -169,36 +170,49 @@ class OrderPage extends React.Component{
                         status = 'статус заказа не определен';
             
                 }
-                if(this.state.role == 'SELLER'){
+                if(this.state.role === 'SELLER'){
                     statusContent = (
-                        <div className="col-lg-3 mb-3">
-                            <select
-                                className="form-select"
-                                aria-label="Выберите права пользователя"
-                                value={this.state.status}
-                                onChange={(e) => this.setState({status : e.target.value})}
-                                required
-                            >
-                                <option value="PENDING">ОБРАБАТЫВАЕТСЯ</option>
-                                <option value="ASSEMBLED">СОБРАН</option>
-                                <option value="PAID">ОПЛАЧЕН</option>
-                                <option value="DELIVERED">ДОСТАВЛЯЕТСЯ</option>
-                                <option value="COMPLETED">ЗАВЕРШЕН</option>
-                            </select>
-                            <button 
-                                className="btn btn-primary mb-3" 
-                                type="button"
-                                onClick={this.handleOrderStatus} 
-                            >
-                                Изменить
-                            </button>
-                        </div>
+                        <div className="row row-cols-auto d-flex align-items-center mb-2">
+                            <div className="col align-self-bottom lh-1 mb-2">
+                                статус:
+                            </div>
+                            <div className="col mb-2">
+                                <select
+                                    className="form-select"
+                                    aria-label="Статус заказа"
+                                    value={this.state.status}
+                                    onChange={(e) => this.setState({status : e.target.value})}
+                                    required
+                                >
+                                    <option value="PENDING">ОБРАБАТЫВАЕТСЯ</option>
+                                    <option value="ASSEMBLED">СОБРАН</option>
+                                    <option value="PAID">ОПЛАЧЕН</option>
+                                    <option value="DELIVERED">ДОСТАВЛЯЕТСЯ</option>
+                                    <option value="COMPLETED">ЗАВЕРШЕН</option>
+                                </select>
+                            </div>
+                            <div className="col mb-2">
+                                <button 
+                                    className="btn btn-primary" 
+                                    type="button"
+                                    onClick={this.handleOrderStatus} 
+                                >
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>  
+                        
+                    );
+                }
+                else {
+                    statusContent = (
+                        <div className="mb-2"> статус: {status}</div>
                     );
                 }
                 orderContent = (
                 <div>
-                    <h2>Заказ № {this.state.order.id} {this.state.role}</h2>
-                    <div>статус: {statusContent}</div>
+                    <h2>Заказ № {this.state.order.id}</h2>
+                    {statusContent}
                     {storeContent}
                     <ol className="list-group list-group-numbered">
                         {this.state.order.products.map((product) => {

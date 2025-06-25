@@ -29,9 +29,9 @@ class CartPage extends React.Component{
             products: this.props.loggedInUser.cart
             
         }
-        const body = {
-            order: order
-        }
+        // const body = {
+        //     order: order
+        // }
         const formData = new FormData();
         formData.append('products', JSON.stringify(this.props.loggedInUser.cart));
         formData.append('userId', this.state.userId);

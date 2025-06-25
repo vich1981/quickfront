@@ -67,6 +67,10 @@ export const getStoreOrders = (storeId) => {
 export const getOrder = (id) => {
     return axios.get(`http://localhost:8080/api/v1/orders/${id}`, {withCredentials: true});
 }
+
+export const updateOrderStatus = (id, body) => {
+    return axios.patch(`http://localhost:8080/api/v1/orders/update/${id}`, body, {withCredentials: true});
+}
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);
 // };

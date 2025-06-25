@@ -60,6 +60,7 @@ class SellerStoreOrdersView extends Component {
             <div className="mb-3">
                 <div className="row mb-3">
                     {this.state.orders.map((order) => {
+                        if(!this.state.displayArchive && order.status === 'COMPLETED')return;
                         return <OrderView key={order.id} order = {order} />;
                     })}
                 </div>
