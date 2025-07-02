@@ -28,6 +28,7 @@ const LoginPage = () => {
 
             const loggedIn = {
                 id: user.data.id,
+                sessionId: user.data.sessionId,
                 username: user.data.username,
                 email: user.data.email,
                 location: user.data.location,

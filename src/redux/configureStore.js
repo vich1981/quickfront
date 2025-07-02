@@ -20,6 +20,7 @@ const configStore = (addLogger = true) => {
 
     let persistedState = {
         id: 0,
+        sessionId: '',
         username: '',
         email: '',
         location: '',
@@ -59,12 +60,12 @@ const configStore = (addLogger = true) => {
     }
     const store = addLogger
     ? configureStore({
-        reducer: authReducer, cartReducer, cartNewReducer,
+        reducer: authReducer,
         preloadedState: persistedState,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
     })
     : configureStore({
-        reducer: authReducer, cartReducer, cartNewReducer,
+        reducer: authReducer,
         preloadedState: persistedState,
         middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     });

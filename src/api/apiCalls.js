@@ -1,12 +1,32 @@
 import axios from 'axios';
 import { encodeBase64 } from '../redux/encoderFunctions';
+import { useNavigate } from 'react-router-dom';
 
 // export const signup = (user) => {
 //     return axios.post('/api/1.0/users', user);
 // };
 
+
+const api = axios.create({
+    baseURL: 'http://localhost:8080/api/v1', // our API base URL
+});
+
+api.interceptors.response.use(response => response, 
+    error => {
+   
+        if (error.response.status === 403) {
+            localStorage.clear();
+            window.location.href = "/";
+          }
+      
+        // reject with error if response status is not 403
+        return Promise.reject(error);
+    }
+);
+
+
 export const login = async (email,password) => {
-    return await axios.post('http://localhost:8080/api/v1/auth/login', {
+    return await api.post('/auth/login', {
         email,
         password,
     }, { withCredentials: true });
@@ -23,8 +43,8 @@ export const setAuthorizationHeader = ({username, password, isLoggedIn }) => {
     
 };
 
-export const loadMyStores = () => {
-    return axios.get('http://localhost:8080/api/v1/my/store',{ withCredentials: true});
+export const getMyStores = () => {
+    return api.get('/store/my/store',{ withCredentials: true});
 };
 
 // export const listUsers = (param = { page: 0, size: 3 }) => {
@@ -33,43 +53,43 @@ export const loadMyStores = () => {
 // };
 
 export const getUser = (id) => {
-    return axios.get(`http://localhost:8080/api/v1/users/${id}`);
+    return api.get(`/users/${id}`);
 };
 
 export const updateUser = (userId, body) => {
-    return axios.put('http://localhost:8080/api/v1/users/update/' + userId, body,{withCredentials: true});
+    return api.put('/users/update/' + userId, body,{withCredentials: true});
 };
 
 export const getStore = (storeId) => {
-    return axios.get(`http://localhost:8080/api/v1/store/${storeId}`,{withCredentials: true});
+    return api.get(`/store/${storeId}`,{withCredentials: true});
 };
 
 export const getProducts = (storeId) => {
-    return axios.get(`http://localhost:8080/api/v1/store/${storeId}/products`,{withCredentials: true});
+    return api.get(`/store/${storeId}/products`,{withCredentials: true});
 };
 
 export const getProduct = (productId) => {
-    return axios.get(`http://localhost:8080/api/v1/product/${productId}`,{withCredentials: true});
+    return api.get(`/product/${productId}`,{withCredentials: true});
 };
 
 export const createOrder = (body) => {
-    return axios.post('http://localhost:8080/api/v1/orders/',body,{withCredentials: true});
+    return api.post('/orders/',body,{withCredentials: true});
 }
 
 export const getOrders = (userId) => {
-    return axios.get(`http://localhost:8080/api/v1/orders/user/${userId}`,{withCredentials: true});
+    return api.get(`/orders/user/${userId}`,{withCredentials: true});
 }
 
 export const getStoreOrders = (storeId) => {
-    return axios.get(`http://localhost:8080/api/v1/orders/store/${storeId}`,{withCredentials: true});
+    return api.get(`/orders/store/${storeId}`,{withCredentials: true});
 }
 
 export const getOrder = (id) => {
-    return axios.get(`http://localhost:8080/api/v1/orders/${id}`, {withCredentials: true});
+    return api.get(`/orders/${id}`, {withCredentials: true});
 }
 
 export const updateOrderStatus = (id, body) => {
-    return axios.patch(`http://localhost:8080/api/v1/orders/update/${id}`, body, {withCredentials: true});
+    return api.patch(`/orders/update/${id}`, body, {withCredentials: true});
 }
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);

@@ -14,28 +14,47 @@ class SellerStore extends Component {
     }
     componentDidMount(){
         this.setState({isLoadingStores: true});
-        this.handleStoreRegister();
+        this.loadStores();
         //this.setState({isLoadingStores: false});
         // apiCalls.loadMyStores().then(response => {
         
         // });
     }
-    handleStoreRegister = async (e) => {
+    loadStores = () => {
         //e.preventDefault();
-        try {
-            const response = await axios.get('http://localhost:8080/api/v1/store/my/store', { withCredentials: true });
-            this.setState({
-                stores: response.data, 
-                isLoadingStores: false
+
+        apiCalls.getMyStores()
+            .then(response => {
+                this.setState({
+                    stores: response.data,
+                    isLoadingStores: false
+                })
+            })
+            .catch(error => {
+                console.error('Невозможно получить магазин');
+                this.setState({
+                    isLoadingStores: false,
+                    error: 'Невозможно получить магазины.'
+                })
             });
+
+        // try {
+        //     const response = await axios.get('http://localhost:8080/api/v1/store/my/store', { withCredentials: true });
+        //     this.setState({
+        //         stores: response.data, 
+        //         isLoadingStores: false
+        //     });
             
 
-            console.log(response.data);
+        //     console.log(response.data);
 
-        } catch (error) {
-            this.setState({error: 'Невозможно получить магазин, проверьте права доступа.'});
-            console.error(error);
-        }
+        // } catch (error) {
+        //     this.setState({
+        //         error: 'Невозможно получить магазин, проверьте права доступа.',
+        //         isLoadingStores: false
+        //     });
+        //     console.error(error);
+        // }
     };
     // getUrl = async(store) =>{
     //     try{
@@ -78,9 +97,9 @@ class SellerStore extends Component {
         }
         return (
             <div>
+                 
                 {myStores}
                 {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
-                
                 <Link to="/store/register" className="nav-link">
                         Добавить новый магазин
                 </Link>

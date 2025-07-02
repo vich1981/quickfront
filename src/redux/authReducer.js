@@ -2,6 +2,7 @@
 
 const initialState = {
         id: 0,
+        sessionId:'',
         username: '',
         email: '',
         location: '',
