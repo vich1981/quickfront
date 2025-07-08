@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ProfileImageWithDefault from './ProfileImageWithDefault';
 import "../css/TopBar.css";
 import Cookies from 'js-cookie';
-
+import { withRouter } from "./withRouter";
 class TopBar extends React.Component {
 
     state = {
@@ -55,7 +55,7 @@ class TopBar extends React.Component {
         };
         this.props.dispatch(action);
 
-        //navigate('/');
+        this.props.navigate('/store/all/store');
     };
 
 
@@ -192,4 +192,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(TopBar);
+export default connect(mapStateToProps)(withRouter(TopBar));

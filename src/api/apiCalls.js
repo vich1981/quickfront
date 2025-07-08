@@ -1,10 +1,7 @@
 import axios from 'axios';
 import { encodeBase64 } from '../redux/encoderFunctions';
-import { useNavigate } from 'react-router-dom';
 
-// export const signup = (user) => {
-//     return axios.post('/api/1.0/users', user);
-// };
+
 
 
 const api = axios.create({
@@ -17,7 +14,7 @@ api.interceptors.response.use(response => response,
         if (error.response.status === 403) {
             localStorage.clear();
             window.location.href = "/";
-          }
+        }
       
         // reject with error if response status is not 403
         return Promise.reject(error);
@@ -25,12 +22,7 @@ api.interceptors.response.use(response => response,
 );
 
 
-export const login = async (email,password) => {
-    return await api.post('/auth/login', {
-        email,
-        password,
-    }, { withCredentials: true });
-};
+
 
 export const setAuthorizationHeader = ({username, password, isLoggedIn }) => {
     if (isLoggedIn){
@@ -43,21 +35,37 @@ export const setAuthorizationHeader = ({username, password, isLoggedIn }) => {
     
 };
 
-export const getMyStores = () => {
-    return api.get('/store/my/store',{ withCredentials: true});
+export const signup = (user) => {
+    return api.post('/auth/signup', user
+        // username,
+        // email,
+        // password,
+        // location,
+        // role
+    );
 };
 
-// export const listUsers = (param = { page: 0, size: 3 }) => {
-//     const path = `/api/1.0/users?page=${param.page || 0}&size=${param.size || 3}`;
-//     return axios.get(path);
-// };
+export const login = (email,password) => {
+    return api.post('/auth/login', {
+        email,
+        password,
+    }, { withCredentials: true });
+};
 
 export const getUser = (id) => {
     return api.get(`/users/${id}`);
 };
 
+export const getUserByEmail = (email) => {
+    return api.get(`/users/email/${email}`, {withCredentials: true});
+};
+
 export const updateUser = (userId, body) => {
     return api.put('/users/update/' + userId, body,{withCredentials: true});
+};
+
+export const getMyStores = () => {
+    return api.get('/store/my/store',{ withCredentials: true});
 };
 
 export const getStore = (storeId) => {
@@ -74,23 +82,23 @@ export const getProduct = (productId) => {
 
 export const createOrder = (body) => {
     return api.post('/orders/',body,{withCredentials: true});
-}
+};
 
 export const getOrders = (userId) => {
     return api.get(`/orders/user/${userId}`,{withCredentials: true});
-}
+};
 
 export const getStoreOrders = (storeId) => {
     return api.get(`/orders/store/${storeId}`,{withCredentials: true});
-}
+};
 
 export const getOrder = (id) => {
     return api.get(`/orders/${id}`, {withCredentials: true});
-}
+};
 
 export const updateOrderStatus = (id, body) => {
     return api.patch(`/orders/update/${id}`, body, {withCredentials: true});
-}
+};
 // export const postHoax = (hoax) => {
 //     return axios.post('/api/1.0/hoaxes', hoax);
 // };

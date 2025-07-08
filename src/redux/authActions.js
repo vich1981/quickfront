@@ -7,19 +7,19 @@ export const loginSuccess = (loginUserData) => {
         };
 };
 
-export const loginHandler = (credentials) => {
-    return function (dispatch){
-        return apiCalls.login(credentials).then((response) => {
-            dispatch(
-                loginSuccess({
-                    ...response.data,
-                    password: credentials.password
-                })
-            );
-            return response;
-        });
-    };
-};
+// export const loginHandler = (credentials) => {
+//     return function (dispatch){
+//         return apiCalls.login(credentials).then((response) => {
+//             dispatch(
+//                 loginSuccess({
+//                     ...response.data,
+//                     password: credentials.password
+//                 })
+//             );
+//             return response;
+//         });
+//     };
+// };
 // export const loginHandler = (credentials) => {
 //     return function (dispatch){
 //         return apiCalls.login(credentials).then((response) => {
