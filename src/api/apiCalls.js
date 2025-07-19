@@ -86,10 +86,18 @@ export const getStore = (storeId) => {
 
 export const registerStore = (body) => {
     return api.post('/store/register', body,
-                { 
-                    headers: {'Content-Type': 'multipart/form-data'},
-                    withCredentials: true 
-                });
+        { 
+            headers: {'Content-Type': 'multipart/form-data'},
+            withCredentials: true 
+        });
+};
+
+export const updateStore = (id, body) => {
+    return api.patch(`/store/update/${id}`, body,
+        { 
+            headers: {'Content-Type': 'multipart/form-data'},
+            withCredentials: true 
+        });
 };
 
 export const getProducts = (storeId) => {

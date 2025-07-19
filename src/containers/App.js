@@ -17,6 +17,7 @@ import CartPage from '../pages/CartPage';
 import OrdersPage from '../pages/OrdersPage';
 import OrderPage from '../pages/OrderPage';
 import SellerOrdersPage from '../pages/SellerOrdersPage';
+import StoreUpdatePage from '../pages/StoreUpdatePage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/store/register" element={<StoreRegisterPage />} />
+            <Route path="/store/update" element={<StoreUpdatePage />} />
             <Route path='/store/:id' element={<StoreIDPage />} />
             <Route path="/store/all/store" element={<AllStorePage />} />
             <Route path="/product/add" element={<ProductAddPage />} />

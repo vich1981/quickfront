@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Input from '../components/Input';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as apiCalls from '../api/apiCalls';
 //import Cookies from 'js-cookie';
 
-const ProductUpdatePage = (props) => {
+const ProductUpdatePage = () => {
     //const [storeDTO, setStore] = useState([]);
     const location = useLocation();
     const {product} = location.state;
@@ -44,7 +43,7 @@ const ProductUpdatePage = (props) => {
         })
     }
 
-    const handleProductAdd = async (e) => {
+    /*const handleProductAdd = async (e) => {
         e.preventDefault();
     
         const formData = new FormData();
@@ -73,7 +72,7 @@ const ProductUpdatePage = (props) => {
             }
         }
 
-    };
+    };*/
     const onFileSelect = (event) => {
         if(event.target.files.length === 0){
             return;

@@ -87,60 +87,60 @@ const StoreRegister = () => {
     return (
         <div>
             <div className="container">
-                <h1 className="text-center">Store register</h1>
+                <h1 className="text-center">Регистрация магазина</h1>
                 <form className="text-center" onSubmit={handleRegisterStore}>
 
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
+                            <Input
                                 type="userId"
                                 value={userId}
                                 onChange={(e) => setUserId(e.target.value)}
-                                placeholder="User Id"
+                                placeholder="Id пользователя"
                                 required
                             />
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
+                            <Input
                                 type="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="Name"
+                                placeholder="Название магазина"
                                 required
                             />
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
+                            <Input
                                 type="location"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
-                                placeholder="Location"
+                                placeholder="Расположение"
                                 required
                             />
                         </div>    
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
+                            <Input
                                 type="description"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Description"
+                                placeholder="Описание"
                                 required
                             />
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
+                            <Input
                                 type="working hours"
                                 value={workingHours}
                                 onChange={(e) => setWorkingHours(e.target.value)}
-                                placeholder="Working hours"
+                                placeholder="График работы"
                                 required
                             />
                         </div>
