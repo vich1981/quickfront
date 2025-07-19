@@ -46,25 +46,26 @@ export class SignupPage extends React.Component {
 
         })
     }
+    // login = () => {
+    //     this.setState({pendingApiCall: true});
+    //     apiCalls.login(this.state.email, this.state.password)
+    //     .then(response => {
+    //         // this.setState({ isLogining: false});
+    //         this.storeUser();
+    //     })
+    //     .catch((error) => {
+    //         this.setState({
+    //             pendingApiCall: false,
+    //             apiError: 'Не удалось войти, попробуйте ещё раз'
+    //         })
+    //     });     
+    // }
     login = () => {
         this.setState({pendingApiCall: true});
         apiCalls.login(this.state.email, this.state.password)
         .then(response => {
             // this.setState({ isLogining: false});
-            this.storeUser();
-        })
-        .catch((error) => {
-            this.setState({
-                pendingApiCall: false,
-                apiError: 'Не удалось войти, попробуйте ещё раз'
-            })
-        });     
-    }
-
-    storeUser = () => {
-        apiCalls.getUserByEmail(this.state.email)
-        .then(response => {
-            this.setState({ pendingApiCall: false },() => {
+            this.setState({ pendingApiCall: false},() => {
                 const loggedIn = {
                     id: response.data.id,
                     sessionId: response.data.sessionId,
@@ -84,16 +85,52 @@ export class SignupPage extends React.Component {
                 Cookies.set('sessionId', response.data.sessionId, { path: '/' });
 
                 console.log(response.data);
-                this.props.navigate(`/users/${loggedIn.id}`);
-            })       
+                this.props.navigate('/store/all/store');
+            })
+
+            //this.storeUser();
         })
         .catch((error) => {
             this.setState({
                 pendingApiCall: false,
-                apiError: 'Не удалось получить пользователя, попробуйте войти ещё раз'
+                apiError: 'Не удается войти, неверный email или пароль'
             })
-        });
+        });     
     }
+
+    // storeUser = () => {
+    //     apiCalls.getUserByEmail(this.state.email)
+    //     .then(response => {
+    //         this.setState({ pendingApiCall: false },() => {
+    //             const loggedIn = {
+    //                 id: response.data.id,
+    //                 sessionId: response.data.sessionId,
+    //                 username: response.data.username,
+    //                 email: response.data.email,
+    //                 location: response.data.location,
+    //                 role: response.data.role,
+    //                 image: '',
+    //                 password: '',
+    //                 isLoggedIn: true
+    //             };
+    //             const action = {
+    //                 type: 'login-success',
+    //                 payload:loggedIn
+    //             };
+    //             this.props.dispatch(action);
+    //             Cookies.set('sessionId', response.data.sessionId, { path: '/' });
+
+    //             console.log(response.data);
+    //             this.props.navigate(`/users/${loggedIn.id}`);
+    //         })       
+    //     })
+    //     .catch((error) => {
+    //         this.setState({
+    //             pendingApiCall: false,
+    //             apiError: 'Не удалось получить пользователя, попробуйте войти ещё раз'
+    //         })
+    //     });
+    // }
 
     onChangePassword = (event) => {
         const value = event.target.value;
@@ -177,7 +214,7 @@ export class SignupPage extends React.Component {
                             />
                         </div>
                     </div>
-                    <div className="row justify-content-center">
+                    {/* <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <Input
                                 className="form-control"
@@ -206,7 +243,7 @@ export class SignupPage extends React.Component {
                                 
                             </select>
                         </div>
-                    </div>                
+                    </div>                 */}
                     <div className="row justify-content-center">
                         <div className="text-center">
                             <ButtonWithProgress 

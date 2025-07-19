@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
+import * as apiCalls from '../api/apiCalls';
 //import Cookies from 'js-cookie';
 
 const StoreRegister = () => {
@@ -17,7 +17,31 @@ const StoreRegister = () => {
     //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
 
-    const handleStoreRegister = async (e) => {
+    const handleRegisterStore = () => {
+        const formData = new FormData();
+        formData.append('userId', userId);
+        formData.append('name', name);
+        formData.append('location', location);
+        formData.append('description', description);
+        formData.append('workingHours', workingHours);
+        formData.append('logo', logo);
+        apiCalls.registerStore(formData)
+        .then(response => {
+            navigate(`/users/${userId}`);
+            console.log(response.data);
+        })
+        .catch(error => {
+            if (error.response) {
+                setError(`Ошибка: ${error.response.data.message || error.response.statusText}`);
+            } else if (error.request) {
+                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
+            } else {
+                setError(`Ошибка: ${error.message}`);
+            }
+        });
+    };
+
+    /*const handleStoreRegister = async (e) => {
         e.preventDefault();
     
         const formData = new FormData();
@@ -46,7 +70,7 @@ const StoreRegister = () => {
             }
         }
 
-    };
+    };*/
     const onFileSelect = (event) => {
         if(event.target.files.length === 0){
             return;
@@ -64,7 +88,7 @@ const StoreRegister = () => {
         <div>
             <div className="container">
                 <h1 className="text-center">Store register</h1>
-                <form className="text-center" onSubmit={handleStoreRegister}>
+                <form className="text-center" onSubmit={handleRegisterStore}>
 
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
@@ -136,7 +160,7 @@ const StoreRegister = () => {
                     
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <button className="btn btn-primary mb-3" type="submit">Register</button>
+                            <button className="btn btn-primary mb-3" type="submit">Зарегистрировать</button>
                         </div>
                     </div> 
                 </form>

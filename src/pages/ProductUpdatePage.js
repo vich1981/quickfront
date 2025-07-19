@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Input from '../components/Input';
 import { useNavigate, useLocation } from 'react-router-dom';
+import * as apiCalls from '../api/apiCalls';
 //import Cookies from 'js-cookie';
 
 const ProductUpdatePage = (props) => {
@@ -19,6 +20,29 @@ const ProductUpdatePage = (props) => {
     const navigate = useNavigate();
     //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
+
+    const handleUpdateProduct = () => {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('stock', parseInt(stock));
+        if(image)formData.append('image', image);
+        apiCalls.updateProduct(formData, product.id)
+        .then(response => {
+            navigate(-1);
+        })
+        .catch(error => {
+            if (error.response) {
+                setError(`Ошибка: ${error.response.data.message || error.response.statusText}`);
+            } else if (error.request) {
+                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
+            } else {
+                setError(`Ошибка: ${error.message}`);
+            }
+        })
+    }
 
     const handleProductAdd = async (e) => {
         e.preventDefault();
@@ -67,7 +91,7 @@ const ProductUpdatePage = (props) => {
         <div>
             <div className="container">
                 <h1 className="text-center">Изменение продукта({product.id})</h1>
-                <form className="text-center" onSubmit={handleProductAdd}>
+                <form className="text-center" onSubmit={handleUpdateProduct}>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <input

@@ -23,19 +23,6 @@ class LoginPage extends React.Component{
         apiCalls.login(this.state.email, this.state.password)
         .then(response => {
             // this.setState({ isLogining: false});
-            this.storeUser();
-        })
-        .catch((error) => {
-            this.setState({
-                isLogining: false,
-                error: 'Не удается войти, неверный email или пароль'
-            })
-        });     
-    }
-
-    storeUser = () => {
-        apiCalls.getUserByEmail(this.state.email)
-        .then(response => {
             this.setState({ isLogining: false},() => {
                 const loggedIn = {
                     id: response.data.id,
@@ -57,15 +44,51 @@ class LoginPage extends React.Component{
 
                 console.log(response.data);
                 this.props.navigate('/store/all/store');
-            })       
+            })
+
+            //this.storeUser();
         })
         .catch((error) => {
             this.setState({
                 isLogining: false,
-                error: 'Не удается получить пользователя, попробуйте ещё раз'
+                error: 'Не удается войти, неверный email или пароль'
             })
-        });
+        });     
     }
+
+    // storeUser = () => {
+    //     apiCalls.getUserByEmail(this.state.email)
+    //     .then(response => {
+    //         this.setState({ isLogining: false},() => {
+    //             const loggedIn = {
+    //                 id: response.data.id,
+    //                 sessionId: response.data.sessionId,
+    //                 username: response.data.username,
+    //                 email: response.data.email,
+    //                 location: response.data.location,
+    //                 role: response.data.role,
+    //                 image: '',
+    //                 password: '',
+    //                 isLoggedIn: true
+    //             };
+    //             const action = {
+    //                 type: 'login-success',
+    //                 payload:loggedIn
+    //             };
+    //             this.props.dispatch(action);
+    //             Cookies.set('sessionId', response.data.sessionId, { path: '/' });
+
+    //             console.log(response.data);
+    //             this.props.navigate('/store/all/store');
+    //         })       
+    //     })
+    //     .catch((error) => {
+    //         this.setState({
+    //             isLogining: false,
+    //             error: 'Не удается получить пользователя, попробуйте ещё раз'
+    //         })
+    //     });
+    // }
 
     render() {
         let loginContent;

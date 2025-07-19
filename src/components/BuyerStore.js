@@ -15,13 +15,33 @@ class BuyerStore extends Component {
     }
     componentDidMount(){
         this.setState({isLoadingOrders: true});
-        this.handleStoreRegister();
+        this.loadUserOrders();
         //this.setState({isLoadingStores: false});
         // apiCalls.loadMyStores().then(response => {
         
         // });
     }
-    handleStoreRegister = async (e) => {
+
+    
+
+    loadUserOrders = () => {
+        this.setState({isLoadingOrders: true})
+        apiCalls.getOrders(this.state.userId)
+        .then(response => {
+            this.setState({
+                orders: response.data,
+                isLoadingOrders: false
+            });
+        })
+        .catch((error) => {
+            this.setState({
+                isLoadingOrders: false,
+                error: 'Невозможно отобразить заказы.'
+            })
+            console.error(error);
+        })
+    }
+    /*handleStoreRegister = async (e) => {
         //e.preventDefault();
         try {
             const response = await axios.get(`http://localhost:8080/api/v1/orders/user/${this.state.userId}`, { withCredentials: true });
@@ -37,19 +57,8 @@ class BuyerStore extends Component {
             this.setState({error: 'Не можем отобразить заказы. Проверьте права доступа.'});
             console.error(error);
         }
-    };
-    // getUrl = async(store) =>{
-    //     try{
-    //         const response = await axios.get(`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`);
-    //         this.setState({
-    //             store: response.data
-    //         });
-    //         console.log(response.data);
-    //     } catch(error){
-    //         this.setState({error: 'Невозможно получить изображение logo.'});
-    //         console.error(error);
-    //     }
-    // };
+    };*/
+  
     render() {
         let myOrders;
         if(this.state.isLoadingOrders){

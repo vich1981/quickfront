@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StoreImageWithDefault from './StoreImageWithDefault';
 import axios from 'axios';
+import * as apiCalls from '../api/apiCalls';
 //  import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 
@@ -12,25 +13,39 @@ class ModerStoreView extends Component {
     };
 
 
-    handleStoreModeration = async (e) => {
-        //e.preventDefault();
-        try {
-            const status = this.state.store.storeStatus;
-            const formData = new FormData();
-            formData.append('status', this.state.store.storeStatus);
-            const response = await axios.patch(`http://localhost:8080/api/v1/moderation/manage/store/${this.state.store.storeId}`, {status}, { withCredentials: true });
-            this.setState({
-                //stores: response.data, 
-                isLoadingStores: false
-            });
-            
+    handleStoreModeration = () => {
+        const status = this.state.store.storeStatus;
+        const formData = new FormData();
+        formData.append('status', status);
+        apiCalls.patchModerationStore(this.state.store.storeId, status)
+        .then((response) => {
+            this.setState({ store : {
+                                ...this.state.store,
+                                storeStatus: response.data.status}})
 
-            console.log(response.data);
-
-        } catch (error) {
+        })
+        .catch((error) => {
             this.setState({error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'});
             console.error(error);
-        }
+        });
+        //e.preventDefault();
+        // try {
+        //     const status = this.state.store.storeStatus;
+        //     const formData = new FormData();
+        //     formData.append('status', this.state.store.storeStatus);
+        //     const response = await axios.patch(`http://localhost:8080/api/v1/moderation/manage/store/${this.state.store.storeId}`, {status}, { withCredentials: true });
+        //     this.setState({
+        //         //stores: response.data, 
+        //         isLoadingStores: false
+        //     });
+            
+
+        //     console.log(response.data);
+
+        // } catch (error) {
+        //     this.setState({error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'});
+        //     console.error(error);
+        // }
     }
     onChangeStatus = (event) => {
         const store = { ...this.state.store };

@@ -61,15 +61,35 @@ export const getUserByEmail = (email) => {
 };
 
 export const updateUser = (userId, body) => {
-    return api.put('/users/update/' + userId, body,{withCredentials: true});
+    return api.patch('/users/update/' + userId, body,{withCredentials: true});
+};
+
+export const getAllStores = () => {
+    return api.get('/store/all/store');
 };
 
 export const getMyStores = () => {
     return api.get('/store/my/store',{ withCredentials: true});
 };
 
+export const getModerationStores = () => {
+    return api.get('/moderation/manage/store', { withCredentials: true });
+};
+
+export const patchModerationStore = (storeId, status) => {
+    return api.patch(`/moderation/manage/store/${storeId}`, {status}, { withCredentials: true });
+};
+
 export const getStore = (storeId) => {
     return api.get(`/store/${storeId}`,{withCredentials: true});
+};
+
+export const registerStore = (body) => {
+    return api.post('/store/register', body,
+                { 
+                    headers: {'Content-Type': 'multipart/form-data'},
+                    withCredentials: true 
+                });
 };
 
 export const getProducts = (storeId) => {
@@ -78,6 +98,22 @@ export const getProducts = (storeId) => {
 
 export const getProduct = (productId) => {
     return api.get(`/product/${productId}`,{withCredentials: true});
+};
+
+export const addProduct = (body, storeId) => {
+    return api.post(`/store/${storeId}/product`, body,
+    { 
+        headers: {'Content-Type': 'multipart/form-data'},
+        withCredentials: true 
+    });
+};
+
+export const updateProduct = (body, productId) => {
+    return api.patch(`/product/${productId}`, body,
+                { 
+                    headers: {'Content-Type': 'multipart/form-data'},
+                    withCredentials: true 
+                });
 };
 
 export const createOrder = (body) => {

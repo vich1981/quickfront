@@ -13,42 +13,47 @@ class ModerStore extends Component {
         error: ''
     }
     componentDidMount(){
-        this.setState({isLoadingStores: true});
-        this.handleStoreRegister();
-        //this.setState({isLoadingStores: false});
-        // apiCalls.loadMyStores().then(response => {
+        this.loadUserStores();
+        //this.handleStoreRegister();
         
-        // });
     }
-    handleStoreRegister = async (e) => {
-        //e.preventDefault();
-        try {
-            const response = await axios.get('http://localhost:8080/api/v1/moderation/manage/store', { withCredentials: true });
+
+    loadUserStores = () => {
+        this.setState({isLoadingStores: true})
+        apiCalls.getModerationStores()
+        .then(response => {
             this.setState({
-                stores: response.data, 
+                stores: response.data,
                 isLoadingStores: false
             });
+        })
+        .catch((error) => {
+            this.setState({
+                isLoadingStores: false,
+                error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'
+            })
+            console.error(error);
+        });
+    }
+
+    // handleStoreRegister = async (e) => {
+    //     //e.preventDefault();
+    //     try {
+    //         const response = await axios.get('http://localhost:8080/api/v1/moderation/manage/store', { withCredentials: true });
+    //         this.setState({
+    //             stores: response.data, 
+    //             isLoadingStores: false
+    //         });
             
 
-            console.log(response.data);
-
-        } catch (error) {
-            this.setState({error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'});
-            console.error(error);
-        }
-    };
-    // getUrl = async(store) =>{
-    //     try{
-    //         const response = await axios.get(`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`);
-    //         this.setState({
-    //             store: response.data
-    //         });
     //         console.log(response.data);
-    //     } catch(error){
-    //         this.setState({error: 'Невозможно получить изображение logo.'});
+
+    //     } catch (error) {
+    //         this.setState({error: 'Невозможно получить информацию о магазинах, проверьте права доступа.'});
     //         console.error(error);
     //     }
     // };
+    
     render() {
         let myStores;
         if(this.state.isLoadingStores){

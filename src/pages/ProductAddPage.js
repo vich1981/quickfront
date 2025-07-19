@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Input from '../components/Input';
 import { useNavigate, useLocation } from 'react-router-dom';
+import * as apiCalls from '../api/apiCalls';
 //import Cookies from 'js-cookie';
 
 const ProductAddPage = (props) => {
@@ -20,7 +21,30 @@ const ProductAddPage = (props) => {
     //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
 
-    const handleProductAdd = async (e) => {
+    const handleProductAdd = () => {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('category', category);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('stock', parseInt(stock));
+        formData.append('image', image);// && logo.split(',')[1]);
+        apiCalls.addProduct(formData, storeId)
+        .then(response => {
+            navigate(`/store/${storeId}`);
+        })
+        .catch((error) => {
+            if (error.response) {
+                setError(`Ошибка: ${error.response.data.message || error.response.statusText}`);
+            } else if (error.request) {
+                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
+            } else {
+                setError(`Ошибка: ${error.message}`);
+            }
+        })
+    }
+
+    /*const handleProductAddOld = async (e) => {
         e.preventDefault();
     
         const formData = new FormData();
@@ -29,7 +53,7 @@ const ProductAddPage = (props) => {
         formData.append('description', description);
         formData.append('price', price);
         formData.append('stock', parseInt(stock));
-        formData.append('image', image);// && logo.split(',')[1]);
+        formData.append('image', image);
         try {
             const response = await axios.post(`http://localhost:8080/api/v1/store/${storeId}/product`, formData,
                 { 
@@ -49,7 +73,7 @@ const ProductAddPage = (props) => {
             }
         }
 
-    };
+    };*/
     const onFileSelect = (event) => {
         if(event.target.files.length === 0){
             return;
