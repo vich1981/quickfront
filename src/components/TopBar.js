@@ -105,9 +105,14 @@ class TopBar extends React.Component {
         }
         else if(this.props.user.role =="SELLER"){
             orders = (
+                <>
+                <li className="nav-item">
+                    <Link to="/store/seller" className="nav-link">Мои магазины</Link>
+                </li>
                 <li className="nav-item">
                     <Link to="/orders/store" className="nav-link">Заказы</Link>
                 </li>
+                </>
             );
         }
         if(this.props.user.isLoggedIn){

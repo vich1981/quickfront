@@ -18,6 +18,7 @@ import OrdersPage from '../pages/OrdersPage';
 import OrderPage from '../pages/OrderPage';
 import SellerOrdersPage from '../pages/SellerOrdersPage';
 import StoreUpdatePage from '../pages/StoreUpdatePage';
+import SellerStore from '../components/SellerStore';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/store/register" element={<StoreRegisterPage />} />
             <Route path="/store/update" element={<StoreUpdatePage />} />
             <Route path='/store/:id' element={<StoreIDPage />} />
+            <Route path='/store/seller' element={<SellerStore />} />
             <Route path="/store/all/store" element={<AllStorePage />} />
             <Route path="/product/add" element={<ProductAddPage />} />
             <Route path="/product/update" element ={<ProductUpdatePage />} />
