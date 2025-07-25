@@ -19,7 +19,8 @@ const StoreUpdatePage = () => {
     //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
 
-    const handleUpdateStore = () => {
+    const handleUpdateStore = (e) => {
+        e.preventDefault();
         const formData = new FormData();
         //formData.append('userId', userId);
         formData.append('storeName', name);

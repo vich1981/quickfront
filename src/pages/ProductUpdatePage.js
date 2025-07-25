@@ -5,9 +5,19 @@ import * as apiCalls from '../api/apiCalls';
 //import Cookies from 'js-cookie';
 
 const ProductUpdatePage = () => {
+    const initialState = {
+        product: {
+            name: 'name',
+            description: 'description',
+            category: 'category',
+            price: 100,
+            stock: 100
+        }
+        
+    }
     //const [storeDTO, setStore] = useState([]);
     const location = useLocation();
-    const {product} = location.state;
+    const {product} = location.state ?? initialState;//{...location.state};
     const [name, setName] = useState(product.name);
     const [description, setDescription] = useState(product.description);
     const [category, setCategory] = useState(product.category);
@@ -20,7 +30,8 @@ const ProductUpdatePage = () => {
     //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
 
-    const handleUpdateProduct = () => {
+    const handleUpdateProduct = (e) => {
+        e.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
         formData.append('category', category);
@@ -42,6 +53,7 @@ const ProductUpdatePage = () => {
             }
         })
     }
+    
 
     /*const handleProductAdd = async (e) => {
         e.preventDefault();
@@ -93,13 +105,13 @@ const ProductUpdatePage = () => {
                 <form className="text-center" onSubmit={handleUpdateProduct}>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
-                                type="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Название"
-                                required
-                            />
+                                <input
+                                    type="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Название"
+                                    required
+                                />
                         </div>
                     </div>
                     <div className="row justify-content-center">
