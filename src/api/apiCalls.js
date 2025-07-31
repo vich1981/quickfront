@@ -11,10 +11,10 @@ const api = axios.create({
 api.interceptors.response.use(response => response, 
     error => {
    
-       /* if (error.response.status === 403) {
+        if (error.response.status === 403) {
             localStorage.clear();
             window.location.href = "/";
-        }*/
+        }
       
         // reject with error if response status is not 403
         return Promise.reject(error);
