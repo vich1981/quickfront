@@ -11,10 +11,10 @@ const api = axios.create({
 api.interceptors.response.use(response => response, 
     error => {
    
-        if (error.response.status === 403) {
+       /* if (error.response.status === 403) {
             localStorage.clear();
             window.location.href = "/";
-        }
+        }*/
       
         // reject with error if response status is not 403
         return Promise.reject(error);
@@ -49,8 +49,12 @@ export const login = (email,password) => {
     return api.post('/auth/login', {
         email,
         password,
-    }, { withCredentials: true });
+    }, {withCredentials: true});
 };
+
+export const logout = () => {
+    return api.post('/auth/logout', {}, {withCredentials: true});
+}
 
 export const getUser = (id) => {
     return api.get(`/users/${id}`);

@@ -7,13 +7,11 @@ import * as apiCalls from '../api/apiCalls';
 class CartPage extends React.Component{
 
     state = {
-        //cart: this.props.loggedInUser.cart,
         role: this.props.loggedInUser.role,
         userId: this.props.loggedInUser.id,
         deliveryAddress: 'укажите адрес доставки',
         paymentMethod: 'наличные',
         orderStatus: undefined,
-
         orders:[],
         error: undefined
     };

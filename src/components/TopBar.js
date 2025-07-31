@@ -7,6 +7,7 @@ import ProfileImageWithDefault from './ProfileImageWithDefault';
 import "../css/TopBar.css";
 import Cookies from 'js-cookie';
 import { withRouter } from "./withRouter";
+import * as apiCalls from '../api/apiCalls';
 class TopBar extends React.Component {
 
     state = {
@@ -40,22 +41,29 @@ class TopBar extends React.Component {
             dropDownVisible: false
         });
         //const navigate = useNavigate();
+        apiCalls.logout()
+        .then(response =>{
+            Cookies.remove('sessionId', { path: '/' });
 
-        Cookies.remove('sessionId', { path: '/' });
-
-        // Проверяем, была ли кука удалена
-        const cookieExists = Cookies.get('sessionId');
-        if (!cookieExists) {
-            console.log('sessionId cookie successfully removed.');
-        } else {
-            console.log('Failed to remove sessionId cookie.');
-        }
-        const action = {
-            type: 'logout-success'
-        };
-        this.props.dispatch(action);
-
-        this.props.navigate('/store/all/store');
+            // Проверяем, была ли кука удалена
+            const cookieExists = Cookies.get('sessionId');
+            if (!cookieExists) {
+                console.log('sessionId cookie successfully removed.');
+            } else {
+                console.log('Failed to remove sessionId cookie.');
+            }
+            const action = {
+                type: 'logout-success'
+            };
+            this.props.dispatch(action);
+    
+            this.props.navigate('/store/all/store');
+        })
+        .catch(error => {
+            console.log(`Невозможно выполнить выход: ${error.message}`);
+        })
+        
+        
     };
 
 
