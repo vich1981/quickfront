@@ -20,7 +20,7 @@ const ProfileCard = (props) => {
                     className="rounded-circle shadow"
                 />
             </div>
-            <div className="card-body text-center">
+            <div className="card-body text-center" style={{color: 'black'}}>
                 {!props.inEditMode && (
                     <div>
                         <h5>{`${username}(${role})`}</h5>

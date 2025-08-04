@@ -1,3 +1,57 @@
+body {
+  background-color: white;
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: white;
+  }
+}
+
+.topbar {
+  border-bottom: 3px solid #0fc8d2; /* Цвет линии */
+}
+
+.nav-link {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand{
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #07dad6b7;
+}
+
 .cart {
     width: 50px;
     height: 50px;
@@ -41,6 +95,11 @@
     top: -20px;
     left: -20px;
   }
+
+  .cart__image{
+      border-radius: 50%;
+  }
+
   .link {
     text-decoration: none;
   }

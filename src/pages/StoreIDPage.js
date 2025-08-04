@@ -105,7 +105,7 @@ class StoreIdPage extends React.Component{
             );
         }
         else {
-            if(this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === this.state.user.id){  
+            if(this.props.loggedInUserId === this.state.user.id){  
                 productsContent = (
                     <div className="mb-3">
                         {this.state.products && <div className="row mb-3">

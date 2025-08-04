@@ -40,37 +40,7 @@ const StoreRegister = () => {
             }
         });
     };
-
-    /*const handleStoreRegister = async (e) => {
-        e.preventDefault();
     
-        const formData = new FormData();
-        formData.append('userId', userId);
-        formData.append('name', name);
-        formData.append('location', location);
-        formData.append('description', description);
-        formData.append('workingHours', workingHours);
-        formData.append('logo', logo);// && logo.split(',')[1]);
-        try {
-            const response = await axios.post('http://localhost:8080/api/v1/store/register', formData,
-                { 
-                    headers: {'Content-Type': 'multipart/form-data'},
-                    withCredentials: true 
-                });
-
-            navigate(`/users/${userId}`);
-
-        } catch (err) {
-            if (err.response) {
-                setError(`Ошибка: ${err.response.data.message || err.response.statusText}`);
-            } else if (err.request) {
-                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
-            } else {
-                setError(`Ошибка: ${err.message}`);
-            }
-        }
-
-    };*/
     const onFileSelect = (event) => {
         if(event.target.files.length === 0){
             return;
@@ -91,15 +61,7 @@ const StoreRegister = () => {
                 <form className="text-center" onSubmit={handleRegisterStore}>
 
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <Input
-                                type="userId"
-                                value={userId}
-                                onChange={(e) => setUserId(e.target.value)}
-                                placeholder="Id пользователя"
-                                required
-                            />
-                        </div>
+                        
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
