@@ -8,7 +8,7 @@ class ProductSellerView extends Component {
    render(){
        const { product } = this.props;
        return (
-            <div className="card col-lg-4 col-sm-6">
+            <div className="card col-lg-4 col-sm-6" style={{color: 'black'}}>
                 <div className="text-center">
                     <Link to ={`/product/${product.id}`} >
                         <ProductImageWithDefault
