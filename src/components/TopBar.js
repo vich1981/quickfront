@@ -1,7 +1,7 @@
 import React from "react";
 import logo from '../assets/logoquickcart.png';
 import cartImage from '../assets/cart.webp';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ProfileImageWithDefault from './ProfileImageWithDefault';
 import "../css/TopBar.css";
@@ -82,12 +82,18 @@ class TopBar extends React.Component {
         if(this.props.user.cart)this.props.user.cart.forEach(element => {
             cartCount += parseInt(element.quantity);
         });
-        this.state.count = cartCount;
+        if(cartCount !== this.state.count){
+            this.setState({ count: cartCount });
+        } 
     }
 
 
     render() {
+
+        const theme = this.props.theme || 'light'; // 'dark' или 'light'
+
         this.calculateCount();   
+        
         let links = (
             <ul className="nav navbar-nav ms-auto">
                 <li className="nav-item">
@@ -104,14 +110,14 @@ class TopBar extends React.Component {
         );
 
         let orders;
-        if(this.props.user.role =="BUYER"){
+        if(this.props.user.role ==="BUYER"){
             orders = (
                 <li className="nav-item">
                     <Link to="/orders/user" className="nav-link">Заказы</Link>
                 </li>
             );
         }
-        else if(this.props.user.role =="SELLER"){
+        else if(this.props.user.role ==="SELLER"){
             orders = (
                 <>
                 <li className="nav-item">
@@ -166,35 +172,60 @@ class TopBar extends React.Component {
             );
         }
         return (
-            <div className="bg-white shadow-sm mb-2 d-block">
-                <div className="container">
-                    <nav className="navbar navbar-light navbar-expand">
-                        <Link to="/" className="navbar-brand">
-                            <img src={logo} width="60" alt="quickCart" /> Quick Cart
-                        </Link>
-                        <div class="collapse navbar-collapse" id="navbarText">
-                            <ul class="navbar-nav mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <Link to="/store/all/store" className="nav-link">Магазины</Link>
-                                </li>
-                                {orders}
-                            </ul>
-                        </div>
-                        <Link to ="/cart" className="link">
-                            <button 
-                                className="cart" 
-                                id="cart"
-                            >
-                                <img className="cart__image" src={cartImage} width="50"
-                                    height="50" alt="Cart" />
-                                <div className="cart__num" id="cart_num">{this.state.count}</div>
-                            </button>        
-                        </Link>
+            // <div className="bg-white shadow-sm mb-2 d-block">
+            //     <div className="container">
+            //         <nav className="navbar navbar-light navbar-expand">
+            //             <Link to="/" className="navbar-brand">
+            //                 <img src={logo} width="60" alt="quickCart" /> Quick Cart
+            //             </Link>
+            //             <div class="collapse navbar-collapse" id="navbarText">
+            //                 <ul class="navbar-nav mb-2 mb-lg-0">
+            //                     <li class="nav-item">
+            //                         <Link to="/store/all/store" className="nav-link">Магазины</Link>
+            //                     </li>
+            //                     {orders}
+            //                 </ul>
+            //             </div>
+            //             <Link to ="/cart" className="link">
+            //                 <button 
+            //                     className="cart" 
+            //                     id="cart"
+            //                 >
+            //                     <img className="cart__image" src={cartImage} width="50"
+            //                         height="50" alt="Cart" />
+            //                     <div className="cart__num" id="cart_num">{this.state.count}</div>
+            //                 </button>        
+            //             </Link>
                         
-                        {links}
-                    </nav>
-                </div>  
+            //             {links}
+            //         </nav>
+            //     </div>  
+            // </div>
+            <div className={`topbar ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
+              <div className="container">
+                <nav className="navbar navbar-expand">
+                  <Link to="/" className="navbar-brand">
+                    <img src={logo} width="60" alt="quickCart" /> Quick Cart
+                  </Link>
+                  <div className="collapse navbar-collapse" id="navbarText">
+                    <ul className="navbar-nav mb-2 mb-lg-0">
+                      <li className="nav-item">
+                        <Link to="/store/all/store" className="nav-link">Магазины</Link>
+                      </li>
+                      {orders}
+                    </ul>
+                  </div>
+                  <Link to="/cart" className="link">
+                    <button className="cart" id="cart">
+                      <img className="cart__image" src={cartImage} width="50" height="50" alt="Cart" />
+                      <div className="cart__num" id="cart_num">{this.state.count}</div>
+                    </button>
+                  </Link>
+                  {links}
+                </nav>
+              </div>
             </div>
+
         );
     };
 }

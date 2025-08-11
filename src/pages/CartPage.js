@@ -20,16 +20,7 @@ class CartPage extends React.Component{
     }
 
     onClickOrder = () => {
-        const order = {
-            userId: this.props.loggedInUser.id,
-            deliveryAddress: this.state.deliveryAddress,
-            paymentMethod: this.state.paymentMethod,
-            products: this.props.loggedInUser.cart
-            
-        }
-        // const body = {
-        //     order: order
-        // }
+        
         const formData = new FormData();
         formData.append('products', JSON.stringify(this.props.loggedInUser.cart));
         formData.append('userId', this.state.userId);
@@ -69,7 +60,7 @@ class CartPage extends React.Component{
         let productContent;
         const cart = this.props.loggedInUser.cart;
         let totalPrice = 0;
-        if(this.state.role != 'BUYER'){
+        if(this.state.role !== 'BUYER'){
             productContent = (
                 <div><h4>Корзина доступна только для покупателей</h4></div>
             )

@@ -13,7 +13,7 @@ const StoreUpdatePage = () => {
     const [location, setLocation] = useState(store.location);
     const [description, setDescription] = useState(store.description);
     const [workingHours, setWorkingHours] = useState(store.workingHours);
-    const [logoUrl, setLogoUrl] = useState('');
+    //const [logoUrl, setLogoUrl] = useState('');
     const [logo, setLogo] = useState('');
     const navigate = useNavigate();
     //const [store, setStore] = useState([]);
