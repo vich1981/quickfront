@@ -1,0 +1,26 @@
+body {
+    background-color: white;
+    color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+            background-color: #121212;
+            color: white;
+    }
+}
+
+.product-card {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+

@@ -225,7 +225,7 @@ export class SignupPage extends React.Component {
                                 required
                             />
                         </div>
-                    </div>  
+                    </div> */} 
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <select
@@ -238,12 +238,12 @@ export class SignupPage extends React.Component {
                             >
                                 <option value="BUYER">Buyer</option>
                                 <option value="SELLER">Seller</option>
-                                <option value="MODER">Moderator</option>
-                                <option value="ADMIN">Administrator</option>
+                                {/* <option value="MODER">Moderator</option>
+                                <option value="ADMIN">Administrator</option> */}
                                 
                             </select>
                         </div>
-                    </div>                 */}
+                    </div>              
                     <div className="row justify-content-center">
                         <div className="text-center">
                             <ButtonWithProgress 

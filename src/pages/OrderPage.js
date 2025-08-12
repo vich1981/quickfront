@@ -65,7 +65,7 @@ class OrderPage extends React.Component{
             console.error(error);
             this.setState({ 
                 isLoadingStore: false,
-                error: 'Невоможно получить магазин.'
+                error: 'Невозможно получить магазин.'
             });
         });
     }
