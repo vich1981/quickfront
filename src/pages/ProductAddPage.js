@@ -1,52 +1,26 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import Input from '../components/Input';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as apiCalls from '../api/apiCalls';
-//import Cookies from 'js-cookie';
+import Input from '../components/Input';
 
 const ProductAddPage = (props) => {
-    //const [storeDTO, setStore] = useState([]);
     const location = useLocation();
-    const {storeId} = location.state;
+    const { storeId } = location.state;
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('Еда');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
-
-    //const [imageUrl, setLogoUrl] = useState('');
     const [image, setImage] = useState('');
-    const navigate = useNavigate();
-    //const [store, setStore] = useState([]);
     const [error, setError] = useState('');
+    const [showCategories, setShowCategories] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
 
-    const handleProductAdd = () => {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('category', category);
-        formData.append('description', description);
-        formData.append('price', price);
-        formData.append('stock', parseInt(stock));
-        formData.append('image', image);// && logo.split(',')[1]);
-        apiCalls.addProduct(formData, storeId)
-        .then(response => {
-            navigate(`/store/${storeId}`);
-        })
-        .catch((error) => {
-            if (error.response) {
-                setError(`Ошибка: ${error.response.data.message || error.response.statusText}`);
-            } else if (error.request) {
-                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
-            } else {
-                setError(`Ошибка: ${error.message}`);
-            }
-        })
-    }
+    const categories = ['Еда', 'Техника', 'Одежда', 'Книги', 'Косметика']; // категории
+    const navigate = useNavigate();
 
-    /*const handleProductAddOld = async (e) => {
+    const handleProductAdd = (e) => {
         e.preventDefault();
-    
         const formData = new FormData();
         formData.append('name', name);
         formData.append('category', category);
@@ -54,48 +28,45 @@ const ProductAddPage = (props) => {
         formData.append('price', price);
         formData.append('stock', parseInt(stock));
         formData.append('image', image);
-        try {
-            const response = await axios.post(`http://localhost:8080/api/v1/store/${storeId}/product`, formData,
-                { 
-                    headers: {'Content-Type': 'multipart/form-data'},
-                    withCredentials: true 
-                });
 
-            navigate(`/store/${storeId}`);
+        apiCalls.addProduct(formData, storeId)
+            .then(response => {
+                navigate(`/store/${storeId}`);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    setError(`Ошибка: ${error.response.data.message || error.response.statusText}`);
+                } else if (error.request) {
+                    setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
+                } else {
+                    setError(`Ошибка: ${error.message}`);
+                }
+            });
+    };
 
-        } catch (err) {
-            if (err.response) {
-                setError(`Ошибка: ${err.response.data.message || err.response.statusText}`);
-            } else if (err.request) {
-                setError('Ошибка: Сервер не ответил. Пожалуйста, попробуйте позже.');
-            } else {
-                setError(`Ошибка: ${err.message}`);
-            }
-        }
-
-    };*/
     const onFileSelect = (event) => {
-        if(event.target.files.length === 0){
+        if (event.target.files.length === 0) {
             return;
         }
         const file = event.target.files[0];
         setImage(file);
-        // let reader = new FileReader();
-        // reader.onloadend = () => {
-        //     setLogo(reader.result);
-        // }
-        // reader.readAsDataURL(file);
+        setImagePreview(URL.createObjectURL(file));
+    };
+
+    const handleCategorySelect = (cat) => {
+        setCategory(cat);
+        setShowCategories(false);
     };
 
     return (
         <div>
             <div className="container">
-                <h1 className="text-center">Добавление продукта({storeId})</h1>
+                <h1 className="text-center">Добавление продукта ({storeId})</h1>
                 <form className="text-center" onSubmit={handleProductAdd}>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <input
-                                type="name"
+                                type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Название"
@@ -105,22 +76,38 @@ const ProductAddPage = (props) => {
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
-                                type="category"
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value)}
-                                placeholder="Категория"
-                                required
-                            />
+                            <div className="position-relative">
+                                <input
+                                    type="text"
+                                    value={category}
+                                    readOnly
+                                    onFocus={() => setShowCategories(true)}
+                                    placeholder="Категория"
+                                    required
+                                />
+                                {showCategories && (
+                                    <ul className="list-group position-absolute" style={{ zIndex: 1000 }}>
+                                        {categories.map((cat, index) => (
+                                            <li
+                                                key={index}
+                                                className="list-group-item list-group-item-action"
+                                                onClick={() => handleCategorySelect(cat)}
+                                            >
+                                                {cat}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
                         </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <input
-                                type="description"
+                            <textarea
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder="Описание"
+                                rows="4"
                                 required
                             />
                         </div>
@@ -128,18 +115,18 @@ const ProductAddPage = (props) => {
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <input
-                                type="price"
+                                type="number"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 placeholder="Цена"
                                 required
                             />
-                        </div>    
+                        </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <input
-                                type="stock"
+                                type="number"
                                 value={stock}
                                 onChange={(e) => setStock(e.target.value)}
                                 placeholder="Количество"
@@ -149,27 +136,33 @@ const ProductAddPage = (props) => {
                     </div>
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
-                            <div className = "text-start mt-2">
-                                <Input 
+                            <div className="text-start mt-2">
+                                <Input
                                     type="file"
-                                    onChange={onFileSelect} //{(e) => setLogo(e.target.value)}//{props.onFileSelect}
-                                    //hasError=//{props.errors.image && true}
+                                    onChange={onFileSelect}
                                     error={error}
                                 />
                             </div>
+                            {imagePreview && (
+                                <div className="mt-2">
+                                    <img
+                                        src={imagePreview}
+                                        alt="Preview"
+                                        style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
-                    
                     <div className="row justify-content-center">
                         <div className="col-lg-3 mb-3">
                             <button className="btn btn-primary mb-3" type="submit">Добавить</button>
                         </div>
-                    </div> 
+                    </div>
                 </form>
-                {error && <p className="alert alert-danger">{error}</p>}  
+                {error && <p className="alert alert-danger">{error}</p>}
             </div>
         </div>
-        
     );
 };
 

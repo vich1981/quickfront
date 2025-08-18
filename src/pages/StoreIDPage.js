@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-//import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
 import Spinner from '../components/Spinner';
 import StoreImageWithDefault from '../components/StoreImageWithDefault';
 import ProductView from '../components/ProductView';
 import ProductSellerView from '../components/ProductSellerView';
 import * as apiCalls from '../api/apiCalls';
-import { withRouterParam }  from '../components/withRouterParam';
+import { withRouterParam } from '../components/withRouterParam';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -14,11 +13,9 @@ class StoreIdPage extends React.Component{
         user: undefined,
         store: undefined,
         products: [],
-        backet:[],
         isLoadingStore: false,
         isLoadingProducts: false,
         error: undefined
-
     };
 
     componentDidMount(){
@@ -68,80 +65,78 @@ class StoreIdPage extends React.Component{
         });
     }
     render() {
-        let storeContent;
-        let productsContent;
-        if(this.state.isLoadingStore){
-            storeContent = (
-                <Spinner />
-            );
-        }
-        else {
-            if(this.state.store) storeContent = (
-                <div class="list-group-item list-group-item-action mb-3">
-                    <h2>Магазин</h2>
-                    <div className="d-flex w-100 justify-content-between">
-                        <div> 
-                            <h5 className="mb-1">{this.state.store.storeName}</h5>
-                        </div>
-                        
-                        <p>
-                            <StoreImageWithDefault 
-                                src={`http://localhost:8080/api/v1/store/storeLogo/${this.state.store.logoUrl}`} 
-                                width="60" 
-                                height="60" 
-                                alt="" 
-                            />
-                        </p>
-                        <small>{this.state.store.storeWorkingHours}</small>
+        const { store, products, isLoadingStore, isLoadingProducts, error, user } = this.state;
+
+        let storeContent = isLoadingStore ? (
+            <Spinner />
+        ) : store ? (
+            <div className="list-group-item list-group-item-action mb-3">
+                <h2>Магазин</h2>
+                <div className="d-flex w-100 justify-content-between">
+                    <div>
+                        <h5 className="mb-1" style={{ color: 'black' }}>{store.storeName}</h5>
                     </div>
-                    <p className="mb-1">{this.state.store.storeDescription}</p>
-                    <small>{this.state.store.storeLocation}</small>
+                    <StoreImageWithDefault 
+                        src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
+                        width="60" 
+                        height="60" 
+                        alt="" 
+                    />
+                    <small>{store.storeWorkingHours}</small>
                 </div>
-            );
-        }
-        if(this.state.isLoadingProduct || this.state.isLoadingStore || !this.state.user){
-            productsContent = (
-                <Spinner />
-            );
-        }
-        else {
-            if(this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === this.state.user.id){  
-                productsContent = (
-                    <div className="mb-3">
-                        {this.state.products && <div className="row mb-3">
-                            {this.state.products.map((product) => {
-                                return <ProductSellerView key={product.id} product = {product} />;
-                            })}
-                        </div>}
-                        <Link 
-                            to="/product/add"
-                            state={{storeId: this.state.store.storeId}}
-                            className="nav-link"
-                        >
-                            Добавить продукт
-                        </Link>
-                    </div>       
-                );                   
-            }
-            else productsContent = (
-                <div className="row mb-3">
-                    {this.state.products.map((product) => {
-                        return <ProductView key={product.id} product = {product} />;
-                    })}
+                <p className="mb-1" style={{ color: 'black' }}>{store.storeDescription}</p>
+                <small>{store.storeLocation}</small>
+            </div>
+        ) : null;
+
+        let productsContent = (isLoadingProducts || isLoadingStore || !user) ? (
+            <Spinner />
+        ) : (
+            <div className="row mb-3" style={{ color: 'black' }}>
+            {products.map(product => (
+                <div className="col-md-4 mb-4" key={product.id}>
+                    <div className="card shadow-sm">
+                        <img 
+                            src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
+                            className="card-img-top" 
+                            alt={product.name} 
+                            style={{ height: '300px', objectFit: 'cover' }} 
+                        />
+                        <div className="card-body">
+                            <h5 className="card-title">{product.name}</h5>
+                            <p className="card-text">{product.description}</p>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <span className="text-muted">{product.price} ₽</span>
+                                {this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user.id}
+                                    <Link to="/product/update"
+                                    state={{product: product}} 
+                                    className="btn btn-primary btn-sm">Редактировать</Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            );  
-        }        
+            ))}
+        </div>
+        
+        );
+
         return (
             <div data-testid="storepage">
-
                 {storeContent}
-            
-                {productsContent}
-        
-                {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
 
+                {this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user?.id && (
+                    <Link 
+                        to="/product/add"
+                        state={{ storeId: store?.storeId }}
+                        className="btn btn-primary mb-3"
+                    >
+                        Добавить продукт
+                    </Link>
+                )}
+
+                {productsContent}
+                {error && <p className="alert alert-danger">{error}</p>}
             </div>
-            
         );
     }
 }
