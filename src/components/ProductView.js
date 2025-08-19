@@ -39,7 +39,7 @@ class ProductView extends Component {
                     <div className="row">
                         <div className="col-6 align-self-end">
                             <div className="fw-bold">
-                                    {product.price}
+                                    {product.price} ₽
                             </div>
                             <small class="text-body-secondary">Осталось:{product.stock}</small> 
                         </div>

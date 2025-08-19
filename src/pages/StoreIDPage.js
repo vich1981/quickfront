@@ -1,6 +1,8 @@
 import React from 'react';
 import Spinner from '../components/Spinner';
 import StoreImageWithDefault from '../components/StoreImageWithDefault';
+import ProductView from '../components/ProductView';
+import ProductSellerView from '../components/ProductSellerView';
 import * as apiCalls from '../api/apiCalls';
 import { withRouterParam } from '../components/withRouterParam';
 import { connect } from 'react-redux';
@@ -93,32 +95,47 @@ class StoreIdPage extends React.Component {
 
         let productsContent = (isLoadingProducts || isLoadingStore || !user) ? (
             <Spinner />
-        ) : (
-            <div className="row mb-3" style={{ color: 'black' }}>
-                {products.map(product => (
-                    <div className="col-md-4 mb-4" key={product.id}>
-                        <div className="card shadow-sm">
-                            <img 
-                                src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
-                                className="card-img-top" 
-                                alt={product.name} 
-                                style={{ height: '300px', objectFit: 'cover' }} 
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">{product.name}</h5>
-                                <p className="card-text">{product.description}</p>
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <span className="text-muted">{product.price} ₽</span>
-                                    {this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user.id && (
-                                        <Link to="/product/update" state={{ product: product }} className="btn btn-primary btn-sm">Редактировать</Link>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+        ) : 
+        (this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user.id) ? (
+            <div className="mb-3">
+                {products && <div className="row mb-3">
+                    {products.map((product) => {
+                        return <ProductSellerView key={product.id} product = {product} />;
+                    })}
+                </div>}
+            </div>
+        ) :
+        (
+            <div className="row mb-3">
+                {products.map((product) => {
+                    return <ProductView key={product.id} product = {product} />;
+                })}
             </div>
         );
+            // <div className="row mb-3" style={{ color: 'black' }}>
+            //     {products.map(product => (
+            //         <div className="col-md-4 mb-4" key={product.id}>
+            //             <div className="card shadow-sm">
+            //                 <img 
+            //                     src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
+            //                     className="card-img-top" 
+            //                     alt={product.name} 
+            //                     style={{ height: '300px', objectFit: 'cover' }} 
+            //                 />
+            //                 <div className="card-body">
+            //                     <h5 className="card-title">{product.name}</h5>
+            //                     <p className="card-text">{product.description}</p>
+            //                     <div className="d-flex justify-content-between align-items-center">
+            //                         <span className="text-muted">{product.price} ₽</span>
+            //                         {this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user.id && (
+            //                             <Link to="/product/update" state={{ product: product }} className="btn btn-primary btn-sm">Редактировать</Link>
+            //                         )}
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     ))}
+            // </div>
 
         return (
             <div data-testid="storepage">
