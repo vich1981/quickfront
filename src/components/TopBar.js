@@ -172,35 +172,6 @@ class TopBar extends React.Component {
             );
         }
         return (
-            // <div className="bg-white shadow-sm mb-2 d-block">
-            //     <div className="container">
-            //         <nav className="navbar navbar-light navbar-expand">
-            //             <Link to="/" className="navbar-brand">
-            //                 <img src={logo} width="60" alt="quickCart" /> Quick Cart
-            //             </Link>
-            //             <div class="collapse navbar-collapse" id="navbarText">
-            //                 <ul class="navbar-nav mb-2 mb-lg-0">
-            //                     <li class="nav-item">
-            //                         <Link to="/store/all/store" className="nav-link">Магазины</Link>
-            //                     </li>
-            //                     {orders}
-            //                 </ul>
-            //             </div>
-            //             <Link to ="/cart" className="link">
-            //                 <button 
-            //                     className="cart" 
-            //                     id="cart"
-            //                 >
-            //                     <img className="cart__image" src={cartImage} width="50"
-            //                         height="50" alt="Cart" />
-            //                     <div className="cart__num" id="cart_num">{this.state.count}</div>
-            //                 </button>        
-            //             </Link>
-                        
-            //             {links}
-            //         </nav>
-            //     </div>  
-            // </div>
             <div className={`topbar ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
               <div className="container">
                 <nav className="navbar navbar-expand">

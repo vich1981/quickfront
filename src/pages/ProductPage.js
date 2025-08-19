@@ -70,7 +70,7 @@ class ProductPage extends React.Component{
                                             </div>
                                             <small class="text-body-secondary">Осталось:{this.state.product.stock}</small> 
                                         </div>
-                                        <div className="col-6 align-self-center">
+                                        {/* <div className="col-6 align-self-center">
                                             <Link 
                                                 to="/product/update"
                                                 state={{product: this.state.product}}
@@ -78,7 +78,7 @@ class ProductPage extends React.Component{
                                             >
                                                 Изменить
                                             </Link>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
