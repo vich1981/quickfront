@@ -18,7 +18,8 @@ class LoginPage extends React.Component{
         error: undefined
     };
     
-    loginUser = () => {
+    loginUser = (e) => {
+        e.preventDefault();
         this.setState({isLogining: true});
         apiCalls.login(this.state.email, this.state.password)
         .then(response => {

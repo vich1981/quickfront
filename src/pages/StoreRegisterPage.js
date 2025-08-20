@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
 import * as apiCalls from '../api/apiCalls';
+import ButtonWithProgress from '../components/ButtonWithProgress';
 
 const StoreRegister = () => {
     const [userId, setUserId] = useState('');
@@ -14,11 +15,13 @@ const StoreRegister = () => {
     const [workingHoursEndMinute, setWorkingHoursEndMinute] = useState('');
     const [logo, setLogo] = useState('');
     const [logoPreview, setLogoPreview] = useState('');
+    const [pendingApiCall,setPendingApiCall] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleRegisterStore = (e) => {
         e.preventDefault();
+        setPendingApiCall(true);
         const formData = new FormData();
         formData.append('name', name);
         formData.append('location', location);
@@ -146,12 +149,17 @@ const StoreRegister = () => {
                     />
                     {logoPreview && (
                         <div className="mt-2">
-                            <img src={logoPreview} alt="Предпросмотр логотипа" style={{ width: '100%', borderRadius: '10px' }} />
+                            <img src={logoPreview} alt="Предпросмотр логотипа" style={{ width: '150px', height: '150px', borderRadius: '10px' }} />
                         </div>
                     )}
                 </div>
                 <div className="text-center">
-                    <button className="btn btn-primary" type="submit">Зарегистрировать</button>
+                    <ButtonWithProgress 
+                        onClick={handleRegisterStore}
+                        disabled={pendingApiCall}
+                        pendingApiCall={pendingApiCall}
+                        text="Зарегистрировать"
+                    />
                 </div>
             </form>
             {error && <p className="alert alert-danger mt-3">{error}</p>}

@@ -97,12 +97,12 @@ class StoreIdPage extends React.Component {
             <Spinner />
         ) : 
         (this.props.loggedInUserRole === 'SELLER' && this.props.loggedInUserId === user.id) ? (
-            <div className="mb-3">
-                {products && <div className="row mb-3">
-                    {products.map((product) => {
-                        return <ProductSellerView key={product.id} product = {product} />;
-                    })}
-                </div>}
+            <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px'}}>
+                {products.length === 0 && <p>У вас ещё нет товаров.</p>}
+                {products.map((product) => {
+                    return <ProductSellerView key={product.id} product = {product} />;
+                })}
+                
             </div>
         ) :
         (
@@ -145,7 +145,7 @@ class StoreIdPage extends React.Component {
                     <Link 
                         to="/product/add"
                         state={{ storeId: store?.storeId }}
-                        className="btn btn-primary mb-3"
+                        className="btn btn-primary"
                     >
                         Добавить продукт
                     </Link>

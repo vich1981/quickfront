@@ -82,36 +82,30 @@ class ProductCard extends Component {
                         />
                     </Link>
                 </div> 
-                <div
-              
-            >
-              
-              {/* <h3 style={{marginTop: '12px'}}>{product.name}</h3>
-              <p>{product.description || 'Описание отсутствует'}</p>
-              <p>Кол-во {product.stock}</p><p>Цена: {product.price} ₽</p> */}
+                <div>
                 
-                    <h4 className="card-title">{product.name}</h4>
+                    <h5 className="card-title">{product.name}</h5>
                     <p className="card-text">{product.description}</p>
                     <div className="row">
-                        <div className="col-6 align-self-end">
+                        <div className="align-self-end">
                             <div className="fw-bold">
-                                    {product.price}
+                                   Цена: {product.price} ₽
                             </div>
                             <small class="text-body-secondary">Осталось:{product.stock}</small> 
                         </div>
                         
                     </div>
                 
-            </div>
-            <button
-              className="btn btn-primary"
-              onClick={(e) => {
-                e.stopPropagation();
-                this.addProduct();
-              }}
-            >
-              В корзину
-            </button>
+                </div>
+                <button
+                className="btn btn-primary"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    this.addProduct();
+                }}
+                >
+                В корзину
+                </button>
             </div>
         );
    }

@@ -8,15 +8,15 @@ const ProductAddPage = (props) => {
     const { storeId } = location.state;
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('Еда');
+    const [category, setCategory] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
     const [image, setImage] = useState('');
     const [error, setError] = useState('');
-    const [showCategories, setShowCategories] = useState(false);
+    //const [showCategories, setShowCategories] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
 
-    const categories = ['Еда', 'Техника', 'Одежда', 'Книги', 'Косметика']; // категории
+    // const categories = ['Еда', 'Техника', 'Одежда', 'Книги', 'Косметика']; // категории
     const navigate = useNavigate();
 
     const handleProductAdd = (e) => {
@@ -53,10 +53,10 @@ const ProductAddPage = (props) => {
         setImagePreview(URL.createObjectURL(file));
     };
 
-    const handleCategorySelect = (cat) => {
-        setCategory(cat);
-        setShowCategories(false);
-    };
+    // const handleCategorySelect = (cat) => {
+    //     setCategory(cat);
+    //     setShowCategories(false);
+    // };
 
     return (
         <div>
@@ -80,12 +80,13 @@ const ProductAddPage = (props) => {
                                 <input
                                     type="text"
                                     value={category}
-                                    readOnly
-                                    onFocus={() => setShowCategories(true)}
+                                    onChange={(e) => setCategory(e.target.value)}
+                                    // readOnly
+                                    // onFocus={() => setShowCategories(true)}
                                     placeholder="Категория"
                                     required
                                 />
-                                {showCategories && (
+                                {/* {showCategories && (
                                     <ul className="list-group position-absolute" style={{ zIndex: 1000 }}>
                                         {categories.map((cat, index) => (
                                             <li
@@ -97,7 +98,7 @@ const ProductAddPage = (props) => {
                                             </li>
                                         ))}
                                     </ul>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     </div>
