@@ -2,6 +2,7 @@ import React from 'react';
 import ProfileImageWithDefault from './ProfileImageWithDefault';
 import Input from './Input';
 import ButtonWithProgress from './ButtonWithProgress';
+import '../css/ProfileCard.css';
 
 const ProfileCard = (props) => {
     const { role, email, location, username, image } = props.user;
@@ -9,7 +10,7 @@ const ProfileCard = (props) => {
     const showEditButton = props.isEditable && !props.inEditMode;
 
     return (
-        <div className="card">
+        <div className="card mt-3">
             <div className="card-header text-center">
                 <ProfileImageWithDefault
                     alt="profile" 
@@ -33,7 +34,7 @@ const ProfileCard = (props) => {
                         <div className = "text-start mt-2">
                             <Input 
                                 value={username} 
-                                label={`Изменить имя для ${email}`}
+                                label={`Изменить имя`}
                                 onChange={props.onChangeUsername}
                                 hasError={props.errors.username && true}
                                 error={props.errors.username}
@@ -42,7 +43,7 @@ const ProfileCard = (props) => {
                         <div className = "text-start mt-2">
                             <Input 
                                 value={location} 
-                                label={`Изменить расположение для ${email}`}
+                                label={`Изменить адрес`}
                                 onChange={props.onChangeLocation}
                                 hasError={props.errors.location && true}
                                 error={props.errors.location}

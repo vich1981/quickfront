@@ -100,7 +100,7 @@ class SellerStore extends Component {
                  
                 {myStores}
                 {this.state.error && <p className="alert alert-danger">{this.state.error}</p>}
-                <Link to="/store/register" className="nav-link">
+                <Link to="/store/register" className="btn btn-primary">
                         Добавить новый магазин
                 </Link>
                 

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import ProductCard from '../components/ProductCard';
 
 const HomePage = () => {
@@ -8,8 +6,6 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('http://127.0.0.1:8080/api/v1/get/all/products')
@@ -28,13 +24,6 @@ const HomePage = () => {
         setLoading(false);
       });
   }, []);
-
-  const addProduct = (product) => {
-    dispatch({
-      type: 'addNewProduct',
-      payload: product
-    });
-  };
 
   if (loading) return <div className="container"><p>Загрузка товаров...</p></div>;
   if (error) return <div className="container"><p style={{color: 'red'}}>Ошибка: {error}</p></div>;

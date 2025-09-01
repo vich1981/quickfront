@@ -21,54 +21,9 @@ class ProductCard extends Component {
    render(){
        const { product } = this.props;
        return (
-        // <div
-        //             key={product.id}
-        //             className="product-card"
-                    
-        //             onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-        //             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-        //           >
-        //             <div
-        //               //onClick={() => navigate(`/product/${product.id}`)}
-        //               style={{ cursor: 'pointer' }}
-        //             >
-        //               {product.imageUrl ? (
-        //                 <img
-        //                   src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`}
-        //                   alt={product.name}
-        //                   style={{width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px'}}
-        //                 />
-        //               ) : (
-        //                 <div style={{
-        //                   width: '100%',
-        //                   height: '150px',
-        //                   backgroundColor: '#eee',
-        //                   borderRadius: '4px',
-        //                   display: 'flex',
-        //                   justifyContent: 'center',
-        //                   alignItems: 'center',
-        //                   color: '#aaa'
-        //                 }}>Нет изображения</div>
-        //               )}
-        //               <h3 style={{marginTop: '12px'}}>{product.name}</h3>
-        //               <p>{product.description || 'Описание отсутствует'}</p>
-        //               <p>Кол-во {product.stock}</p><p>Цена: {product.price} ₽</p>
-        
-        //             </div>
-        //             <button
-        //               className="btn btn-primary"
-        //               onClick={(e) => {
-        //                 e.stopPropagation();
-        //                 this.addProduct(product);
-        //               }}
-        //             >
-        //               В корзину
-        //             </button>
-        //           </div>
             <div 
                 key={product.id}
                 className="product-card"
-                
                 onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
             >

@@ -7,6 +7,7 @@ import * as apiCalls from '../api/apiCalls';
 import { withRouterParam } from '../components/withRouterParam';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import "../css/StoreIDPage.css";
 
 class StoreIdPage extends React.Component {
     state = {
@@ -74,22 +75,29 @@ class StoreIdPage extends React.Component {
         let storeContent = isLoadingStore ? (
             <Spinner />
         ) : store ? (
-            <div className="list-group-item list-group-item-action mb-3">
-                <h2>Магазин</h2>
-                <div className="d-flex w-100 justify-content-between">
-                    <div>
-                        <h5 className="mb-1" style={{ color: 'black' }}>{store.storeName}</h5>
+            <div 
+                className="store-id-card my-3"
+            >        
+                <div className="row d-flex w-100">
+                    <div className="col-4">
+                        <h4>Магазин</h4>
+                        <h5 className="mb-2" style={{ color: 'black' }}>{store.storeName}</h5>
+                        <p className="mb-1" style={{ color: 'black' }}>{store.storeDescription}</p>
+                        <small>{store.storeLocation}</small>
                     </div>
-                    <StoreImageWithDefault 
-                        src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
-                        width="60" 
-                        height="60" 
-                        alt="" 
-                    />
-                    <small>{store.storeWorkingHours}</small>
-                </div>
-                <p className="mb-1" style={{ color: 'black' }}>{store.storeDescription}</p>
-                <small>{store.storeLocation}</small>
+                    <div className="col-md-3 ms-md-auto">
+                        <StoreImageWithDefault 
+                            src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`}
+                            style={{objectFit: 'cover', borderRadius: '4px'}} 
+                            width="120" 
+                            height="120" 
+                            alt="" 
+                        />
+                    </div>
+                    <div className="col-md-3 ms-md-auto align-self-center text-end">
+                        <small>{store.storeWorkingHours}</small>
+                    </div>   
+                </div>            
             </div>
         ) : null;
 
@@ -106,7 +114,7 @@ class StoreIdPage extends React.Component {
             </div>
         ) :
         (
-            <div className="row mb-3">
+            <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px'}}>
                 {products.map((product) => {
                     return <ProductView key={product.id} product = {product} />;
                 })}
