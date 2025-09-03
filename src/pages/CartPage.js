@@ -9,7 +9,7 @@ class CartPage extends React.Component{
     state = {
         role: this.props.loggedInUser.role,
         userId: this.props.loggedInUser.id,
-        deliveryAddress: 'укажите адрес доставки',
+        deliveryAddress: this.props.loggedInUser.location,
         paymentMethod: 'наличные',
         orderStatus: undefined,
         orders:[],

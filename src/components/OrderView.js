@@ -30,30 +30,22 @@ class OrderView extends Component {
 
        }
        return (
-           <div>
-               <Link to ={`/orders/${order.id}`} class="list-group-item list-group-item-action">
-                   <div className="d-flex w-100 justify-content-between">
-                       <div> 
-                           <h5 className="mb-1">Заказ номер №{order.id} от {date}</h5>
-                           статус: {status}
-                       </div>
-                       
-                       {/* <p>
-                           <StoreImageWithDefault 
-                               src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`} 
-                               width="60" 
-                               height="60" 
-                               alt="" 
-                           />
-                       </p> */}
-                       {/* <small>{store.workingHours}</small>
-                   </div>
-                   <p className="mb-1">{order.description}</p>
-                   <small>{store.location}</small> */}
-                   </div>
-               </Link>
-               
-           </div>
+            <div className="row align-items-center mb-1">
+                <div 
+                    className="col"
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <Link to ={`/orders/${order.id}`} className="list-group-item list-group-item-action rounded shadow">
+                        <div className="d-flex w-100 justify-content-between">
+                            <div> 
+                                <h5 className="mb-1">Заказ номер №{order.id} от {date}</h5>
+                                статус: {status}
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+            </div>
         );
    }
 }

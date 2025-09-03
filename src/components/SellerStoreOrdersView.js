@@ -4,6 +4,7 @@ import StoreImageWithDefault from './StoreImageWithDefault';
 import * as apiCalls from '../api/apiCalls';
 import Spinner from './Spinner';
 import OrderView from './OrderView';
+import SellerStoreCard from './SellerStoreCard';
 import { Link } from 'react-router-dom';
 
 class SellerStoreOrdersView extends Component {
@@ -77,7 +78,8 @@ class SellerStoreOrdersView extends Component {
 
         return (
            <div className="row mb-3">
-               <Link to ={`/store/${this.state.store.id}`} className="list-group-item list-group-item-action">
+                <SellerStoreCard store={this.props.store} />
+               {/* <Link to ={`/store/${this.state.store.id}`} className="list-group-item list-group-item-action">
                    <div className="d-flex w-100 justify-content-between">
                        <div> 
                            <h5 className="mb-1">{this.state.store.name}</h5>
@@ -96,7 +98,7 @@ class SellerStoreOrdersView extends Component {
                    </div>
                    <p className="mb-1">{this.state.store.description}</p>
                    <small>{this.state.store.location}</small>
-               </Link>
+               </Link> */}
                {ordersContent}
            </div>
         );

@@ -8,8 +8,12 @@ const ProfileCard = (props) => {
     const { role, email, location, username, image } = props.user;
 
     const showEditButton = props.isEditable && !props.inEditMode;
+    let address = 
+                role === 'BUYER'? 'Адрес доставки по умолчанию': 
+                role === 'SELLER'? 'Адрес магазина': 'Домашний адрес';
 
     return (
+        
         <div className="card mt-3">
             <div className="card-header text-center">
                 <ProfileImageWithDefault
@@ -43,7 +47,7 @@ const ProfileCard = (props) => {
                         <div className = "text-start mt-2">
                             <Input 
                                 value={location} 
-                                label={`Изменить адрес`}
+                                label={address}
                                 onChange={props.onChangeLocation}
                                 hasError={props.errors.location && true}
                                 error={props.errors.location}

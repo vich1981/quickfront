@@ -5,6 +5,7 @@ import OrderProductView from '../components/OrderProductView';
 import * as apiCalls from '../api/apiCalls';
 import Spinner from '../components/Spinner';
 import StoreImageWithDefault from '../components/StoreImageWithDefault';
+import StoreView from '../components/StoreView';
 
 class OrderPage extends React.Component{
 
@@ -112,26 +113,27 @@ class OrderPage extends React.Component{
                 );
             }
             else storeContent = (
-                <div class="list-group-item list-group-item-action mb-3">
-                    <h5>из магазина</h5>
-                    <div className="d-flex w-100 justify-content-between">
-                        <div> 
-                            <h5 className="mb-1">{this.state.store.storeName}</h5>
-                        </div>
+                <StoreView store={this.state.store} />
+                // <div class="list-group-item list-group-item-action mb-3">
+                //     <h5>из магазина</h5>
+                //     <div className="d-flex w-100 justify-content-between">
+                //         <div> 
+                //             <h5 className="mb-1">{this.state.store.storeName}</h5>
+                //         </div>
                         
-                        <p>
-                            <StoreImageWithDefault 
-                                src={`http://localhost:8080/api/v1/store/storeLogo/${this.state.store.logoUrl}`} 
-                                width="60" 
-                                height="60" 
-                                alt="" 
-                            />
-                        </p>
-                        <small>{this.state.store.storeWorkingHours}</small>
-                    </div>
-                    <p className="mb-1">{this.state.store.storeDescription}</p>
-                    <small>{this.state.store.storeLocation}</small>
-                </div>
+                //         <p>
+                //             <StoreImageWithDefault 
+                //                 src={`http://localhost:8080/api/v1/store/storeLogo/${this.state.store.logoUrl}`} 
+                //                 width="60" 
+                //                 height="60" 
+                //                 alt="" 
+                //             />
+                //         </p>
+                //         <small>{this.state.store.storeWorkingHours}</small>
+                //     </div>
+                //     <p className="mb-1">{this.state.store.storeDescription}</p>
+                //     <small>{this.state.store.storeLocation}</small>
+                // </div>
             )
         }
         if(this.state.isLoadOrder){

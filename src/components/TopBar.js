@@ -11,8 +11,7 @@ import * as apiCalls from '../api/apiCalls';
 class TopBar extends React.Component {
 
     state = {
-        dropDownVisible: false,
-        count: 0
+        dropDownVisible: false
     };
     componentDidMount() {
         document.addEventListener('click', this.onClickTracker);
@@ -82,17 +81,14 @@ class TopBar extends React.Component {
         if(this.props.user.cart)this.props.user.cart.forEach(element => {
             cartCount += parseInt(element.quantity);
         });
-        if(cartCount !== this.state.count){
-            this.setState({ count: cartCount });
-        } 
+        return cartCount; 
     }
 
 
     render() {
 
         const theme = this.props.theme || 'light'; // 'dark' или 'light'
-
-        this.calculateCount();   
+        const renderCount = this.calculateCount();  
         
         let links = (
             <ul className="nav navbar-nav ms-auto">
@@ -189,7 +185,7 @@ class TopBar extends React.Component {
                   <Link to="/cart" className="link">
                     <button className="cart" id="cart">
                       <img className="cart__image" src={cartImage} width="50" height="50" alt="Cart" />
-                      <div className="cart__num" id="cart_num">{this.state.count}</div>
+                      <div className="cart__num" id="cart_num">{renderCount}</div>
                     </button>
                   </Link>
                   {links}

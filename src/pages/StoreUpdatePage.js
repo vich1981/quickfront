@@ -9,10 +9,11 @@ const StoreUpdatePage = () => {
     const [name, setName] = useState(store.name);
     const [location, setLocation] = useState(store.location);
     const [description, setDescription] = useState(store.description);
-    const [workingHoursStartHour, setWorkingHoursStartHour] = useState(store.workingHours.split(' ')[1].split(':')[0]);
-    const [workingHoursStartMinute, setWorkingHoursStartMinute] = useState(store.workingHours.split(' ')[1].split(':')[1]);
-    const [workingHoursEndHour, setWorkingHoursEndHour] = useState(store.workingHours.split(' ')[3].split(':')[0]);
-    const [workingHoursEndMinute, setWorkingHoursEndMinute] = useState(store.workingHours.split(' ')[3].split(':')[1]);
+    const [workingHours, setWorkingHours] = useState(store.workingHours);
+    // const [workingHoursStartHour, setWorkingHoursStartHour] = useState(store.workingHours.split(' ')[1].split(':')[0]);
+    // const [workingHoursStartMinute, setWorkingHoursStartMinute] = useState(store.workingHours.split(' ')[1].split(':')[1]);
+    // const [workingHoursEndHour, setWorkingHoursEndHour] = useState(store.workingHours.split(' ')[3].split(':')[0]);
+    // const [workingHoursEndMinute, setWorkingHoursEndMinute] = useState(store.workingHours.split(' ')[3].split(':')[1]);
     const [logo, setLogo] = useState('');
     const [logoPreview, setLogoPreview] = useState('');
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const StoreUpdatePage = () => {
         formData.append('storeName', name);
         formData.append('storeLocation', location);
         formData.append('storeDescription', description);
-        formData.append('storeWorkingHours', `С ${workingHoursStartHour}:${workingHoursStartMinute} ДО ${workingHoursEndHour}:${workingHoursEndMinute}`);
+        formData.append('storeWorkingHours', workingHours);//`С ${workingHoursStartHour}:${workingHoursStartMinute} ДО ${workingHoursEndHour}:${workingHoursEndMinute}`);
         if (logo) formData.append('logo', logo);
 
         apiCalls.updateStore(store.id, formData)
@@ -58,7 +59,7 @@ const StoreUpdatePage = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="col-6 offset-3 mt-5">
             <h1 className="text-center mb-4">Обновить магазин</h1>
             <form onSubmit={handleUpdateStore} className="bg-light p-4 rounded shadow">
                 <div className="mb-3">
@@ -88,7 +89,16 @@ const StoreUpdatePage = () => {
                         required
                     />
                 </div>
-                <div className="mb-3 d-flex align-items-center justify-content-between">
+                <div className="mb-3">
+                    <textarea className="form-control"
+                        type="text"
+                        value={workingHours}
+                        onChange={(e) => setWorkingHours(e.target.value)}
+                        placeholder="Время работы"
+                        required
+                    />
+                </div>
+                {/* <div className="mb-3 d-flex align-items-center justify-content-between">
                     <label className="me-2" style={{ color: 'black' }}>Часы работы:</label>
                     <div className="d-flex align-items-center">
                         <span style={{ color: 'black', padding: 5 }}>C</span>
@@ -136,7 +146,7 @@ const StoreUpdatePage = () => {
                             max="59"
                         />
                     </div>
-                </div>
+                </div> */}
                 <div className="mb-3">
                     <Input 
                         type="file"
@@ -145,7 +155,7 @@ const StoreUpdatePage = () => {
                     />
                     {logoPreview && (
                         <div className="mt-2">
-                            <img src={logoPreview} alt="Предпросмотр логотипа" style={{ width: '100%', borderRadius: '10px' }} />
+                            <img src={logoPreview} alt="Предпросмотр логотипа" style={{ width: '150px', height: '150px', borderRadius: '10px' }} />
                         </div>
                     )}
                 </div>

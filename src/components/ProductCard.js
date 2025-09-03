@@ -20,6 +20,8 @@ class ProductCard extends Component {
    
    render(){
        const { product } = this.props;
+       const { role } = this.props.loggedInUser;
+       const isBuyer = role === 'BUYER'? true : false;
        return (
             <div 
                 key={product.id}
@@ -53,13 +55,14 @@ class ProductCard extends Component {
                 
                 </div>
                 <button
-                className="btn btn-primary"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    this.addProduct();
-                }}
+                    className="btn btn-primary"
+                    disabled={!isBuyer}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        this.addProduct();
+                    }}
                 >
-                В корзину
+                    В корзину
                 </button>
             </div>
         );
@@ -68,7 +71,8 @@ class ProductCard extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.cart
+        products: state.cart,
+        loggedInUser: state
     }
 };
 //
