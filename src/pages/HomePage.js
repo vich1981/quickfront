@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import * as apiCalls from '../api/apiCalls';
 
 const HomePage = () => {
     
@@ -8,15 +9,9 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8080/api/v1/get/all/products')
+    apiCalls.getAllProducts()
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Ошибка загрузки данных');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setProducts(data);
+        setProducts(response.data);
         setLoading(false);
       })
       .catch(err => {
@@ -31,7 +26,6 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      {/* <h1 className="text-center">Quick Cart - это лучший сервис покупки товаров!!!</h1> */}
       <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px'}}>
         {products.length === 0 && <p>Товары не найдены.</p>}
         {products.map(product => {

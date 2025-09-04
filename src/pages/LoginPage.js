@@ -3,7 +3,6 @@ import * as apiCalls from '../api/apiCalls';
 import { withRouter }  from '../components/withRouter';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie'; // Импортируем библиотеку для работы с куками
-import Spinner from '../components/Spinner';
 import Input from '../components/Input';
 import ButtonWithProgress from '../components/ButtonWithProgress';
 
@@ -21,7 +20,6 @@ class LoginPage extends React.Component{
         this.setState({isLogining: true});
         apiCalls.login(this.state.email, this.state.password)
         .then(response => {
-            // this.setState({ isLogining: false});
             this.setState({ isLogining: false},() => {
                 const loggedIn = {
                     id: response.data.id,
@@ -53,19 +51,9 @@ class LoginPage extends React.Component{
         });     
     }
 
-    render() {
-        // let loginContent;
-        // if(this.state.isLogining){
-        //     loginContent = (
-        //         <Spinner />
-        //     );
-        // } 
-             
+    render() {             
         return (
             <div data-testid="loginpage">
-
-                {/* {loginContent} */}
-
                 <div className="col-lg-6 mt-3 offset-3 rounded shadow p-1">
                     <h1 className="text-center">Login</h1>
                     <form className="text-center" onSubmit={this.loginUser}>

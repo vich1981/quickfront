@@ -112,6 +112,10 @@ export const getProduct = (productId) => {
     return api.get(`/product/${productId}`,{withCredentials: true});
 };
 
+export const getAllProducts = () => {
+    return api.get('/get/all/products');
+}
+
 export const addProduct = (body, storeId) => {
     return api.post(`/store/${storeId}/product`, body,
     { 

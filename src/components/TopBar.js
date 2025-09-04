@@ -106,11 +106,20 @@ class TopBar extends React.Component {
         );
 
         let orders;
+        let cart;
         if(this.props.user.role ==="BUYER"){
             orders = (
                 <li className="nav-item">
                     <Link to="/orders/user" className="nav-link">Заказы</Link>
                 </li>
+            );
+            cart = (
+                <Link to="/cart" className="link">
+                    <button className="cart" id="cart">
+                        <img className="cart__image" src={cartImage} width="50" height="50" alt="Cart" />
+                        <div className="cart__num" id="cart_num">{renderCount}</div>
+                    </button>
+                </Link>
             );
         }
         else if(this.props.user.role ==="SELLER"){
@@ -182,12 +191,7 @@ class TopBar extends React.Component {
                       {orders}
                     </ul>
                   </div>
-                  <Link to="/cart" className="link">
-                    <button className="cart" id="cart">
-                      <img className="cart__image" src={cartImage} width="50" height="50" alt="Cart" />
-                      <div className="cart__num" id="cart_num">{renderCount}</div>
-                    </button>
-                  </Link>
+                  {cart}
                   {links}
                 </nav>
               </div>
