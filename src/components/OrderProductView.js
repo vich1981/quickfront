@@ -19,7 +19,7 @@ class OrderProductView extends Component {
                 </div>
                 
                 <div className="col-3 align-self-center fw-bold ms-2 text-end">
-                    {product.quantity} шт. х {Number(product.price)} р. = {product.quantity*Number(product.price)} р.
+                    {product.quantity} шт. х {Number(product.price)} ₽ = {product.quantity*Number(product.price)} ₽
                 </div>
             </li>
         );

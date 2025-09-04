@@ -25,14 +25,12 @@ const HomePage = () => {
 
 
   return (
-    <div className="container">
-      <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px'}}>
+      <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '11px', marginTop: '20px'}}>
         {products.length === 0 && <p>Товары не найдены.</p>}
         {products.map(product => {
             return <ProductCard key={product.id} product = {product} />;
         })}
       </div>
-    </div>
   );
 };
 

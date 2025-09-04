@@ -35,7 +35,7 @@ class StoreView extends Component {
                 
         <div 
             className="store-card mb-1"
-            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}  
         >  
             <Link 

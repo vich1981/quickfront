@@ -59,111 +59,116 @@ const ProductAddPage = (props) => {
     // };
 
     return (
-        <div>
-            <div className="container">
-                <h1 className="text-center">Добавление продукта ({storeId})</h1>
-                <form className="text-center" onSubmit={handleProductAdd}>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <input
+        <div className="col-lg-6 offset-lg-3 mt-5">
+            <h1 className="text-center mb-4">Добавить продукт</h1>
+            <form onSubmit={handleProductAdd} className="bg-light p-4 rounded shadow">
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        <label>Название</label>
+                        <Input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Название"
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        <div className="position-relative">
+                            <label>Категория</label>
+                            <Input
                                 type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Название"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                                // readOnly
+                                // onFocus={() => setShowCategories(true)}
+                                placeholder="Категория"
                                 required
                             />
+                            {/* {showCategories && (
+                                <ul className="list-group position-absolute" style={{ zIndex: 1000 }}>
+                                    {categories.map((cat, index) => (
+                                        <li
+                                            key={index}
+                                            className="list-group-item list-group-item-action"
+                                            onClick={() => handleCategorySelect(cat)}
+                                        >
+                                            {cat}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )} */}
                         </div>
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <div className="position-relative">
-                                <input
-                                    type="text"
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                    // readOnly
-                                    // onFocus={() => setShowCategories(true)}
-                                    placeholder="Категория"
-                                    required
+                </div>
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        <label>Описание</label>
+                        <textarea
+                            className="form-control"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Описание"
+                            rows="4"
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        Цена
+                        <Input
+                            type="number"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            placeholder="Цена"
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        Количество
+                        <Input
+                            type="number"
+                            value={stock}
+                            onChange={(e) => setStock(e.target.value)}
+                            placeholder="Количество"
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="mb-3">
+                        <div className="text-start mt-2">
+                            <Input
+                                type="file"
+                                onChange={onFileSelect}
+                                error={error}
+                            />
+                        </div>
+                        {imagePreview && (
+                            <div className="mt-2">
+                                <img
+                                    src={imagePreview}
+                                    alt="Preview"
+                                    style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
                                 />
-                                {/* {showCategories && (
-                                    <ul className="list-group position-absolute" style={{ zIndex: 1000 }}>
-                                        {categories.map((cat, index) => (
-                                            <li
-                                                key={index}
-                                                className="list-group-item list-group-item-action"
-                                                onClick={() => handleCategorySelect(cat)}
-                                            >
-                                                {cat}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )} */}
                             </div>
-                        </div>
+                        )}
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <textarea
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Описание"
-                                rows="4"
-                                required
-                            />
-                        </div>
+                </div>
+                <div className="row text-center">
+                    <div className="mb-3">
+                        <button className="btn btn-primary" type="submit">Добавить</button>
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <input
-                                type="number"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                placeholder="Цена"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <input
-                                type="number"
-                                value={stock}
-                                onChange={(e) => setStock(e.target.value)}
-                                placeholder="Количество"
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <div className="text-start mt-2">
-                                <Input
-                                    type="file"
-                                    onChange={onFileSelect}
-                                    error={error}
-                                />
-                            </div>
-                            {imagePreview && (
-                                <div className="mt-2">
-                                    <img
-                                        src={imagePreview}
-                                        alt="Preview"
-                                        style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <button className="btn btn-primary mb-3" type="submit">Добавить</button>
-                        </div>
-                    </div>
-                </form>
-                {error && <p className="alert alert-danger">{error}</p>}
-            </div>
+                </div>
+            </form>
+            {error && <p className="alert alert-danger">{error}</p>}
         </div>
+        
     );
 };
 

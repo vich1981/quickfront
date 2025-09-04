@@ -14,7 +14,7 @@ class SellerStoreCard extends Component {
             <div className="row align-items-center mb-1">
                 <div 
                     className="store-card col mb-1"
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}  
                 >  
                     <Link 

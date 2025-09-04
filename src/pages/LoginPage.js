@@ -54,7 +54,7 @@ class LoginPage extends React.Component{
     render() {             
         return (
             <div data-testid="loginpage">
-                <div className="col-lg-6 mt-3 offset-3 rounded shadow p-1">
+                <div className="col-lg-6 mt-3 offset-lg-3 rounded shadow p-1">
                     <h1 className="text-center">Login</h1>
                     <form className="text-center" onSubmit={this.loginUser}>
                         <div className="row justify-content-center">

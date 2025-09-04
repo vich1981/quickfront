@@ -46,20 +46,7 @@ export class SignupPage extends React.Component {
 
         })
     }
-    // login = () => {
-    //     this.setState({pendingApiCall: true});
-    //     apiCalls.login(this.state.email, this.state.password)
-    //     .then(response => {
-    //         // this.setState({ isLogining: false});
-    //         this.storeUser();
-    //     })
-    //     .catch((error) => {
-    //         this.setState({
-    //             pendingApiCall: false,
-    //             apiError: 'Не удалось войти, попробуйте ещё раз'
-    //         })
-    //     });     
-    // }
+    
     login = () => {
         this.setState({pendingApiCall: true});
         apiCalls.login(this.state.email, this.state.password)
@@ -159,11 +146,11 @@ export class SignupPage extends React.Component {
     render() { 
         return (
             <div>
-                <div className="container">
+                <div className="col-lg-6 mt-3 offset-lg-3 rounded shadow p-1">
                     <h1 className="text-center">Sign up</h1>
                     <form className="text-center" onSubmit={this.onClickSignup}>
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
+                        <div className="col-lg-6 col-md-6 mb-3">
                             <Input
                                 className="form-control"
                                 type="text"
@@ -175,7 +162,7 @@ export class SignupPage extends React.Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
+                        <div className="col-lg-6 col-md-6 mb-3">
                             <Input
                                 className="form-control"
                                 type="email"
@@ -187,7 +174,7 @@ export class SignupPage extends React.Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
+                        <div className="col-lg-6 col-md-6 mb-3">
                             <Input
                                 className="form-control"
                                 autoComplete="current-password"
@@ -200,7 +187,7 @@ export class SignupPage extends React.Component {
                         </div>
                     </div>
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
+                        <div className="col-lg-6 col-md-6 mb-3">
                             <Input
                                 className="form-control"
                                 //autoComplete="current-password"
@@ -227,7 +214,7 @@ export class SignupPage extends React.Component {
                         </div>
                     </div> */} 
                     <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
+                        <div className="col-lg-6 col-md-6 mb-3">
                             <select
                                 className="form-select"
                                 aria-label="Выберите права пользователя"

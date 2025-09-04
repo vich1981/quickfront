@@ -69,12 +69,13 @@ const ProductUpdatePage = () => {
     };
 
     return (
-        <div className="container">
-            <h1 className="text-center">Изменение продукта ({product.id})</h1>
-            <form className="text-center" onSubmit={handleUpdateProduct}>
+        <div className="col-lg-6 offset-lg-3 mt-5">
+            <h1 className="text-center mb-4">Обновить продукт</h1>
+            <form onSubmit={handleUpdateProduct} className="bg-light p-4 rounded shadow">
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
+                    <div className="mb-3">
+                        <label>Название</label>
+                        <Input
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -84,17 +85,19 @@ const ProductUpdatePage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
+                    <div className="mb-3">
                         <div className="position-relative">
-                            <input
+                            <label>Категория</label>
+                            <Input
                                 type="text"
                                 value={category}
-                                readOnly
-                                onFocus={() => setShowCategories(true)}
+                                onChange={(e) => setCategory(e.target.value)}
+                                // readOnly
+                                // onFocus={() => setShowCategories(true)}
                                 placeholder="Категория"
                                 required
                             />
-                            {showCategories && (
+                            {/* {showCategories && (
                                 <ul className="list-group position-absolute" style={{ zIndex: 1000 }}>
                                     {categories.map((cat, index) => (
                                         <li
@@ -106,13 +109,15 @@ const ProductUpdatePage = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
+                    <div className="mb-3">
+                        <label>Описание</label>
                         <textarea
+                            className="form-control"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="Описание"
@@ -122,8 +127,9 @@ const ProductUpdatePage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
+                    <div className="mb-3">
+                        Цена
+                        <Input
                             type="number"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
@@ -133,8 +139,9 @@ const ProductUpdatePage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
+                    <div className="mb-3">
+                        Количество
+                        <Input
                             type="number"
                             value={stock}
                             onChange={(e) => setStock(e.target.value)}
@@ -144,7 +151,7 @@ const ProductUpdatePage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
+                    <div className="mb-3">
                         <div className="text-start mt-2">
                             <Input
                                 type="file"
@@ -163,9 +170,9 @@ const ProductUpdatePage = () => {
                         )}
                     </div>
                 </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <button className="btn btn-primary mb-3" type="submit">Обновить</button>
+                <div className="row text-center">
+                    <div className="mb-3">
+                        <button className="btn btn-primary" type="submit">Обновить</button>
                     </div>
                 </div>
             </form>

@@ -33,7 +33,7 @@ class OrderView extends Component {
             <div className="row align-items-center mb-1">
                 <div 
                     className="col"
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'}
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 >
                     <Link to ={`/orders/${order.id}`} className="list-group-item list-group-item-action rounded shadow">

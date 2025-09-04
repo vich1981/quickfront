@@ -88,12 +88,12 @@ class ProductPage extends React.Component{
                 // else{
                 productContent = (
 
-                    <div>
+                    <div className="container rounded shadow mt-3 p-3">
                         <h2>Продукт</h2>
                         <div className="row">
-                            <div className="col">
+                            <div className="col-auto">
                                 <ProductImageWithDefault
-                                    className="img-fluid rounded-start text-center" 
+                                    className="img-fluid rounded text-center" 
                                     src={`http://localhost:8080/api/v1/product/productImage/${this.state.product.imageUrl}`} 
                                     width="400" 
                                     height="400" 
@@ -101,12 +101,18 @@ class ProductPage extends React.Component{
                                 />
                             </div>
                             <div className="col">
-                                <h5 className="card-title">{this.state.product.name}</h5>
-                                <p className="card-text">{this.state.product.description}</p>
                                 <div className="row">
-                                    <div className="col-6 align-self-end">
+                                    <h5 className="card-title">{this.state.product.name}</h5>
+                                </div>
+                                <div className="row">
+                                    <p className="card-text">{this.state.product.description}</p>
+                                </div>
+                                
+                                
+                                <div className="row align-items-end">
+                                    <div className="col-auto align-self-end">
                                         <div className="fw-bold">
-                                                {this.state.product.price}
+                                                Цена: {this.state.product.price} ₽
                                         </div>
                                         <small class="text-body-secondary">Осталось:{this.state.product.stock}</small> 
                                     </div>
@@ -124,7 +130,7 @@ class ProductPage extends React.Component{
                 <div>
                     <h2>Невозможно отобразить продукт</h2>
                     <div className="col-6 align-self-center">
-                        <a href="#" className="btn btn-primary">В корзину</a>
+                        <a href="#" className="btn btn-primary">Вернуться</a>
                     </div>
                 </div>
                 

@@ -86,7 +86,7 @@ class CartPage extends React.Component{
             }
             else {
                 productContent = (
-                    <div>
+                    <div className="container mt-3 p-3 rounded shadow">
                         <h2>Корзина</h2>
                         <ol className="list-group list-group-numbered">
                             {cart.map((product) => {
@@ -98,7 +98,7 @@ class CartPage extends React.Component{
                             <div className="ms-4 me-auto">
                                 <div className="fw-bold">Общая сумма:</div>
                             </div>
-                            <div className="fw-bold me-3">{totalPrice} р.</div>
+                            <div className="fw-bold me-3">{totalPrice} ₽</div>
                         </div>
                         <div className="row">
                             <div className="col-4"></div>

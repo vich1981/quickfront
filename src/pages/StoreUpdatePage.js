@@ -59,10 +59,11 @@ const StoreUpdatePage = () => {
     };
 
     return (
-        <div className="col-6 offset-3 mt-5">
+        <div className="col-lg-6 offset-lg-3 mt-5">
             <h1 className="text-center mb-4">Обновить магазин</h1>
             <form onSubmit={handleUpdateStore} className="bg-light p-4 rounded shadow">
                 <div className="mb-3">
+                    <label>Название магазина</label>
                     <Input
                         type="text"
                         value={name}
@@ -72,6 +73,7 @@ const StoreUpdatePage = () => {
                     />
                 </div>
                 <div className="mb-3">
+                    <label>Расположение</label>
                     <Input
                         type="text"
                         value={location}
@@ -81,6 +83,7 @@ const StoreUpdatePage = () => {
                     />
                 </div>
                 <div className="mb-3">
+                    <label>Описание</label>
                     <Input
                         type="text"
                         value={description}
@@ -90,6 +93,7 @@ const StoreUpdatePage = () => {
                     />
                 </div>
                 <div className="mb-3">
+                    <label>Время работы</label>
                     <textarea className="form-control"
                         type="text"
                         value={workingHours}

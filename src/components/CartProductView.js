@@ -69,7 +69,7 @@ class CartProductView extends Component {
                     </button>
                 </div>
                 <div className="col-1 align-self-center fw-bold ms-2 text-end">
-                    {Number(product.price)*product.quantity} р.
+                    {Number(product.price)*product.quantity} ₽
                 </div>
             </li>
         );
