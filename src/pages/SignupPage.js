@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-//import axios from 'axios';
-//import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { withRouter } from '../components/withRouter';
 import * as apiCalls from '../api/apiCalls';
 import { connect } from 'react-redux';
@@ -15,6 +13,7 @@ export class SignupPage extends React.Component {
         password: '',
         passwordRepeat: '',
         location: '',
+        phone: '',
         role: 'BUYER',
         pendingApiCall: false,
         apiError: undefined,
@@ -28,6 +27,7 @@ export class SignupPage extends React.Component {
             email: this.state.email,
             password: this.state.password,
             location: this.state.location,
+            phone: this.state.phone,
             role: this.state.role
         };
         this.setState({pendingApiCall: true});
@@ -45,13 +45,12 @@ export class SignupPage extends React.Component {
             this.setState({ pendingApiCall: false, errors });
 
         })
-    }
+    };
     
     login = () => {
         this.setState({pendingApiCall: true});
         apiCalls.login(this.state.email, this.state.password)
         .then(response => {
-            // this.setState({ isLogining: false});
             this.setState({ pendingApiCall: false},() => {
                 const loggedIn = {
                     id: response.data.id,
@@ -74,8 +73,6 @@ export class SignupPage extends React.Component {
                 console.log(response.data);
                 this.props.navigate('/store/all/store');
             })
-
-            //this.storeUser();
         })
         .catch((error) => {
             this.setState({
@@ -83,41 +80,7 @@ export class SignupPage extends React.Component {
                 apiError: 'Не удается войти, неверный email или пароль'
             })
         });     
-    }
-
-    // storeUser = () => {
-    //     apiCalls.getUserByEmail(this.state.email)
-    //     .then(response => {
-    //         this.setState({ pendingApiCall: false },() => {
-    //             const loggedIn = {
-    //                 id: response.data.id,
-    //                 sessionId: response.data.sessionId,
-    //                 username: response.data.username,
-    //                 email: response.data.email,
-    //                 location: response.data.location,
-    //                 role: response.data.role,
-    //                 image: '',
-    //                 password: '',
-    //                 isLoggedIn: true
-    //             };
-    //             const action = {
-    //                 type: 'login-success',
-    //                 payload:loggedIn
-    //             };
-    //             this.props.dispatch(action);
-    //             Cookies.set('sessionId', response.data.sessionId, { path: '/' });
-
-    //             console.log(response.data);
-    //             this.props.navigate(`/users/${loggedIn.id}`);
-    //         })       
-    //     })
-    //     .catch((error) => {
-    //         this.setState({
-    //             pendingApiCall: false,
-    //             apiError: 'Не удалось получить пользователя, попробуйте войти ещё раз'
-    //         })
-    //     });
-    // }
+    };
 
     onChangePassword = (event) => {
         const value = event.target.value;
@@ -143,7 +106,9 @@ export class SignupPage extends React.Component {
         this.setState({ username: value, errors });
     };
 
-    render() { 
+    render() {
+        let locationLabel = this.state.role === 'BUYER'? 'Адрес доставки по умолчанию': 
+                            this.state.role === 'SELLER'? 'Юридический адрес': 'Домашний адрес'; 
         return (
             <div>
                 <div className="col-lg-6 mt-3 offset-lg-3 rounded shadow p-1">
@@ -154,7 +119,7 @@ export class SignupPage extends React.Component {
                             <Input
                                 className="form-control"
                                 type="text"
-                                placeholder="Username"
+                                placeholder="Имя пользователя"
                                 value={this.state.username}
                                 onChange={this.onChangeUsername}
                                 required
@@ -177,9 +142,33 @@ export class SignupPage extends React.Component {
                         <div className="col-lg-6 col-md-6 mb-3">
                             <Input
                                 className="form-control"
+                                type="text"
+                                placeholder="Телефон"
+                                value={this.state.phone}
+                                onChange={(e) => this.setState({ phone: e.target.value })}
+                                required
+                            />
+                        </div>
+                    </div> 
+                    <div className="row justify-content-center">
+                        <div className="col-lg-6 col-md-6 mb-3">
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder={locationLabel}
+                                value={this.state.location}
+                                onChange={(e) => this.setState({ location: e.target.value })}
+                                required
+                            />
+                        </div>
+                    </div> 
+                    <div className="row justify-content-center">
+                        <div className="col-lg-6 col-md-6 mb-3">
+                            <Input
+                                className="form-control"
                                 autoComplete="current-password"
                                 type="password"
-                                placeholder="Password"
+                                placeholder="Пароль"
                                 value={this.state.password}
                                 onChange={this.onChangePassword}
                                 required
@@ -192,7 +181,7 @@ export class SignupPage extends React.Component {
                                 className="form-control"
                                 //autoComplete="current-password"
                                 type="password"
-                                placeholder="Repeat password"
+                                placeholder="Повтор пароля"
                                 value={this.state.passwordRepeat}
                                 onChange={this.onChangePasswordRepeat}
                                 hasError={this.state.errors.passwordRepeat && true}
@@ -201,18 +190,6 @@ export class SignupPage extends React.Component {
                             />
                         </div>
                     </div>
-                    {/* <div className="row justify-content-center">
-                        <div className="col-lg-3 mb-3">
-                            <Input
-                                className="form-control"
-                                type="text"
-                                placeholder="Location"
-                                value={this.state.location}
-                                onChange={(e) => this.setState({ location: e.target.value })}
-                                required
-                            />
-                        </div>
-                    </div> */} 
                     <div className="row justify-content-center">
                         <div className="col-lg-6 col-md-6 mb-3">
                             <select
@@ -240,9 +217,6 @@ export class SignupPage extends React.Component {
                                 text="Sign Up"
                             />
                         </div>
-                        {/* <div className="col-lg-4 mb-3">
-                            <button className="btn btn-primary mb-3" type="submit">Signup</button>
-                        </div> */}
                     </div>  
                     </form>
                     {this.state.apiError && <p className="alert alert-danger">{this.state.apiError}</p>}
@@ -266,116 +240,3 @@ const mapStateToProps = (state) => {
 }; 
 
 export default connect(mapStateToProps)(withRouter(SignupPage));
-/*const SignupPage = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [location, setLocation] = useState('');
-    const [role, setRole] = useState('');
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
-
-    const handleSignup = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/v1/auth/signup', {
-                username,
-                email,
-                password,
-                location,
-                role
-            });
-            console.log('Signup successful:', response.data);
-            navigate('/login');
-
-        } catch (err) {
-            setError(err.response?.data || 'Signup failed. Please try again.');
-            console.error(err);
-        }
-    };
-
-    return (
-        <div>
-            <div className="container">
-                <h1 className="text-center">Sign up</h1>
-                <form className="text-center" onSubmit={handleSignup}>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
-                            className="input-group"
-                            type="text"
-                            placeholder="Username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
-                            className="input-group"
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
-                            className="input-group"
-                            autoComplete="current-password"
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <input
-                            className="input-group"
-                            type="text"
-                            placeholder="Location"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            required
-                        />
-                    </div>
-                </div>  
-                <div className="row justify-content-center">
-                    <div className="col-lg-3 mb-3">
-                        <select
-                            className="form-select"
-                            aria-label="Выберите права пользователя"
-                            value={role}
-                            onChange={(e) => setRole(e.target.value)}
-                            required
-
-                        >
-                            <option value="ADMIN">Administrator</option>
-                            <option value="MODER">Moderator</option>
-                            <option value="BUYER">Buyer</option>
-                            <option value="SELLER">Seller</option>
-                        </select>
-                    </div>
-                </div>                
-                <div className="row justify-content-center">
-                    <div className="col-lg-4 mb-3">
-                        <button className="btn btn-primary mb-3" type="submit">Signup</button>
-                    </div>
-                </div>  
-                </form>
-                {error && <p className="alert alert-danger">{error}</p>}
-            </div>
-        </div>
-    );
-};
-
-export default SignupPage;
-*/

@@ -6,6 +6,7 @@ const initialState = {
         username: '',
         email: '',
         location: '',
+        phone: '',
         role: '',
         image: '',
         password: '',
@@ -27,6 +28,7 @@ export default function authReducer(state = initialState, action) {
             ...state,
             username: action.payload.username,
             location: action.payload.location,
+            phone: action.payload.phone,
             image: action.payload.image
         };
     } else if(action.type === 'addNewProduct'){

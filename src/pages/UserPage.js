@@ -17,6 +17,7 @@ class UserPage extends React.Component{
         inEditMode: false,
         originalUsername: undefined,
         originalLocation: undefined,
+        originalPhone: undefined,
         pendingUpdateCall: false,
         image: undefined,
         errors: {}
@@ -61,11 +62,15 @@ class UserPage extends React.Component{
         const user = { ...this.state.user}
         if(this.state.originalUsername !== undefined){
             user.username = this.state.originalUsername;
+            user.location = this.state.originalLocation;
+            user.phone = this.state.originalPhone;
         }
         this.setState({
             user,
             errors: {},
             originalUsername: undefined,
+            originalLocation: undefined,
+            originalPhone: undefined,
             inEditMode: false,
             image: undefined
         });
@@ -76,6 +81,7 @@ class UserPage extends React.Component{
         const userUpdate = {
             username: this.state.user.username,
             location: this.state.user.location,
+            phone: this.state.user.phone,
             image: this.state.image && this.state.image.split(',')[1]
         };
         this.setState({pendingUpdateCall: true})
@@ -87,6 +93,7 @@ class UserPage extends React.Component{
                     inEditMode: false,
                     originalUsername: undefined,
                     originalLocation: undefined,
+                    originalPhone: undefined,
                     pendingUpdateCall: false,
                     user,
                     image: undefined
@@ -131,6 +138,17 @@ class UserPage extends React.Component{
         const errors = { ...this.state.errors};
         errors.location = undefined;
         this.setState({user, originalLocation, errors });
+    }
+    onChangePhone = (event) => {
+        const user = { ...this.state.user };
+        let originalPhone = this.state.originalPhone;
+        if(originalPhone === undefined){
+            originalPhone = user.Phone;
+        }
+        user.phone = event.target.value;
+        const errors = { ...this.state.errors};
+        errors.phone = undefined;
+        this.setState({user, originalPhone, errors });
     }
 
 
@@ -181,6 +199,7 @@ class UserPage extends React.Component{
                     onClickSave={this.onClickSave}
                     onChangeUsername={this.onChangeUsername}
                     onChangeLocation={this.onChangeLocation}
+                    onChangePhone={this.onChangePhone}
                     pendingUpdateCall={this.state.pendingUpdateCall}
                     loadedImage={this.state.image}
                     onFileSelect={this.onFileSelect}

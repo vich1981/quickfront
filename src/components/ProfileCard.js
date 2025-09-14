@@ -5,12 +5,14 @@ import ButtonWithProgress from './ButtonWithProgress';
 import '../css/ProfileCard.css';
 
 const ProfileCard = (props) => {
-    const { role, email, location, username, image } = props.user;
-
+    const { role, email, username, image } = props.user;
+    const phone = props.user.phone || (props.inEditMode ? "" : "нет данных");
+    const location  = props.user.location || (props.inEditMode ? "" : "нет данных");
+    
     const showEditButton = props.isEditable && !props.inEditMode;
     let address = 
                 role === 'BUYER'? 'Адрес доставки по умолчанию': 
-                role === 'SELLER'? 'Адрес магазина': 'Домашний адрес';
+                role === 'SELLER'? 'Юридический адрес': 'Домашний адрес';
 
     return (
         
@@ -30,6 +32,7 @@ const ProfileCard = (props) => {
                     <div>
                         <h5>{`${username}(${role})`}</h5>
                         <h5>{`${email}`}</h5>
+                        <h5>{`${phone}`}</h5>
                         <h5>{`${location}`}</h5>
                     </div>
                 )}
@@ -42,6 +45,15 @@ const ProfileCard = (props) => {
                                 onChange={props.onChangeUsername}
                                 hasError={props.errors.username && true}
                                 error={props.errors.username}
+                            />
+                        </div>
+                        <div className = "text-start mt-2">
+                            <Input 
+                                value={phone} 
+                                label={`Телефон`}
+                                onChange={props.onChangePhone}
+                                hasError={props.errors.phone && true}
+                                error={props.errors.phone}
                             />
                         </div>
                         <div className = "text-start mt-2">
