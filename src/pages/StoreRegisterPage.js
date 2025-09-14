@@ -32,7 +32,7 @@ const StoreRegister = () => {
 
         apiCalls.registerStore(formData)
             .then(response => {
-                navigate(`/store/my/store`);
+                navigate(`/store/seller`);
                 console.log(response.data);
             })
             .catch(error => {

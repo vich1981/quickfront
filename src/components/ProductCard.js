@@ -22,6 +22,7 @@ class ProductCard extends Component {
        const { product } = this.props;
        const { role } = this.props.loggedInUser;
        const isBuyer = role === 'BUYER'? true : false;
+       const isSold = product.stock == 0? true : false;
        return (
             <div 
                 key={product.id}
@@ -48,7 +49,7 @@ class ProductCard extends Component {
                             <div className="fw-bold">
                                    Цена: {product.price} ₽
                             </div>
-                            <small class="text-body-secondary">Осталось:{product.stock}</small> 
+                            <small class="text-body-secondary">Осталось:{isSold ? "Распродано": product.stock}</small> 
                         </div>
                         
                     </div>
@@ -56,13 +57,13 @@ class ProductCard extends Component {
                 </div>
                 <button
                     className="btn btn-primary"
-                    disabled={!isBuyer}
+                    disabled={!isBuyer || isSold}
                     onClick={(e) => {
                         e.stopPropagation();
                         this.addProduct();
                     }}
                 >
-                    В корзину
+                    {isSold? 'Нет в наличии' : 'В корзину'}
                 </button>
             </div>
         );

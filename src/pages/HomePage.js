@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import ProductView from '../components/ProductView';
 import * as apiCalls from '../api/apiCalls';
 
 const HomePage = () => {
@@ -28,7 +29,7 @@ const HomePage = () => {
       <div className="product-list" style={{display: 'flex', flexWrap: 'wrap', gap: '11px', marginTop: '20px'}}>
         {products.length === 0 && <p>Товары не найдены.</p>}
         {products.map(product => {
-            return <ProductCard key={product.id} product = {product} />;
+            return <ProductView key={product.id} product = {product} />;
         })}
       </div>
   );

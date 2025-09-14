@@ -38,7 +38,7 @@ class CartProductView extends Component {
     render(){
         const { product } = this.props;
         return (
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li key={product.id} class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">{product.name}</div>
                     {product.description}

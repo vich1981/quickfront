@@ -1,10 +1,9 @@
 import React from 'react';
 import Spinner from '../components/Spinner';
 import ProductImageWithDefault from '../components/ProductImageWithDefault';
-import { withRouterParam } from '../components/withRouterParam';
+import { withRouter } from '../components/withRouter';
 import * as apiCalls from '../api/apiCalls';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 
 class ProductPage extends React.Component{
@@ -117,7 +116,12 @@ class ProductPage extends React.Component{
                                         <small class="text-body-secondary">Осталось:{this.state.product.stock}</small> 
                                     </div>
                                     <div className="col-6 align-self-center">
-                                        <a href="#" className="btn btn-primary">Вернуться</a>
+                                        <button 
+                                            onClick={() => this.props.navigate(-1)}
+                                            className="btn btn-primary"
+                                        >
+                                            Вернуться
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +134,12 @@ class ProductPage extends React.Component{
                 <div>
                     <h2>Невозможно отобразить продукт</h2>
                     <div className="col-6 align-self-center">
-                        <a href="#" className="btn btn-primary">Вернуться</a>
+                        <button 
+                            onClick={() => this.props.navigate(-1)}
+                            className="btn btn-primary"
+                        >
+                            Вернуться
+                        </button>
                     </div>
                 </div>
                 
@@ -160,4 +169,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(withRouterParam(ProductPage));
+export default connect(mapStateToProps)(withRouter(ProductPage));

@@ -21,6 +21,7 @@ class ProductView extends Component {
    
    render(){
        const { product } = this.props;
+       const isSold = product.stock == 0? true : false;
        return (
             <div 
                 key={product.id}
@@ -46,7 +47,7 @@ class ProductView extends Component {
                             <div className="fw-bold">
                                 Цена: {product.price} ₽
                             </div>
-                            <small class="text-body-secondary">Осталось:{product.stock}</small> 
+                            <small class="text-body-secondary">Осталось: {isSold ? "Распродано": product.stock}</small> 
                         </div>
                         
                     </div>
@@ -54,12 +55,13 @@ class ProductView extends Component {
                 </div>
                 <button
                     className="btn btn-primary"
+                    disabled={this.props.loggedInUserRole !== 'BUYER'|| isSold}
                     onClick={(e) => {
                         e.stopPropagation();
                         this.addProduct();
                     }}
                 >
-                    В корзину
+                    {isSold? 'Нет в наличии' : 'В корзину'}
                 </button>
             </div>
         );
@@ -68,6 +70,7 @@ class ProductView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedInUserRole: state.role,
         products: state.cart
     }
 };
