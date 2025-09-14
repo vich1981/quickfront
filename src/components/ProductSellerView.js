@@ -33,7 +33,7 @@ class ProductSellerView extends Component {
                             <div className="fw-bold">
                                 Цена: {product.price} ₽
                             </div>
-                            <small class="text-body-secondary">Осталось:{product.stock}</small> 
+                            <small className="text-body-secondary">Осталось:{product.stock}</small> 
                         </div>
                         
                     </div>
@@ -50,44 +50,6 @@ class ProductSellerView extends Component {
                     Изменить
                 </Link>
             </div>
-
-
-
-
-            // <div className="card col-lg-4 col-sm-6">
-            //     <div className="text-center">
-            //         <Link to ={`/product/${product.id}`} >
-            //             <ProductImageWithDefault
-            //                 className="img-fluid rounded-start text-center" 
-            //                 src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
-            //                 width="200" 
-            //                 height="200" 
-            //                 alt="" 
-            //             />
-            //         </Link>
-            //     </div> 
-            //     <div className="card-body text-self-left">
-            //         <h5 className="card-title">{product.name}({product.id})</h5>
-            //         <p className="card-text">{product.description}</p>
-            //         <div className="row">
-            //             <div className="col-6 align-self-end">
-            //                 <div className="fw-bold">
-            //                         {product.price} ₽
-            //                 </div>
-            //                 <small class="text-body-secondary">Осталось:{product.stock}</small> 
-            //             </div>
-            //             <div className="col-6 align-self-center">
-            //                 <Link 
-            //                     to="/product/update"
-            //                     state={{product: product}}
-            //                     className="btn btn-primary"
-            //                 >
-            //                     Изменить
-            //                 </Link>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
         );
    }
 }

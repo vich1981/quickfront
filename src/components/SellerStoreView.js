@@ -11,7 +11,7 @@ class SellerStoreView extends Component {
     render(){
         let store = this.state.store;
         return (
-            <div className="row align-items-center mb-3">
+            <div key={store.id} className="row align-items-center mb-3">
                 <div 
                     className="store-card col mb-1"
                     onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'}
@@ -44,32 +44,8 @@ class SellerStoreView extends Component {
                         </div>            
                     </Link>
                 </div>
-                {/* <div className="col">
-                    <Link 
-                        to ={`/store/${this.state.store.id}`} 
-                        className="list-group-item list-group-item-action"
-                    >
-                        <div className="d-flex w-100 justify-content-between">
-                            <div> 
-                                <h5 className="mb-1">{this.state.store.name}</h5>
-                                status: {this.state.store.status}
-                            </div>
-                            
-                            <p>
-                                <StoreImageWithDefault 
-                                    src={`http://localhost:8080/api/v1/store/storeLogo/${this.state.store.logoUrl}`} 
-                                    width="60" 
-                                    height="60" 
-                                    alt="" 
-                                />
-                            </p>
-                            <small>{this.state.store.workingHours}</small>
-                        </div>
-                        <p className="mb-1">{this.state.store.description}</p>
-                        <small>{this.state.store.location}</small>
-                    </Link>
-                </div> */}
-                <div className="col-2">
+                
+                <div className="d-grid col-2 gap-2 mx-auto">
                     <Link 
                         to ="/store/update/"
                         state={{store: this.state.store}} 
@@ -77,6 +53,14 @@ class SellerStoreView extends Component {
                     >
                         Изменить
                     </Link>
+                    <Link 
+                        to ="/store/delete/"
+                        state={{store: this.state.store}} 
+                        className="btn btn-danger"
+                    >
+                        Удалить
+                    </Link>
+
                 </div>
                 
                

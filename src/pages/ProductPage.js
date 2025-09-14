@@ -45,46 +45,6 @@ class ProductPage extends React.Component{
         }
         else {
             if(this.state.product){
-                // if(this.props.loggedInUserRole === 'SELLER'){
-                //     productContent = (
-                //         <div>
-                //             <h2>Продукт</h2>
-                //             <div className="row">
-                //                 <div className="col">
-                //                     <ProductImageWithDefault
-                //                         className="img-fluid rounded-start text-center" 
-                //                         src={`http://localhost:8080/api/v1/product/productImage/${this.state.product.imageUrl}`} 
-                //                         width="400" 
-                //                         height="400" 
-                //                         alt=""
-                //                     />
-                //                 </div>
-                //                 <div className="col">
-                //                     <h5 className="card-title">{this.state.product.name}</h5>
-                //                     <p className="card-text">{this.state.product.description}</p>
-                //                     <div className="row">
-                //                         <div className="col-6 align-self-end">
-                //                             <div className="fw-bold">
-                //                                     {this.state.product.price}
-                //                             </div>
-                //                             <small class="text-body-secondary">Осталось:{this.state.product.stock}</small> 
-                //                         </div>
-                //                         {/* <div className="col-6 align-self-center">
-                //                             <Link 
-                //                                 to="/product/update"
-                //                                 state={{product: this.state.product}}
-                //                                 className="btn btn-primary"
-                //                             >
-                //                                 Изменить
-                //                             </Link>
-                //                         </div> */}
-                //                     </div>
-                //                 </div>
-                //             </div>
-                //         </div>
-                //     )
-                // }
-                // else{
                 productContent = (
 
                     <div className="container rounded shadow mt-3 p-3">
@@ -113,7 +73,7 @@ class ProductPage extends React.Component{
                                         <div className="fw-bold">
                                                 Цена: {this.state.product.price} ₽
                                         </div>
-                                        <small class="text-body-secondary">Осталось:{this.state.product.stock}</small> 
+                                        <small className="text-body-secondary">Осталось:{this.state.product.stock}</small> 
                                     </div>
                                     <div className="col-6 align-self-center">
                                         <button 

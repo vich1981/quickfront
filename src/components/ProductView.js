@@ -47,7 +47,7 @@ class ProductView extends Component {
                             <div className="fw-bold">
                                 Цена: {product.price} ₽
                             </div>
-                            <small class="text-body-secondary">Осталось: {isSold ? "Распродано": product.stock}</small> 
+                            <small className="text-body-secondary">Осталось: {isSold ? "Распродано": product.stock}</small> 
                         </div>
                         
                     </div>

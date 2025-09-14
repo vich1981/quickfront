@@ -19,6 +19,7 @@ import OrderPage from '../pages/OrderPage';
 import SellerOrdersPage from '../pages/SellerOrdersPage';
 import StoreUpdatePage from '../pages/StoreUpdatePage';
 import SellerStore from '../components/SellerStore';
+import SellerDeletePage from '../pages/StoreDeletePage';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/store/register" element={<StoreRegisterPage />} />
             <Route path="/store/update" element={<StoreUpdatePage />} />
+            <Route path="/store/delete" element={<SellerDeletePage />} />
             <Route path='/store/:id' element={<StoreIDPage />} />
             <Route path='/store/seller' element={<SellerStore />} />
             <Route path="/store/all/store" element={<AllStorePage />} />

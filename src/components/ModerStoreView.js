@@ -58,7 +58,7 @@ class ModerStoreView extends Component {
        return (
            <div className="row justify-content-center">
                 <div className="col-6 mb-3">
-                    <Link to ={`/store/${this.state.store.storeId}`} class="list-group-item list-group-item-action col-3">
+                    <Link to ={`/store/${this.state.store.storeId}`} className="list-group-item list-group-item-action col-3">
                         {/* <div className="d-flex w-50 justify-content-between"> */}
                             <div> 
                                 <h5 className="mb-1">{this.state.store.storeName}</h5>

@@ -51,10 +51,10 @@ class SellerOrdersPage extends Component {
                     <h2>Заказы в магазинах</h2>
                     <div className="list-group">
                         {this.state.stores.map((store) => {
+                            let key = `store-id-${store.id}`;
                             return (
-                            <div>
-                                <SellerStoreOrdersView key={store.storeId} store={store} />
-                            </div>);
+                                <SellerStoreOrdersView key={key} store={store} />
+                            );
                         })}
                     </div>
                 </div>

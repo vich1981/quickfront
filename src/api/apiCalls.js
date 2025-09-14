@@ -104,6 +104,10 @@ export const updateStore = (id, body) => {
         });
 };
 
+export const deleteStore = (id) => {
+    return api.delete(`/store/delete/${id}`,{withCredentials: true});
+};
+
 export const getProducts = (storeId) => {
     return api.get(`/store/${storeId}/products`,{withCredentials: true});
 };

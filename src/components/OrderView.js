@@ -9,6 +9,7 @@ class OrderView extends Component {
        const od = order.orderDate;
        let date = od.slice(8,10) + '.' + od.slice(5,7) + '.' + od.slice(0,4) + ' ' + od.slice(11,16);
        let status;
+       let key = `order-id-${order.id}`;
        switch(order.status){
         case 'PENDING':
             status = 'Обрабатывается';
@@ -30,7 +31,7 @@ class OrderView extends Component {
 
        }
        return (
-            <div className="row align-items-center mb-1">
+            <div key={key} className="row align-items-center mb-1">
                 <div 
                     className="col"
                     onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.01)'}

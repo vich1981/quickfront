@@ -43,7 +43,7 @@ class SellerStoreOrdersView extends Component {
    render(){
         let ordersContent;
         let archiveButton = this.state.displayArchive ? 'Убрать завершенные': 'Показать завершенные';
-
+        let key = `store-id-${this.props.store.id}`;
         if(this.state.isLoadOrders){
             ordersContent = (
                 <Spinner />
@@ -74,7 +74,7 @@ class SellerStoreOrdersView extends Component {
 
 
         return (
-           <div className="row mb-3">
+           <div key={key} className="row mb-3">
                 <SellerStoreCard store={this.props.store} />
                {ordersContent}
            </div>

@@ -38,9 +38,9 @@ class CartProductView extends Component {
     render(){
         const { product } = this.props;
         return (
-            <li key={product.id} class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold">{product.name}</div>
+            <li key={product.id} className="list-group-item d-flex justify-content-between align-items-start">
+                <div className="ms-2 me-auto">
+                    <div className="fw-bold">{product.name}</div>
                     {product.description}
                 </div>
                 <div className="align-self-center "> 
@@ -48,7 +48,7 @@ class CartProductView extends Component {
                         className="btn btn-outline-danger btn-sm shadow-none outline-none"
                         onClick={this.onClickTrash}
                     >
-                        <i class="fas fa-trash"/>
+                        <i className="fas fa-trash"/>
                     </button>
                 </div>
                 <div className="align-self-center ms-2">
@@ -56,7 +56,7 @@ class CartProductView extends Component {
                         className="btn btn-outline-primary btn-sm shadow-none outline-none"
                         onClick={this.onClickMinus}
                     >
-                        <i class="fas fa-minus"/>
+                        <i className="fas fa-minus"/>
                     </button>
                 </div>
                 <div className="align-self-center ms-2">{product.quantity}</div>
@@ -65,7 +65,7 @@ class CartProductView extends Component {
                         className="btn btn-outline-primary btn-sm shadow-none outline-none"
                         onClick={this.onClickPlus}
                     >
-                        <i class="fas fa-plus"/>
+                        <i className="fas fa-plus"/>
                     </button>
                 </div>
                 <div className="col-1 align-self-center fw-bold ms-2 text-end">
