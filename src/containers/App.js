@@ -20,6 +20,7 @@ import SellerOrdersPage from '../pages/SellerOrdersPage';
 import StoreUpdatePage from '../pages/StoreUpdatePage';
 import SellerStore from '../components/SellerStore';
 import SellerDeletePage from '../pages/StoreDeletePage';
+import ProductDeletePage from '../pages/ProductDeletePage';
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
             <Route path='/store/seller' element={<SellerStore />} />
             <Route path="/store/all/store" element={<AllStorePage />} />
             <Route path="/product/add" element={<ProductAddPage />} />
-            <Route path="/product/update" element ={<ProductUpdatePage />} />
+            <Route path="/product/update" element={<ProductUpdatePage />} />
+            <Route path="/product/delete" element={<ProductDeletePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/orders/user" element={<OrdersPage />} />

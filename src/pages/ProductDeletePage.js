@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as apiCalls from '../api/apiCalls';
 
-const StoreDeletePage = () => {
+const ProductDeletePage = () => {
     const loc = useLocation();
-    const { store } = loc.state;
-    const [name, setName] = useState(store.name);
-    const [location, setLocation] = useState(store.location);
-    const [description, setDescription] = useState(store.description);
-    const [workingHours, setWorkingHours] = useState(store.workingHours);
+    const { product } = loc.state;
+    const [name, setName] = useState(product.name);
+    const [description, setDescription] = useState(product.description);
+    const [category, setCategory] = useState(product.category);
+    const [price, setPrice] = useState(product.price);
+    const [stock, setStock] = useState(product.stock);
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
-    const handleDeleteStore = (e) => {
+    const handleDeleteProduct = (e) => {
         e.preventDefault();
-        apiCalls.deleteStore(store.id)
+        apiCalls.deleteProduct(product.id)
             .then(response => {
-                navigate(-1);
+                navigate(-2);
                 console.log(response.data);
             })
             .catch(error => {
@@ -32,19 +33,22 @@ const StoreDeletePage = () => {
 
     return (
         <div className="col-lg-6 offset-lg-3 mt-5">
-            <h1 className="text-center alert alert-danger mb-4">Вы действительно хотите удалить магазин?</h1>
-            <form onSubmit={handleDeleteStore} className="bg-light p-4 rounded shadow">
+            <h1 className="text-center alert alert-danger mb-4">Вы действительно хотите удалить продукт?</h1>
+            <form onSubmit={handleDeleteProduct} className="bg-light p-4 rounded shadow">
                 <div className="mb-3">
-                    <label>Название магазина: {name}</label>
+                    <label>Название продукта: {name}</label>
                 </div>
                 <div className="mb-3">
-                    <label>Расположение: {location}</label>
+                    <label>Категория: {category}</label>
                 </div>
                 <div className="mb-3">
                     <label>Описание: {description}</label>
                 </div>
                 <div className="mb-3">
-                    <label>Время работы: {workingHours}</label>
+                    <label>В наличии: {stock}</label>
+                </div>
+                <div className="mb-3">
+                    <label>Цена: {price} ₽</label>
                 </div>
                 
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -63,4 +67,4 @@ const StoreDeletePage = () => {
     );
 };
 
-export default StoreDeletePage;
+export default ProductDeletePage;

@@ -136,6 +136,10 @@ export const updateProduct = (body, productId) => {
                 });
 };
 
+export const deleteProduct = (id) => {
+    return api.delete(`/product/${id}`, {withCredentials: true});
+}
+
 export const createOrder = (body) => {
     return api.post('/orders/',body,{withCredentials: true});
 };

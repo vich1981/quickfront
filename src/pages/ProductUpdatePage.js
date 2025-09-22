@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link} from 'react-router-dom';
 import * as apiCalls from '../api/apiCalls';
 import Input from '../components/Input';
 
@@ -171,8 +171,15 @@ const ProductUpdatePage = () => {
                     </div>
                 </div>
                 <div className="row text-center">
-                    <div className="mb-3">
-                        <button className="btn btn-primary" type="submit">Обновить</button>
+                    <div className="col mb-3">
+                        <button className="me-3 btn btn-primary" type="submit">Обновить</button>
+                        <Link 
+                            to ="/product/delete/"
+                            state={{product: product}} 
+                            className="col btn btn-danger"
+                        >
+                            Удалить
+                        </Link>
                     </div>
                 </div>
             </form>
