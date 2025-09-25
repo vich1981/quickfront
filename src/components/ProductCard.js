@@ -42,8 +42,12 @@ class ProductCard extends Component {
                 </div> 
                 <div>
                 
-                    <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">{product.description}</p>
+                    <div className="row">
+                        <h5 className="card-title">{product.name}</h5>
+                    </div>
+                    <div className="row">    
+                        <p className="card-text">{product.description}</p>
+                    </div>
                     <div className="row">
                         <div className="align-self-end">
                             <div className="fw-bold">
