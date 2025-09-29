@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ProductImageWithDefault from './ProductImageWithDefault';
-//  import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import "../css/ProductSellerView.css";
 
@@ -15,47 +14,40 @@ class ProductSellerView extends Component {
                 onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
             >
-                <div className="text-center">
-                    <Link to ={`/product/${product.id}`} >
+                <div className="product-image-container">
+                    <Link to={`/product/${product.id}`}>
                         <ProductImageWithDefault
-                            className="img-fluid rounded-start text-center" 
+                            className="product-image"
                             src={`https://quick-cart.ru/api/product/productImage/${product.imageUrl}`}
-                            style={{width: '100%', height: '200px', objectFit: 'cover', borderRadius: '4px'}}
-                            alt="" 
+                            alt={product.name}
                         />
                     </Link>
                 </div> 
-                <div>
-                    <div className="row">
-                        <h5 className="card-title">{product.name}</h5>
-                    </div>
-                    <div className="row">    
-                        <p className="card-text">{product.description}</p>
-                    </div>
-                    <div className="row">
-                        <div className="align-self-end">
-                            <div className="fw-bold">
-                                Цена: {product.price} ₽
-                            </div>
-                            <small className="text-body-secondary">Осталось:{product.stock}</small> 
+                <div className="product-info">
+                    <h5 className="product-title">{product.name}</h5>
+                    <p className="product-description">{product.description}</p>
+                    <div className="product-price-section">
+                        <div className="product-price">
+                            <i className="fas fa-tag"></i> {product.price} ₽
                         </div>
-                        
+                        <div className="product-stock">
+                            <i className="fas fa-box"></i> Осталось: {product.stock}
+                        </div>
                     </div>
-                
                 </div>
                 <Link 
                     to="/product/update"
                     state={{product: product}}
-                    className="btn btn-primary"
+                    className="add-to-cart-btn"
                     onClick={(e) => {
                         e.stopPropagation();
                     }}
                 >
-                    Изменить
+                    <i className="fas fa-edit"></i> Изменить  {}
                 </Link>
             </div>
         );
    }
 }
 
-export default ProductSellerView; 
+export default ProductSellerView;
