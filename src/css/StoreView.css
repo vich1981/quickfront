@@ -1,20 +1,73 @@
 body {
     background-color: white;
     color: black;
+    font-family: Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-            background-color: #121212;
-            color: white;
+        background-color: #121212;
+        color: white;
     }
 }
 
 .store-card {
     cursor: pointer;
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 0px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: white;
+    margin-bottom: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .store-card {
+        border-color: #333;
+        background-color: #1e1e1e;
+        color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.store-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+    .store-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+@media (max-width: 575px) {
+    .store-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+
+    .store-card .row {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    .store-card {
+        padding: 14px;
+    }
+    
+
+    .store-card .row {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 992px) {
+    .store-card {
+        padding: 16px;
+    }
 }

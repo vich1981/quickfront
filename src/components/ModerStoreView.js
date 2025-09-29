@@ -63,7 +63,7 @@ class ModerStoreView extends Component {
                             <div> 
                                 <h5 className="mb-1">{this.state.store.storeName}</h5>
                                 <StoreImageWithDefault 
-                                    src={`http://localhost:8080/api/v1/store/storeLogo/${this.state.store.logoUrl}`} 
+                                    src={`https://quick-cart.ru/api/store/storeLogo/${this.state.store.logoUrl}`} 
                                     width="60" 
                                     height="60" 
                                     alt="" 

@@ -1,83 +1,70 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ProductImageWithDefault from './ProductImageWithDefault';
-//  import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import "../css/ProductView.css";
 
-class ProductView extends Component {
-    state = {
-        product: this.props.product,
-        //products: this.props.products
-    }
-
-    addProduct = () => {
+const ProductView = ({ product, loggedInUserRole, dispatch }) => {
+    const addProduct = () => {
         const action = {
-            type:'addNewProduct',
-            payload: this.state.product
+            type: 'addNewProduct',
+            payload: product
         };
-        this.props.dispatch(action);
+        dispatch(action);
     };
-   
-   render(){
-       const { product } = this.props;
-       const isSold = product.stock == 0? true : false;
-       return (
-            <div 
-                key={product.id}
-                className="product-card"
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-            >
-                <div className="text-center">
-                    <Link to ={`/product/${product.id}`} >
-                        <ProductImageWithDefault
-                            className="img-fluid rounded-start text-center" 
-                            src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
-                            style={{width: '100%', height: '200px', objectFit: 'cover', borderRadius: '4px'}}
-                            alt="" 
-                        />
-                    </Link>
-                </div> 
-                <div>
-                    <div className="row">
-                        <h5 className="card-title">{product.name}</h5>
-                    </div>
-                    <div className="row">    
-                        <p className="card-text">{product.description}</p>
-                    </div>
-                    <div className="row">
-                        <div className="align-self-end">
-                            <div className="fw-bold">
-                                Цена: {product.price} ₽
-                            </div>
-                            <small className="text-body-secondary">Осталось: {isSold ? "Распродано": product.stock}</small> 
-                        </div>
-                        
-                    </div>
-                
-                </div>
-                <button
-                    className="btn btn-primary"
-                    disabled={this.props.loggedInUserRole !== 'BUYER'|| isSold}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        this.addProduct();
-                    }}
-                >
-                    {isSold? 'Нет в наличии' : 'В корзину'}
-                </button>
-            </div>
-        );
-   }
-}
 
-const mapStateToProps = (state) => {
-    return {
-        loggedInUserRole: state.role,
-        products: state.cart
-    }
+    const isSold = product.stock === 0;
+
+    return (
+        <div 
+            key={product.id}
+            className="product-card"
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+        >
+            <div className="product-image-container">
+                <Link to={`/product/${product.id}`}>
+                    <ProductImageWithDefault
+                        className="product-image"
+                        src={`https://quick-cart.ru/api/product/productImage/${product.imageUrl}`}
+                        alt={product.name}
+                    />
+                </Link>
+            </div> 
+            <div className="product-info">
+                <h5 className="product-title">{product.name}</h5>
+                <p className="product-description">{product.description}</p>
+                <div className="product-price-section">
+                    <div className="product-price">
+                        <i className="fas fa-tag"></i> {product.price} ₽
+                    </div>
+                    <div className={`product-stock ${isSold ? 'sold-out' : ''}`}>
+                        <i className={`fas ${isSold ? 'fa-ban' : 'fa-box'}`}></i>
+                        {isSold ? "Распродано" : `Осталось: ${product.stock}`}
+                    </div>
+                </div>
+            </div>
+            <button
+                className={`add-to-cart-btn ${isSold ? 'disabled' : ''}`}
+                disabled={loggedInUserRole !== 'BUYER' || isSold}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    addProduct();
+                }}
+            >
+                {isSold ? (
+                    <><i className="fas fa-times"></i> Нет в наличии</>
+                ) : (
+                    <><i className="fas fa-shopping-cart"></i> В корзину</>
+                )}
+            </button>
+        </div>
+    );
 };
-//
-export default connect(mapStateToProps)(ProductView);       
-   
+
+const mapStateToProps = (state) => ({
+    loggedInUserRole: state.role,
+    products: state.cart
+});
+
+export default connect(mapStateToProps)(ProductView);
