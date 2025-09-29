@@ -10,6 +10,7 @@ const StoreUpdatePage = () => {
     const [location, setLocation] = useState(store.location);
     const [description, setDescription] = useState(store.description);
     const [workingHours, setWorkingHours] = useState(store.workingHours);
+    const [phone, setPhone] = useState(store.phone);
     // const [workingHoursStartHour, setWorkingHoursStartHour] = useState(store.workingHours.split(' ')[1].split(':')[0]);
     // const [workingHoursStartMinute, setWorkingHoursStartMinute] = useState(store.workingHours.split(' ')[1].split(':')[1]);
     // const [workingHoursEndHour, setWorkingHoursEndHour] = useState(store.workingHours.split(' ')[3].split(':')[0]);
@@ -26,6 +27,7 @@ const StoreUpdatePage = () => {
         formData.append('storeLocation', location);
         formData.append('storeDescription', description);
         formData.append('storeWorkingHours', workingHours);//`С ${workingHoursStartHour}:${workingHoursStartMinute} ДО ${workingHoursEndHour}:${workingHoursEndMinute}`);
+        formData.append('storePhone', phone);
         if (logo) formData.append('logo', logo);
 
         apiCalls.updateStore(store.id, formData)
@@ -99,6 +101,16 @@ const StoreUpdatePage = () => {
                         value={workingHours}
                         onChange={(e) => setWorkingHours(e.target.value)}
                         placeholder="Время работы"
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label>Телефон</label>
+                    <Input
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="Телефон"
                         required
                     />
                 </div>

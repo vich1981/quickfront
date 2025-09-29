@@ -14,6 +14,7 @@ const StoreRegister = () => {
     // const [workingHoursEndHour, setWorkingHoursEndHour] = useState('');
     // const [workingHoursEndMinute, setWorkingHoursEndMinute] = useState('');
     const [workingHours, setWorkingHours] = useState('');
+    const [phone, setPhone] = useState('');
     const [logo, setLogo] = useState('');
     const [logoPreview, setLogoPreview] = useState('');
     const [pendingApiCall,setPendingApiCall] = useState(false);
@@ -28,6 +29,7 @@ const StoreRegister = () => {
         formData.append('location', location);
         formData.append('description', description);
         formData.append('workingHours', workingHours);//`С ${workingHoursStartHour}:${workingHoursStartMinute} ДО ${workingHoursEndHour}:${workingHoursEndMinute}`);
+        formData.append('phone', phone);
         formData.append('logo', logo);
 
         apiCalls.registerStore(formData)
@@ -182,6 +184,16 @@ const StoreRegister = () => {
                         value={workingHours}
                         onChange={(e) => setWorkingHours(e.target.value)}
                         placeholder="Время работы"
+                        required
+                    />
+                </div>
+                <div className="mb-3">
+                    <label>Телефон</label>
+                    <Input
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="Телефон"
                         required
                     />
                 </div>

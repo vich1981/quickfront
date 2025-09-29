@@ -35,8 +35,9 @@ class StoreView extends Component {
                                 alt="" 
                             />
                         </div>
-                        <div className="col-md-3 ms-md-auto align-self-center text-end">
-                            <small>{store.storeWorkingHours}</small>
+                        <div className="col-md-3 ms-md-auto align-self-center text-start">
+                                <div className="row mb-4"><i className="fas fa-clock"> {store.storeWorkingHours}</i></div>
+                                <div className="row"><i className="fas fa-phone"> {store.phone||'нет данных'}</i> </div>
                         </div>   
                     </div>            
                 </Link>
