@@ -5,7 +5,7 @@ import { encodeBase64 } from '../redux/encoderFunctions';
 
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api/v1', // our API base URL
+    baseURL: 'https://quick-cart.ru/api/', // our API base URL
 });
 
 api.interceptors.response.use(response => response, 

@@ -1,20 +1,77 @@
 body {
     background-color: white;
     color: black;
+    font-family: Arial, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-            background-color: #121212;
-            color: white;
+        background-color: #121212;
+        color: white;
     }
 }
 
 .store-id-card {
-    /* cursor: pointer; */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    color: black;
+    margin-bottom: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .store-id-card {
+        border-color: #333;
+        background-color: #1e1e1e;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.store-id-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (prefers-color-scheme: dark) {
+    .store-id-card:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+@media (max-width: 575px) {
+    .store-id-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .product-list {
+        gap: 12px;
+        margin-top: 16px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    .store-id-card {
+        padding: 18px;
+    }
+    
+    .product-list {
+        gap: 14px;
+    }
+}
+
+@media (min-width: 992px) {
+    .store-id-card {
+        padding: 20px;
+    }
 }

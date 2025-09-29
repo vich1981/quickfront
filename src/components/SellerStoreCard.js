@@ -31,7 +31,7 @@ class SellerStoreCard extends Component {
                             </div>
                             <div className="col-md-3 ms-md-auto align-self-center">
                                 <StoreImageWithDefault 
-                                    src={`http://localhost:8080/api/v1/store/storeLogo/${store.logoUrl}`}
+                                    src={`https://quick-cart.ru/api/store/storeLogo/${store.logoUrl}`}
                                     style={{objectFit: 'cover', borderRadius: '4px'}} 
                                     width="100" 
                                     height="100" 

@@ -34,7 +34,7 @@ class ProductCard extends Component {
                     <Link to ={`/product/${product.id}`} >
                         <ProductImageWithDefault
                             className="img-fluid rounded-start text-center" 
-                            src={`http://localhost:8080/api/v1/product/productImage/${product.imageUrl}`} 
+                            src={`https://quick-cart.ru/api/product/productImage/${product.imageUrl}`} 
                             style={{width: '100%', height: '200px', objectFit: 'cover', borderRadius: '4px'}}
                             alt="" 
                         />
