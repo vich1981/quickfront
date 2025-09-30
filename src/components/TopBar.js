@@ -83,15 +83,15 @@ class TopBar extends React.Component {
         const renderCount = this.calculateCount();
 
         let links = (
-            <ul className="nav navbar-nav ms-auto">
+            <ul className="nav navbar-nav ms-auto topbar-nav"> {/* Добавил класс для стилей */}
                 <li className="nav-item">
-                    <Link to="/signup" className="nav-link">
-                        Sign Up
+                    <Link to="/signup" className="nav-link topbar-link"> {/* Добавил класс для hover-эффекта */}
+                        <i className="fas fa-user-plus me-1"></i>Sign Up {/* Иконка для привлекательности */}
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/login" className="nav-link">
-                        Login
+                    <Link to="/login" className="nav-link topbar-link">
+                        <i className="fas fa-sign-in-alt me-1"></i>Login
                     </Link>
                 </li>
             </ul>
@@ -102,46 +102,55 @@ class TopBar extends React.Component {
         if (this.props.user.role === "BUYER") {
             orders = (
                 <li className="nav-item">
-                    <Link to="/orders/user" className="nav-link">Заказы</Link>
+                    <Link to="/orders/user" className="nav-link topbar-link">
+                        <i className="fas fa-shopping-bag me-1"></i>Заказы {/* Иконка */}
+                    </Link>
                 </li>
             );
             cart = (
-                <Link to="/cart" className="link">
-                    <button className="cart" id="cart">
-                        <img className="cart__image" src={cartImage} width="50" height="50" alt="Cart" />
-                        <div className="cart__num" id="cart_num">{renderCount}</div>
-                    </button>
+                <Link to="/cart" className="topbar-cart-link">
+                    <div className="topbar-cart-container">
+                        <i className="fas fa-shopping-cart topbar-cart-icon"></i> {}
+                        {renderCount > 0 && (
+                            <span className="topbar-cart-badge">{renderCount}</span>
+                        )}
+                    </div>
                 </Link>
             );
+            
         } else if (this.props.user.role === "SELLER") {
             orders = (
                 <>
                     <li className="nav-item">
-                        <Link to="/store/seller" className="nav-link">Мои магазины</Link>
+                        <Link to="/store/seller" className="nav-link topbar-link">
+                            <i className="fas fa-store me-1"></i>Мои магазины
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/orders/store" className="nav-link">Заказы</Link>
+                        <Link to="/orders/store" className="nav-link topbar-link">
+                            <i className="fas fa-clipboard-list me-1"></i>Заказы
+                        </Link>
                     </li>
                 </>
             );
         }
 
         if (this.props.user.isLoggedIn) {
-            let dropDownClass = 'p-0 shadow dropdown-menu';
+            let dropDownClass = 'p-0 shadow dropdown-menu topbar-dropdown';
             if (this.state.dropDownVisible) {
                 dropDownClass += ' show';
             }
             links = (
-                <ul className="nav navbar-nav ms-auto" ref={this.assignActionArea}>
+                <ul className="nav navbar-nav ms-auto topbar-nav" ref={this.assignActionArea}>
                     <li className="nav-item dropdown">
-                        <div className="d-flex" style={{ cursor: 'pointer' }} onClick={this.onClickDisplayName}>
+                        <div className="d-flex topbar-user" style={{ cursor: 'pointer' }} onClick={this.onClickDisplayName}> {}
                             <ProfileImageWithDefault
-                                className="rounded-circle m-auto d-none d-sm-block"
+                                className="rounded-circle m-auto d-none d-sm-block topbar-avatar"
                                 width="32"
                                 height="32"
                                 image={this.props.user.image}
                             />
-                            <span className="nav-link dropdown-toggle">
+                            <span className="nav-link dropdown-toggle topbar-username"> {}
                                 {this.props.user.username}
                                 <span className="d-none d-md-inline">(id:{this.props.user.id})</span>
                             </span>
@@ -152,12 +161,12 @@ class TopBar extends React.Component {
                         >
                             <Link
                                 to={`/users/${this.props.user.id}`}
-                                className="dropdown-item"
+                                className="dropdown-item topbar-dropdown-item"
                                 onClick={this.onClickMyProfile}
                             >
                                 <i className="fas fa-user text-info"></i> Мой профиль
                             </Link>
-                            <span className="dropdown-item"
+                            <span className="dropdown-item topbar-dropdown-item"
                                 onClick={this.onClickLogout}
                                 style={{ cursor: 'pointer' }}
                             >
@@ -172,15 +181,20 @@ class TopBar extends React.Component {
         return (
             <div className={`topbar ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
                 <div className="container-fluid">
-                    <nav className="navbar navbar-expand">
-                        <Link to="/" className="navbar-brand">
-                            <img src={logo} width="60" alt="quickCart" />
-                            <span className="d-none d-sm-inline">Quick Cart</span>
+                    <nav className="navbar navbar-expand topbar-navbar"> {}
+                        <Link to="/" className="navbar-brand topbar-brand"> {}
+                            <img src={logo} width="60" alt="quickCart" className="topbar-logo" /> {}
+                            <span className="d-none d-sm-inline topbar-title">Quick Cart</span> {}
                         </Link>
+                        <button className="navbar-toggler topbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span> {}
+                        </button>
                         <div className="collapse navbar-collapse" id="navbarText">
-                            <ul className="navbar-nav mb-2 mb-lg-0">
+                            <ul className="navbar-nav mb-2 mb-lg-0 topbar-nav-main"> {}
                                 <li className="nav-item">
-                                    <Link to="/store/all/store" className="nav-link">Магазины</Link>
+                                    <Link to="/store/all/store" className="nav-link topbar-link">
+                                        <i className="fas fa-store me-1"></i>Магазины {}
+                                    </Link>
                                 </li>
                                 {orders}
                             </ul>

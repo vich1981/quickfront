@@ -55,7 +55,7 @@ class LoginPage extends React.Component{
         return (
             <div data-testid="loginpage">
                 <div className="col-lg-6 mt-3 offset-lg-3 rounded shadow p-1">
-                    <h1 className="text-center">Login</h1>
+                    <h1 className="text-center">Вход</h1>
                     <form className="text-center" onSubmit={this.loginUser}>
                         <div className="row justify-content-center">
                             <div className="col-lg-6 col-md-6 mb-3">
@@ -75,7 +75,7 @@ class LoginPage extends React.Component{
                                     className="input-group"
                                     type="password"
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder="Пароль"
                                     value={this.state.password}
                                     onChange={(e) => this.setState({password: e.target.value})}
                                     required
@@ -87,7 +87,7 @@ class LoginPage extends React.Component{
                                 <ButtonWithProgress 
                                     className="btn btn-primary mb-3" 
                                     type="submit"
-                                    text="Login"
+                                    text="Войти"
                                     pendingApiCall={this.state.isLogining}
                                 />
                             </div>

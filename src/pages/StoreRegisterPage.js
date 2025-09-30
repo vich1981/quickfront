@@ -91,10 +91,11 @@ const StoreRegister = () => {
                     .then(response => response.json())
                     .then(data => {
                         if (data && data.address) {
-                            const { house_number, road } = data.address;
+                            const { house_number, road, city} = data.address;
                             let address = '';
+                            if (city) address += city + ", ";
                             if (road) address += road;
-                            if (house_number) address += ', ' + house_number;
+                            if (house_number) address += ', д.' + house_number;
                             setLocation(address || 'Адрес не найден');
                         } else {
                             setLocation('Адрес не найден');
